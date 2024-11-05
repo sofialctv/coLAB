@@ -1,0 +1,20 @@
+@startuml
+
+left to right direction
+actor "Coordenador" as c
+rectangle SlaveOne {
+  usecase "Cadastrar um projeto" as UC1
+  usecase "Cadastrar um Membro" as UC2
+  usecase "Cadastrar Função" as UC3
+  usecase "Cadastrar Categoria" as UC4
+  usecase "Alocar Membro em Projeto" as UC5
+  usecase "Autenticação" as UC6
+}
+c --> UC1
+c --> UC2
+c --> UC3
+c --> UC4
+c --> UC5
+c --> UC6
+
+@enduml
