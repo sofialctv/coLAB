@@ -1,0 +1,84 @@
+@startuml coLAB
+class Projeto {
+  +nome: String
+  +data_inicio: Date
+  +data_fim: Date  
+  +data_prevista_fim: Date
+  +descricao: String
+  +orcamento: Double
+}
+
+enum ProjetoStaus {
+  INATIVO
+  ATIVO
+  CANCELADO
+  FINALIZADO
+}
+
+enum ProjetoCategoria {
+    INOVAÇÃO
+    EXTENSÃO
+    TECNOLOGIA
+}
+
+class Financiador {
+  +nome: String
+  +email: String
+}
+
+class Pesquisador {
+  +nome: String
+  +email: String
+  +telefone: String
+  +cpf: String
+}
+
+enum PesquisadorTime {
+    GESTAO_DE_PROJETOS
+    RECURSOS_HUMANOS
+    MARKETING
+    DESENVOLVIMENTO
+    ANALISTA_DE_REQUISITOS
+    QUALIDADE
+    DESIGN
+}
+
+class Orientador {
+}
+
+class Bolsista {
+}
+
+class Bolsa {
+  +valor: Double
+  +data_inicio: Date
+  +data_fim: Date  
+  +data_prevista_fim: Date
+  +ativo: Boolean
+}
+
+enum BolsaCategoria {
+    GESTAO
+    RECURSOS_HUMANOS
+    MARKETING
+    DESENVOLVIMENTO
+    ANALISTA_DE_REQUISITOS
+    QUALIDADE
+    DESIGN
+}
+
+Projeto "1" --> "1" Orientador
+Projeto "N" --> "N" Pesquisador
+Projeto "N" --> "N" Bolsista
+Projeto "1" --> "N" Financiador: Possui
+Projeto "1" --> "1" ProjetoCategoria: Contém
+Projeto "1" --> "1" ProjetoStaus: Contém
+
+Bolsa "1" --> "1" Bolsista: Pertence
+Bolsa "1" ---> "N" BolsaCategoria: Contém
+
+Pesquisador "1" ---> "N" PesquisadorTime: Pertence
+Pesquisador <|-- Orientador
+Pesquisador <|-- Bolsista
+
+@enduml
