@@ -26,6 +26,12 @@ class Financiador {
   +email: String
 }
 
+class Orientador {
+}
+
+class Bolsista {
+}
+
 class Pesquisador {
   +nome: String
   +email: String
@@ -43,12 +49,6 @@ enum PesquisadorTime {
     DESIGN
 }
 
-class Orientador {
-}
-
-class Bolsista {
-}
-
 class Bolsa {
   +valor: Double
   +data_inicio: Date
@@ -58,13 +58,10 @@ class Bolsa {
 }
 
 enum BolsaCategoria {
-    GESTAO
-    RECURSOS_HUMANOS
-    MARKETING
-    DESENVOLVIMENTO
-    ANALISTA_DE_REQUISITOS
-    QUALIDADE
-    DESIGN
+    TECNICO
+    GRADUACAO
+    MESTRADO
+    DOUTORADO
 }
 
 Projeto "1" --> "1" Orientador
@@ -75,10 +72,13 @@ Projeto "1" --> "1" ProjetoCategoria: Contém
 Projeto "1" --> "1" ProjetoStaus: Contém
 
 Bolsa "1" --> "1" Bolsista: Pertence
+Bolsa "1" --> "1" Orientador: Pertence
 Bolsa "1" ---> "N" BolsaCategoria: Contém
 
 Pesquisador "1" ---> "N" PesquisadorTime: Pertence
 Pesquisador <|-- Orientador
 Pesquisador <|-- Bolsista
+
+Orientador "1" ---> "N" Bolsista: Orienta
 
 @enduml

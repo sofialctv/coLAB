@@ -1,20 +1,30 @@
 @startuml
 
 left to right direction
-actor "Coordenador" as c
-rectangle SlaveOne {
-  usecase "Cadastrar um projeto" as UC1
-  usecase "Cadastrar um Membro" as UC2
-  usecase "Cadastrar Função" as UC3
-  usecase "Cadastrar Categoria" as UC4
-  usecase "Alocar Membro em Projeto" as UC5
-  usecase "Autenticação" as UC6
+actor "Usuário" as c
+rectangle Projetos {
+  usecase "Cadastrar Projetos" as UC1
+  usecase "Visualizar Projetos" as UC2
+  usecase "Editar Projetos" as UC3
+  usecase "Deletar Projetos" as UC4
 }
+
+left to right direction
+actor "Usuário" as c
+rectangle Bolsas {
+  usecase "Cadastrar Bolsas" as UC5
+  usecase "Visualizar Bolsas" as UC6
+  usecase "Editar Bolsas" as UC7
+  usecase "Deletar Bolsas" as UC8
+  }
+
 c --> UC1
 c --> UC2
 c --> UC3
 c --> UC4
 c --> UC5
 c --> UC6
+c --> UC7
+c --> UC8
 
 @enduml

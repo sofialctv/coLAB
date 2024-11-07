@@ -1,0 +1,52 @@
+@startuml
+
+package coLAB {
+    package BusinessLayer {
+
+        package Models {
+
+        package Entities {
+            class Projeto
+            class Bolsista
+            class Orientador
+            class Pesquisador
+            class Financiador
+            class Bolsa
+
+        }
+
+        package DTOs {
+            class ProjetoDTO
+            class BolsistaDTO
+            class OrientadorDTO
+            class PesquisadorDTO
+            class FinanciadorDTO
+            class BolsaDTO
+        }
+       
+        package Interfaces {
+        }
+
+        package Implementations {
+        }
+
+    }
+
+    }
+
+    package PresentationLayer {
+        package Controllers {
+            class ProjetoController
+            class BolsistaController
+            class OrientadorController
+            class BolsaController
+
+        }
+    }
+
+    package DataLayer {
+        class DBConnection
+    }
+}
+
+@enduml
