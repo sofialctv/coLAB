@@ -58,8 +58,16 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -70,13 +78,12 @@
               "RelativeToolTip": ".gitignore",
               "ViewState": "AQIAAGAAAAAAAAAAAAAgwHEAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-11-13T23:12:50.99Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T23:12:50.99Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "colabAPI",
+              "Title": "colabAPI.csproj",
               "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\colabAPI.csproj",
               "RelativeDocumentMoniker": "colabAPI.csproj",
               "ToolTip": "C:\\dev\\coLAB\\colabAPI\\colabAPI.csproj",
@@ -85,14 +92,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2024-11-13T23:11:31.581Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
@@ -104,8 +103,7 @@
               "RelativeToolTip": ".gitignore",
               "ViewState": "AQIAAAAAAAAAAAAAAADwv4QAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-11-13T23:12:37.309Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T23:12:37.309Z"
             },
             {
               "$type": "Document",
@@ -117,8 +115,7 @@
               "RelativeToolTip": "Data\\ApplicationDbContext.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T19:55:58.558Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T19:55:58.558Z"
             },
             {
               "$type": "Document",
@@ -130,8 +127,7 @@
               "RelativeToolTip": "Business\\Models\\Entities\\Financiador.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T20:50:16.318Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T20:50:16.318Z"
             },
             {
               "$type": "Document",
@@ -143,8 +139,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AQIAAAIAAAAAAAAAAAAiwBIAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T19:47:07.806Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T19:47:07.806Z"
             },
             {
               "$type": "Document",
@@ -156,8 +151,7 @@
               "RelativeToolTip": "Business\\Repository\\Interfaces\\IBolsaRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T20:40:01.39Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T20:40:01.39Z"
             },
             {
               "$type": "Document",
@@ -169,8 +163,7 @@
               "RelativeToolTip": "Presentation\\Controllers\\BolsistaController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T20:08:34.312Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T20:08:34.312Z"
             },
             {
               "$type": "Document",
@@ -182,8 +175,7 @@
               "RelativeToolTip": "Presentation\\Controllers\\BolsaController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T20:08:21.651Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T20:08:21.651Z"
             },
             {
               "$type": "Document",
@@ -195,8 +187,7 @@
               "RelativeToolTip": "Presentation\\Controllers\\FinanciadorController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAABAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T20:08:38.117Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T20:08:38.117Z"
             },
             {
               "$type": "Document",
@@ -208,8 +199,7 @@
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-11-13T19:47:09.066Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T19:47:09.066Z"
             },
             {
               "$type": "Document",
@@ -221,8 +211,7 @@
               "RelativeToolTip": "Business\\Repository\\Implementations\\BolsistaRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T20:39:21.434Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T20:39:21.434Z"
             }
           ]
         }
