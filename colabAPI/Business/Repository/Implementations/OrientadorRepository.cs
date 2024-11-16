@@ -1,6 +1,6 @@
 ﻿namespace colabAPI.Business.Repository.Implementations
 {
-    public class IOrientadorRepository
+    public class OrientadorRepository
     {
     }
 }

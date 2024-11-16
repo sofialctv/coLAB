@@ -1,6 +1,6 @@
 ﻿namespace colabAPI.Business.Repository.Interfaces
 {
-    public class IPesquisadorRepository
+    public interface IPesquisadorRepository
     {
     }
 }
