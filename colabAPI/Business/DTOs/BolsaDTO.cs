@@ -1,6 +1,6 @@
 ﻿namespace colabAPI.Business.DTOs
 {
-    public class BolsaDTO
+    public class BolsaDto
     {
     }
 }

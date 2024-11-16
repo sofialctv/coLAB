@@ -1,5 +1,7 @@
 ﻿using colabAPI.Data;
 using Microsoft.EntityFrameworkCore;
+using colabAPI.Business.Repository.Interfaces;
+using colabAPI.Business.Repository.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,9 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 // configura��o do PostgreSQL
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
+
+//ta certo nao
+builder.Services.AddScoped<IBolsistaRepository, BolsistaRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

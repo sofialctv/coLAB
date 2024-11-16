@@ -1,6 +1,6 @@
 ﻿namespace colabAPI.Business.DTOs
 {
-    public class FinanciadorDTO
+    public class FinanciadorDto
     {
     }
 }

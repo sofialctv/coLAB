@@ -1,6 +1,6 @@
 ﻿namespace colabAPI.Business.Repository.Implementations
 {
-    public class IFinanciadorRepository
+    public class FinanciadorRepository
     {
     }
 }

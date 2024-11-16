@@ -12,5 +12,6 @@ namespace colabAPI.Data
 
         // Defina aqui as tabelas como DbSet
         public DbSet<Financiador> Financiadores { get; set; }
+        public DbSet<Bolsista> Bolsistas { get; set; }
     }
 }

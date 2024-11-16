@@ -21,6 +21,19 @@ namespace colabAPI.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Bolsista", b =>
+                {
+                    b.Property<int>("BolsistaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BolsistaId"));
+
+                    b.HasKey("BolsistaId");
+
+                    b.ToTable("Bolsistas");
+                });
+
             modelBuilder.Entity("colabAPI.Business.Models.Entities.Financiador", b =>
                 {
                     b.Property<int>("Id")

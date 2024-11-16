@@ -1,6 +1,6 @@
 ﻿namespace colabAPI.Business.DTOs
 {
-    public class ProjetoDTO
+    public class ProjetoDto
     {
     }
 }
