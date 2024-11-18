@@ -20,5 +20,6 @@ namespace colabAPI.Data
             modelBuilder.Entity<Pesquisador>().HasNoKey();
             base.OnModelCreating(modelBuilder);
         }
+        public DbSet<Bolsa> Bolsas { get; set; }
     }
 }

@@ -15,6 +15,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //ta certo nao
 builder.Services.AddScoped<IBolsistaRepository, BolsistaRepository>();
 
+builder.Services.AddScoped<IBolsaRepository, BolsaRepository>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
