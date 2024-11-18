@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using colabAPI.Business.DTOs;
+using Microsoft.AspNetCore.Mvc;
 using colabAPI.Business.Models.Entities;
 using colabAPI.Business.Repository.Interfaces;
 
@@ -18,17 +19,17 @@ namespace colabAPI.Presentation.Controllers
 
         // GET: api/bolsista
         [HttpGet]
-        public IActionResult GetAllBolsistas()
+        public async Task<ActionResult<IEnumerable<BolsistaDto>>> GetAllBolsistas()
         {
-            var bolsistas = _bolsistaRepository.GetBolsistas();
+            var bolsistas = _bolsistaRepository.GetAllAsync();
             return Ok(bolsistas);
         }
         
         // GET: api/bolsista/{id}
         [HttpGet("{id}")]
-        public IActionResult GetBolsistaById(int id)
+        public async Task<ActionResult<BolsistaDto>> GetBolsistaById(int id)
         {
-            var bolsista = _bolsistaRepository.GetBolsistaById(id);
+            var bolsista = _bolsistaRepository.GetByIdAsync(id);
 
             if (bolsista == null)
             {
@@ -40,52 +41,75 @@ namespace colabAPI.Presentation.Controllers
         
         // POST api/bolsista
         [HttpPost]
-        public IActionResult CreateBolsista([FromBody] Bolsista bolsista)
+        public async Task<ActionResult<BolsistaDto>> CreateBolsista(BolsistaDto bolsistaDto)
         {
-            if (bolsista == null)
+            var bolsista = new Bolsista();
+
+            // Usando Reflection nos atributos da classe
+            var dtoProperties = typeof(BolsistaDto).GetProperties();
+            var bolsistaProperties = typeof(Bolsista).GetProperties();
+
+            foreach (var dtoProperty in dtoProperties)
             {
-                return BadRequest();
+                var bolsistaProperty = bolsistaProperties.
+                    FirstOrDefault(b => b.Name == dtoProperty.Name);
+                if (bolsistaProperty != null && bolsistaProperty.CanWrite)
+                {
+                    bolsistaProperty.SetValue(bolsista, dtoProperty.GetValue(bolsistaDto));
+                }
             }
             
-            _bolsistaRepository.InsertBolsista(bolsista);
-            _bolsistaRepository.Save();
-
-            return CreatedAtAction(nameof(GetBolsistaById), 
-                new { id = bolsista.BolsistaId }, bolsista);
+            await _bolsistaRepository.AddAsync(bolsista);
+            return CreatedAtAction(
+                nameof(GetBolsistaById),
+                new { id = bolsista.BolsistaId },
+                _bolsistaRepository.ConvertToDto(bolsista));
         }
         
         // PUT: api/bolsista/{id}
         [HttpPut("{id}")]
-        public IActionResult UpdateBolsista(int id, [FromBody] Bolsista bolsista)
+        public async Task<IActionResult> UpdateBolsista(int id, BolsistaDto bolsistaDto)
         {
-            if (bolsista == null || bolsista.BolsistaId != id)
+            if (id != bolsistaDto.BolsistaId)
             {
                 return BadRequest();
             }
             
-            var existingBolsista = _bolsistaRepository.GetBolsistaById(id);
-            if (existingBolsista == null)
+            var bolsista = new Bolsista();
+            
+            // Usando Reflection nos atributos da classe
+            var dtoProperties = bolsistaDto.GetType().GetProperties();
+            var bolsistaProperties = bolsista.GetType().GetProperties();
+
+            foreach (var dtoProperty in dtoProperties)
+            {
+                var bolsistaProperty = bolsistaProperties.
+                    FirstOrDefault(b => b.Name == dtoProperty.Name);
+                if (bolsistaProperty != null && bolsistaProperty.CanWrite)
+                {
+                    bolsistaProperty.SetValue(bolsista, dtoProperty.GetValue(bolsistaDto));
+                }
+            }
+            
+            var updated = await _bolsistaRepository.UpdateAsync(bolsista);
+
+            if (!updated)
             {
                 return NotFound();
             }
-            
-            _bolsistaRepository.UpdateBolsista(existingBolsista);
-            _bolsistaRepository.Save();
             
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteBolsista(int id)
+        public async Task<IActionResult> DeleteBolsista(int id)
         {
-            var bolsista = _bolsistaRepository.GetBolsistaById(id);
-            if (bolsista == null)
+            var deleted = await _bolsistaRepository.DeleteAsync(id);
+
+            if (!deleted)
             {
                 return NotFound();
             }
-            
-            _bolsistaRepository.DeleteBolsista(id);
-            _bolsistaRepository.Save();
             
             return NoContent();
         }

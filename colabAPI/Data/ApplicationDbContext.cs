@@ -12,6 +12,13 @@ namespace colabAPI.Data
 
         // Defina aqui as tabelas como DbSet
         public DbSet<Financiador> Financiadores { get; set; }
+        public DbSet<Pesquisador> Pesquisadores { get; set; }
         public DbSet<Bolsista> Bolsistas { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Pesquisador>().HasNoKey();
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

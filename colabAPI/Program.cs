@@ -5,7 +5,7 @@ using colabAPI.Business.Repository.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// string de conex�o
+// string de conexão
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // configura��o do PostgreSQL

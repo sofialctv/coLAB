@@ -21,19 +21,6 @@ namespace colabAPI.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("colabAPI.Business.Models.Entities.Bolsista", b =>
-                {
-                    b.Property<int>("BolsistaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BolsistaId"));
-
-                    b.HasKey("BolsistaId");
-
-                    b.ToTable("Bolsistas");
-                });
-
             modelBuilder.Entity("colabAPI.Business.Models.Entities.Financiador", b =>
                 {
                     b.Property<int>("Id")
@@ -51,6 +38,30 @@ namespace colabAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Financiadores");
+                });
+
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Pesquisador", b =>
+                {
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int[]>("Times")
+                        .HasColumnType("integer[]");
+
+                    b.ToTable("Pesquisadores");
                 });
 #pragma warning restore 612, 618
         }

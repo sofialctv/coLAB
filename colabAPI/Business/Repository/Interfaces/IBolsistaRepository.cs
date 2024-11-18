@@ -1,14 +1,16 @@
-﻿using colabAPI.Business.Models.Entities;
+﻿using colabAPI.Business.DTOs;
+using colabAPI.Business.Models.Entities;
 
 namespace colabAPI.Business.Repository.Interfaces
 {
     public interface IBolsistaRepository
     {
-        IEnumerable<Bolsista> GetBolsistas();
-        Bolsista GetBolsistaById(int bolsistaId);
-        void InsertBolsista(Bolsista bolsista);
-        void UpdateBolsista(Bolsista bolsista);
-        void DeleteBolsista(int bolsistaId);
-        void Save();
+        // Métodos
+        Task<IEnumerable<BolsistaDto>> GetAllAsync();
+        Task<BolsistaDto> GetByIdAsync(int id);
+        Task AddAsync(Bolsista bolsista);
+        Task<bool> UpdateAsync(Bolsista bolsista);
+        Task<bool> DeleteAsync(int id);
+        BolsistaDto ConvertToDto(Bolsista bolsista);
     }
 }
