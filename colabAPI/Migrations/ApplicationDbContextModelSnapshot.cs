@@ -30,25 +30,32 @@ namespace colabAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("ativo")
+                    b.Property<bool>("Ativo")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("categoria")
+                    b.Property<int>("BolsistaId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime?>("data_fim")
+                    b.Property<string>("Categoria")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("DataFim")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("data_inicio")
+                    b.Property<DateTime>("DataInicio")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("data_prevista_fim")
+                    b.Property<DateTime>("DataPrevistaFim")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<double>("valor")
+                    b.Property<double>("Valor")
                         .HasColumnType("double precision");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BolsistaId")
+                        .IsUnique();
 
                     b.ToTable("Bolsas");
                 });
@@ -74,9 +81,20 @@ namespace colabAPI.Migrations
 
             modelBuilder.Entity("colabAPI.Business.Models.Entities.Pesquisador", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
                     b.Property<string>("Cpf")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("character varying(13)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -93,7 +111,36 @@ namespace colabAPI.Migrations
                     b.Property<int[]>("Times")
                         .HasColumnType("integer[]");
 
+                    b.HasKey("Id");
+
                     b.ToTable("Pesquisadores");
+
+                    b.HasDiscriminator().HasValue("Pesquisador");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Bolsista", b =>
+                {
+                    b.HasBaseType("colabAPI.Business.Models.Entities.Pesquisador");
+
+                    b.HasDiscriminator().HasValue("Bolsista");
+                });
+
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Bolsa", b =>
+                {
+                    b.HasOne("colabAPI.Business.Models.Entities.Bolsista", "Bolsista")
+                        .WithOne("Bolsa")
+                        .HasForeignKey("colabAPI.Business.Models.Entities.Bolsa", "BolsistaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Bolsista");
+                });
+
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Bolsista", b =>
+                {
+                    b.Navigation("Bolsa");
                 });
 #pragma warning restore 612, 618
         }

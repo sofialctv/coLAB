@@ -5,7 +5,7 @@ namespace colabAPI.Business.Models.Entities
 {
     public class Pesquisador
     {
-        public int PesquisadorId { get; set; }
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Telefone { get; set; }

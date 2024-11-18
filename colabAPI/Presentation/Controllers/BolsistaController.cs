@@ -62,7 +62,7 @@ namespace colabAPI.Presentation.Controllers
             await _bolsistaRepository.AddAsync(bolsista);
             return CreatedAtAction(
                 nameof(GetBolsistaById),
-                new { id = bolsista.BolsistaId },
+                new { id = bolsista.Id },
                 _bolsistaRepository.ConvertToDto(bolsista));
         }
         
@@ -70,7 +70,7 @@ namespace colabAPI.Presentation.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateBolsista(int id, BolsistaDto bolsistaDto)
         {
-            if (id != bolsistaDto.BolsistaId)
+            if (id != bolsistaDto.Id)
             {
                 return BadRequest();
             }

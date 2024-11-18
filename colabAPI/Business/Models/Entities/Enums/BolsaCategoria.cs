@@ -2,8 +2,8 @@
 
 public enum BolsaCategoria
 {
-    TECNICO,
-    GRADUACAO,
-    MESTRADO,
-    DOUTORADO
+    Tecnico,
+    Graduacao,
+    Mestrado,
+    Doutorado
 }

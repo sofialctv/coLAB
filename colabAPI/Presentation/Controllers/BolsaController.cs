@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using colabAPI.Business.Repository.Interfaces;
 
-namespace colabAPI.Business.Models.Controllers
+namespace colabAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -27,7 +27,7 @@ namespace colabAPI.Business.Models.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var bolsa = _bolsaRepository.getBolsaByID(id);
+            var bolsa = _bolsaRepository.GetBolsaById(id);
             if (bolsa == null)
             {
                 return NotFound();
@@ -59,7 +59,7 @@ namespace colabAPI.Business.Models.Controllers
                 return BadRequest();
             }
 
-            var existingBolsa = _bolsaRepository.getBolsaByID(id);
+            var existingBolsa = _bolsaRepository.GetBolsaById(id);
             if (existingBolsa == null)
             {
                 return NotFound();
@@ -75,7 +75,7 @@ namespace colabAPI.Business.Models.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var bolsa = _bolsaRepository.getBolsaByID(id);
+            var bolsa = _bolsaRepository.GetBolsaById(id);
             if (bolsa == null)
             {
                 return NotFound();

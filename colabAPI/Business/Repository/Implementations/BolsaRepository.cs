@@ -19,7 +19,7 @@ namespace colabAPI.Business.Repository.Implementations
             return _DbContext.Bolsas.ToList();
         }
         
-        public Bolsa getBolsaByID(int id)
+        public Bolsa GetBolsaById(int id)
         {
             return _DbContext.Bolsas.Find(id);
         }

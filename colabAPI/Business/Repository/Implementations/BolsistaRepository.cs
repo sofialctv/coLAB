@@ -70,7 +70,7 @@ namespace colabAPI.Business.Repository.Implementations
         public async Task<bool> UpdateAsync(Bolsista bolsista)
         {
             var existingBolsista = await _context.Bolsistas
-                .FindAsync(bolsista.BolsistaId);
+                .FindAsync(bolsista.Id);
 
             if (existingBolsista == null)
             {
