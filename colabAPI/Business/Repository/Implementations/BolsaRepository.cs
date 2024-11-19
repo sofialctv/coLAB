@@ -1,4 +1,5 @@
 ﻿using colabAPI.Business.Models.Entities;
+using colabAPI.Business.DTOs;
 using colabAPI.Business.Repository.Interfaces;
 using colabAPI.Data;
 using Microsoft.EntityFrameworkCore;
@@ -7,21 +8,51 @@ namespace colabAPI.Business.Repository.Implementations
 {
     public class BolsaRepository : IBolsaRepository, IDisposable
     {
-        private ApplicationDbContext _DbContext;
-        
+        private readonly ApplicationDbContext _DbContext;
+
         public BolsaRepository(ApplicationDbContext context)
         {
-            this._DbContext = context;
+            _DbContext = context;
         }
         
-        public IEnumerable<Bolsa> GetBolsas()
+        public IEnumerable<BolsaDTO> GetBolsas()
         {
-            return _DbContext.Bolsas.ToList();
+            return _DbContext.Bolsas
+                .Include(b => b.Bolsista)
+                .Select(b => new BolsaDTO
+                {
+                    Id = b.Id,
+                    Valor = b.Valor,
+                    DataInicio = b.DataInicio,
+                    DataFim = b.DataFim,
+                    DataPrevistaFim = b.DataPrevistaFim,
+                    Ativo = b.Ativo,
+                    Categoria = b.Categoria,
+                    BolsistaId = b.BolsistaId,
+                    BolsistaNome = b.Bolsista != null ? b.Bolsista.Nome : null
+                }).ToList();
         }
         
-        public Bolsa getBolsaByID(int id)
+        public BolsaDTO GetBolsaByID(int bolsaId)
         {
-            return _DbContext.Bolsas.Find(id);
+            var bolsa = _DbContext.Bolsas
+                .Include(b => b.Bolsista)
+                .FirstOrDefault(b => b.Id == bolsaId);
+
+            if (bolsa == null) return null;
+
+            return new BolsaDTO
+            {
+                Id = bolsa.Id,
+                Valor = bolsa.Valor,
+                DataInicio = bolsa.DataInicio,
+                DataFim = bolsa.DataFim,
+                DataPrevistaFim = bolsa.DataPrevistaFim,
+                Ativo = bolsa.Ativo,
+                Categoria = bolsa.Categoria,
+                BolsistaId = bolsa.BolsistaId,
+                BolsistaNome = bolsa.Bolsista != null ? bolsa.Bolsista.Nome : null
+            };
         }
         
         public void InsertBolsa(Bolsa bolsa)
@@ -31,13 +62,34 @@ namespace colabAPI.Business.Repository.Implementations
         
         public void DeleteBolsa(int bolsaID)
         {
-            Bolsa bolsa = _DbContext.Bolsas.Find(bolsaID);
-            _DbContext.Bolsas.Remove(bolsa);
+            var bolsa = _DbContext.Bolsas.Find(bolsaID);
+            if (bolsa != null)
+            {
+                _DbContext.Bolsas.Remove(bolsa);
+            }
         }
         
         public void UpdateBolsa(Bolsa bolsa)
         {
-            _DbContext.Entry(bolsa).State = EntityState.Modified;
+            if (bolsa == null || bolsa.Id <= 0)
+            {
+                throw new ArgumentException("Invalid bolsa data");
+            }
+
+
+            var existeBolsa = _DbContext.Bolsas.Find(bolsa.Id);
+
+            if (existeBolsa != null)
+            {
+                _DbContext.Entry(existeBolsa).CurrentValues.SetValues(bolsa);
+            }
+            else
+            {
+                throw new KeyNotFoundException("Bolsa not found");
+            }
+
+            // Save changes to the context
+            _DbContext.SaveChanges();
         }
         
         public void Save()
@@ -45,18 +97,18 @@ namespace colabAPI.Business.Repository.Implementations
             _DbContext.SaveChanges();
         }
         
-        private bool disposed = false;
-        
+        private bool _disposed = false;
+
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!_disposed)
             {
                 if (disposing)
                 {
                     _DbContext.Dispose();
                 }
             }
-            this.disposed = true;
+            _disposed = true;
         }
 
         public void Dispose()

@@ -1,11 +1,12 @@
-﻿using colabAPI.Business.Models.Entities;
+﻿using colabAPI.Business.DTOs;
+using colabAPI.Business.Models.Entities;
 
 namespace colabAPI.Business.Repository.Interfaces
 {
     public interface IBolsaRepository
     {
-        IEnumerable<Bolsa> GetBolsas();
-        Bolsa getBolsaByID(int bolsaId);
+        IEnumerable<BolsaDTO> GetBolsas();
+        BolsaDTO GetBolsaByID(int bolsaId);
         void InsertBolsa(Bolsa bolsa);
         void DeleteBolsa(int bolsaID);
         void UpdateBolsa(Bolsa bolsa);

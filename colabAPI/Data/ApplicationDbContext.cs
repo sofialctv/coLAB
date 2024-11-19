@@ -12,6 +12,26 @@ namespace colabAPI.Data
 
         // Defina aqui as tabelas como DbSet
         public DbSet<Financiador> Financiadores { get; set; }
+        public DbSet<Pesquisador> Pesquisadores { get; set; }
+        public DbSet<Bolsista> Bolsistas { get; set; }
         public DbSet<Bolsa> Bolsas { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            
+            modelBuilder.Entity<Bolsista>().ToTable("Bolsistas");
+
+            modelBuilder.Entity<Bolsista>()
+                .HasOne(b => b.Bolsa)
+                .WithOne(b => b.Bolsista)
+                .HasForeignKey<Bolsa>(b => b.BolsistaId)
+                .IsRequired();
+
+            modelBuilder.Entity<Bolsa>()
+                .Property(b => b.Categoria)
+                .HasConversion<string>();
+        }
     }
 }
