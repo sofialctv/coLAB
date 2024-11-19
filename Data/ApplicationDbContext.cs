@@ -15,7 +15,7 @@ namespace colabAPI.Data
         public DbSet<Projeto> Projetos { get; set; }
         public DbSet<Orientador> Orientadores { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 

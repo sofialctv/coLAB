@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// string de conex o
+// string de conex�o
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-// configura  o do PostgreSQL
+// configura��o do PostgreSQL
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 
