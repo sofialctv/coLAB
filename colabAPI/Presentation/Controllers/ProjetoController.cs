@@ -10,17 +10,17 @@ namespace colabAPI.Presentation.Controllers
     [Route("api/[controller]")]
     public class ProjetoController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _DbContext;
 
         public ProjetoController(ApplicationDbContext context)
         {
-            _context = context;
+            _DbContext = context;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProjetoDTO>>> GetAll()
         {
-            var projetos = await _context.Projetos
+            var projetos = await _DbContext.Projetos
                 .Include(p => p.Financiador)
                 .Select(p => new ProjetoDTO
                 {
@@ -44,7 +44,7 @@ namespace colabAPI.Presentation.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ProjetoDTO>> GetById(int id)
         {
-            var projeto = await _context.Projetos
+            var projeto = await _DbContext.Projetos
                 .Include(p => p.Financiador)
                 .Where(p => p.Id == id)
                 .Select(p => new ProjetoDTO
@@ -87,8 +87,8 @@ namespace colabAPI.Presentation.Controllers
                 Status = projetoDto.Status
             };
 
-            _context.Projetos.Add(projeto);
-            await _context.SaveChangesAsync();
+            _DbContext.Projetos.Add(projeto);
+            await _DbContext.SaveChangesAsync();
             return CreatedAtAction(nameof(GetAll), new { id = projeto.Id }, projeto);
         }
 
@@ -100,7 +100,7 @@ namespace colabAPI.Presentation.Controllers
                 return BadRequest(new { message = "ID do projeto não corresponde" });
             }
 
-            var projeto = await _context.Projetos.FindAsync(id);
+            var projeto = await _DbContext.Projetos.FindAsync(id);
             if (projeto == null)
             {
                 return NotFound(new { message = "Projeto não encontrado" });
@@ -116,9 +116,9 @@ namespace colabAPI.Presentation.Controllers
             projeto.Categoria = projetoDto.Categoria;
             projeto.Status = projetoDto.Status;
 
-            _context.Entry(projeto).State = EntityState.Modified;
+            _DbContext.Entry(projeto).State = EntityState.Modified;
 
-            await _context.SaveChangesAsync();
+            await _DbContext.SaveChangesAsync();
 
             return NoContent();
         }
@@ -126,14 +126,14 @@ namespace colabAPI.Presentation.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var projeto = await _context.Projetos.FindAsync(id);
+            var projeto = await _DbContext.Projetos.FindAsync(id);
             if (projeto == null)
             {
                 return NotFound(new { message = "Projeto não encontrado" });
             }
 
-            _context.Projetos.Remove(projeto);
-            await _context.SaveChangesAsync();
+            _DbContext.Projetos.Remove(projeto);
+            await _DbContext.SaveChangesAsync();
 
             return NoContent();
         }
