@@ -12,7 +12,7 @@ namespace colabAPI.Business.Models.Entities
         public Boolean Ativo { get; set; }
         public BolsaCategoria Categoria { get; set; }
         public int BolsistaId { get; set; }
-        public Bolsista Bolsista { get; set; }
+        public Bolsista? Bolsista { get; set; }
 
     }
 }

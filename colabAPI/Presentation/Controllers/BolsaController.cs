@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using colabAPI.Business.Repository.Interfaces;
 
-namespace colabAPI.Presentation.Controllers
+namespace colabAPI.Business.Models.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -14,30 +14,28 @@ namespace colabAPI.Presentation.Controllers
         {
             _bolsaRepository = bolsaRepository;
         }
-        
-        // GET: api/Bolsa
+        // api/Bolsa
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
             var bolsas = _bolsaRepository.GetBolsas();
             return Ok(bolsas);
         }
         
-        // GET: api/Bolsa/5
+        // api/Bolsa/{id}
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var bolsa = _bolsaRepository.GetBolsaById(id);
+            var bolsa = _bolsaRepository.GetBolsaByID(id);
             if (bolsa == null)
             {
                 return NotFound();
             }
             return Ok(bolsa);
         }
-        
-        // POST: api/Bolsa
+        // api/Bolsa
         [HttpPost]
-        public IActionResult Create([FromBody] Bolsa bolsa)
+        public async Task<IActionResult> Create([FromBody] Bolsa bolsa)
         {
             if (!ModelState.IsValid)
             {
@@ -50,16 +48,16 @@ namespace colabAPI.Presentation.Controllers
             return CreatedAtAction(nameof(GetById), new { id = bolsa.Id }, bolsa);
         }
         
-        // PUT: api/Bolsa/5
+        // api/Bolsa/{id}
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] Bolsa bolsa)
+        public async Task<IActionResult> Update(int id, [FromBody] Bolsa bolsa)
         {
             if (id != bolsa.Id || !ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            var existingBolsa = _bolsaRepository.GetBolsaById(id);
+            var existingBolsa = _bolsaRepository.GetBolsaByID(id);
             if (existingBolsa == null)
             {
                 return NotFound();
@@ -71,11 +69,11 @@ namespace colabAPI.Presentation.Controllers
             return NoContent();
         }
         
-        // DELETE: api/Bolsa/5
+        // api/Bolsa/{id}
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var bolsa = _bolsaRepository.GetBolsaById(id);
+            var bolsa = _bolsaRepository.GetBolsaByID(id);
             if (bolsa == null)
             {
                 return NotFound();

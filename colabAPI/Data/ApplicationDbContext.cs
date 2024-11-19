@@ -15,20 +15,5 @@ namespace colabAPI.Data
         public DbSet<Pesquisador> Pesquisadores { get; set; }
         public DbSet<Bolsista> Bolsistas { get; set; }
         public DbSet<Bolsa> Bolsas { get; set; }
-
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Bolsista>()
-                .HasOne(b => b.Bolsa)
-                .WithOne(b => b.Bolsista)
-                .HasForeignKey<Bolsa>(b => b.BolsistaId);
-
-            modelBuilder.Entity<Bolsa>()
-                .Property(b => b.Categoria)
-                .HasConversion<string>();
-        }
     }
 }
