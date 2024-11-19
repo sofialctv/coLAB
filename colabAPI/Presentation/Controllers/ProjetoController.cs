@@ -1,5 +1,6 @@
 ﻿using colabAPI.Business.DTOs;
 using colabAPI.Business.Models.Entities;
+using colabAPI.Business.Repository.Interfaces;
 using colabAPI.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,65 +11,61 @@ namespace colabAPI.Presentation.Controllers
     [Route("api/[controller]")]
     public class ProjetoController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IProjetoRepository _projetoRepository;
 
-        public ProjetoController(ApplicationDbContext context)
+        public ProjetoController(IProjetoRepository projetoRepository)
         {
-            _context = context;
+            _projetoRepository = projetoRepository;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProjetoDTO>>> GetAll()
         {
-            var projetos = await _context.Projetos
-                .Include(p => p.Financiador)
-                .Select(p => new ProjetoDTO
-                {
-                    Id = p.Id,
-                    Nome = p.Nome,
-                    DataInicio = p.DataInicio,
-                    DataFim = p.DataFim,
-                    DataPrevistaFim = p.DataPrevistaFim,
-                    Descricao = p.Descricao,
-                    Orcamento = p.Orcamento,
-                    FinanciadorId = p.FinanciadorId,
-                    FinanciadorNome = p.Financiador != null ? p.Financiador.Nome : null,
-                    Categoria = p.Categoria,
-                    Status = p.Status,
-                })
-                .ToListAsync();
+            var projetos = await _projetoRepository.GetAllAsync();
 
-            return Ok(projetos);
+            var projetoDtos = projetos.Select(p => new ProjetoDTO
+            {
+                Id = p.Id,
+                Nome = p.Nome,
+                DataInicio = p.DataInicio,
+                DataFim = p.DataFim,
+                DataPrevistaFim = p.DataPrevistaFim,
+                Descricao = p.Descricao,
+                Orcamento = p.Orcamento,
+                FinanciadorId = p.FinanciadorId,
+                FinanciadorNome = p.Financiador != null ? p.Financiador.Nome : null,
+                Categoria = p.Categoria,
+                Status = p.Status,
+            }).ToList();
+
+            return Ok(projetoDtos);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ProjetoDTO>> GetById(int id)
         {
-            var projeto = await _context.Projetos
-                .Include(p => p.Financiador)
-                .Where(p => p.Id == id)
-                .Select(p => new ProjetoDTO
-                {
-                    Id = p.Id,
-                    Nome = p.Nome,
-                    DataInicio = p.DataInicio,
-                    DataFim = p.DataFim,
-                    DataPrevistaFim = p.DataPrevistaFim,
-                    Descricao = p.Descricao,
-                    Orcamento = p.Orcamento,
-                    FinanciadorId = p.FinanciadorId,
-                    FinanciadorNome = p.Financiador != null ? p.Financiador.Nome : null,
-                    Categoria = p.Categoria,
-                    Status = p.Status,
-                })
-                .FirstOrDefaultAsync();
-
+            var projeto = await _projetoRepository.GetByIdAsync(id);
             if (projeto == null)
             {
                 return NotFound(new { message = "Projeto não encontrado" });
             }
 
-            return Ok(projeto);
+            var projetoDto = new ProjetoDTO
+            {
+                Id = projeto.Id,
+                Nome = projeto.Nome,
+                DataInicio = projeto.DataInicio,
+                DataFim = projeto.DataFim,
+                DataPrevistaFim = projeto.DataPrevistaFim,
+                Descricao = projeto.Descricao,
+                Orcamento = projeto.Orcamento,
+                FinanciadorId = projeto.FinanciadorId,
+                FinanciadorNome = projeto.Financiador?.Nome,
+                Categoria = projeto.Categoria,
+                Status = projeto.Status,
+            };
+
+            return Ok(projetoDto);
         }
 
         [HttpPost]
@@ -87,9 +84,9 @@ namespace colabAPI.Presentation.Controllers
                 Status = projetoDto.Status
             };
 
-            _context.Projetos.Add(projeto);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetAll), new { id = projeto.Id }, projeto);
+            var createdProjeto = await _projetoRepository.AddAsync(projeto);
+
+            return CreatedAtAction(nameof(GetById), new { id = createdProjeto.Id }, createdProjeto);
         }
 
         [HttpPut("{id}")]
@@ -100,7 +97,7 @@ namespace colabAPI.Presentation.Controllers
                 return BadRequest(new { message = "ID do projeto não corresponde" });
             }
 
-            var projeto = await _context.Projetos.FindAsync(id);
+            var projeto = await _projetoRepository.GetByIdAsync(id);
             if (projeto == null)
             {
                 return NotFound(new { message = "Projeto não encontrado" });
@@ -116,9 +113,7 @@ namespace colabAPI.Presentation.Controllers
             projeto.Categoria = projetoDto.Categoria;
             projeto.Status = projetoDto.Status;
 
-            _context.Entry(projeto).State = EntityState.Modified;
-
-            await _context.SaveChangesAsync();
+            await _projetoRepository.UpdateAsync(projeto);
 
             return NoContent();
         }
@@ -126,14 +121,13 @@ namespace colabAPI.Presentation.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var projeto = await _context.Projetos.FindAsync(id);
+            var projeto = await _projetoRepository.GetByIdAsync(id);
             if (projeto == null)
             {
                 return NotFound(new { message = "Projeto não encontrado" });
             }
 
-            _context.Projetos.Remove(projeto);
-            await _context.SaveChangesAsync();
+            await _projetoRepository.DeleteAsync(id);
 
             return NoContent();
         }
