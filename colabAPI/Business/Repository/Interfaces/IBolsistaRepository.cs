@@ -6,9 +6,9 @@ namespace colabAPI.Business.Repository.Interfaces
     public interface IBolsistaRepository
     {
         // Métodos
-        Task<IEnumerable<BolsistaDto>> GetAllAsync();
+        Task<IEnumerable<Bolsista>> GetAllAsync();
         Task<BolsistaDto> GetByIdAsync(int id);
-        Task AddAsync(Bolsista bolsista);
+        Task<Bolsista>  AddAsync(Bolsista bolsista);
         Task<bool> UpdateAsync(Bolsista bolsista);
         Task<bool> DeleteAsync(int id);
         BolsistaDto ConvertToDto(Bolsista bolsista);

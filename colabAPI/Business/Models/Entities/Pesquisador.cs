@@ -14,6 +14,6 @@ namespace colabAPI.Business.Models.Entities
         public List<PesquisadorTime>? Times { get; set; }
         
         // Relacionamentos
-        public Bolsa Bolsa { get; set; } 
+        public Bolsa? Bolsa { get; set; } 
     }
 }

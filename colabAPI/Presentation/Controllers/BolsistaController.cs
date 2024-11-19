@@ -58,12 +58,13 @@ namespace colabAPI.Presentation.Controllers
                     bolsistaProperty.SetValue(bolsista, dtoProperty.GetValue(bolsistaDto));
                 }
             }
+
+            var createdBolsista = await _bolsistaRepository.AddAsync(bolsista);
             
-            await _bolsistaRepository.AddAsync(bolsista);
             return CreatedAtAction(
                 nameof(GetBolsistaById),
-                new { id = bolsista.Id },
-                _bolsistaRepository.ConvertToDto(bolsista));
+                new { id = createdBolsista.Id },
+                createdBolsista);
         }
         
         // PUT: api/bolsista/{id}

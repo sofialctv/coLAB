@@ -33,8 +33,9 @@ namespace colabAPI.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("Categoria")
-                        .HasColumnType("integer");
+                    b.Property<string>("Categoria")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("DataFim")
                         .HasColumnType("timestamp with time zone");
@@ -90,11 +91,6 @@ namespace colabAPI.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("character varying(13)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
@@ -114,16 +110,14 @@ namespace colabAPI.Migrations
 
                     b.ToTable("Pesquisadores");
 
-                    b.HasDiscriminator().HasValue("Pesquisador");
-
-                    b.UseTphMappingStrategy();
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("colabAPI.Business.Models.Entities.Bolsista", b =>
                 {
                     b.HasBaseType("colabAPI.Business.Models.Entities.Pesquisador");
 
-                    b.HasDiscriminator().HasValue("Bolsista");
+                    b.ToTable("Bolsistas", (string)null);
                 });
 
             modelBuilder.Entity("colabAPI.Business.Models.Entities.Bolsa", b =>
@@ -137,10 +131,18 @@ namespace colabAPI.Migrations
                     b.Navigation("Pesquisador");
                 });
 
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Bolsista", b =>
+                {
+                    b.HasOne("colabAPI.Business.Models.Entities.Pesquisador", null)
+                        .WithOne()
+                        .HasForeignKey("colabAPI.Business.Models.Entities.Bolsista", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("colabAPI.Business.Models.Entities.Pesquisador", b =>
                 {
-                    b.Navigation("Bolsa")
-                        .IsRequired();
+                    b.Navigation("Bolsa");
                 });
 #pragma warning restore 612, 618
         }

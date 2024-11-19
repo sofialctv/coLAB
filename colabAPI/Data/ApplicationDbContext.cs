@@ -16,5 +16,16 @@ namespace colabAPI.Data
         public DbSet<Bolsista> Bolsistas { get; set; }
         public DbSet<Bolsa> Bolsas { get; set; }
         
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            
+            modelBuilder.Entity<Bolsista>().ToTable("Bolsistas");
+
+            modelBuilder.Entity<Bolsa>()
+                .Property(b => b.Categoria)
+                .HasConversion<string>();
+        }
+        
     }
 }

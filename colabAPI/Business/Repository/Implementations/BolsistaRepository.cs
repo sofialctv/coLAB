@@ -6,9 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace colabAPI.Business.Repository.Implementations
 {
-    public class BolsistaRepository : IBolsistaRepository
+    public class BolsistaRepository : IBolsistaRepository, IDisposable
     {
         private readonly ApplicationDbContext _context;
+        
+        public BolsistaRepository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
         public BolsistaDto ConvertToDto(Bolsista bolsista)
         { // Usando Reflection nos atributos da classe
@@ -31,17 +36,15 @@ namespace colabAPI.Business.Repository.Implementations
             return bolsistaDto;
         }
 
-        public BolsistaRepository(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        
 
         // GET all bolsistas
-        public async Task<IEnumerable<BolsistaDto>> GetAllAsync()
+        public async Task<IEnumerable<Bolsista>> GetAllAsync()
         {
             return await _context.Bolsistas
-                .Select(b => ConvertToDto(b))
+                .Include(b => b.Bolsa)
                 .ToListAsync();
+
         }
 
         // GET bolsista by id
@@ -60,10 +63,11 @@ namespace colabAPI.Business.Repository.Implementations
         }
 
         // POST 
-        public async Task AddAsync(Bolsista bolsista)
+        public async Task<Bolsista> AddAsync(Bolsista bolsista)
         {
             _context.Bolsistas.Add(bolsista);
             await _context.SaveChangesAsync();
+            return bolsista;
         }
         
         // PUT
@@ -113,6 +117,24 @@ namespace colabAPI.Business.Repository.Implementations
             await _context.SaveChangesAsync();
             return true;
         }
+
+        private bool _disposed = false;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+            }
+            _disposed = true;
+        }
         
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }
