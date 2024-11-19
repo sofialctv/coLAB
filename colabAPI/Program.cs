@@ -1,17 +1,22 @@
-﻿using colabAPI.Data;
+﻿using colabAPI.Business.Repository.Implementations;
+using colabAPI.Business.Repository.Interfaces;
+using colabAPI.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// string de conex�o
+// string de conexao
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-// configura��o do PostgreSQL
+// configuracao do PostgreSQL
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Registro dos Repositories
+builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
 
 builder.Services.AddControllers();
 
