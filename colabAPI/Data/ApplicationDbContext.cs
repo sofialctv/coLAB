@@ -15,5 +15,6 @@ namespace colabAPI.Data
         public DbSet<Pesquisador> Pesquisadores { get; set; }
         public DbSet<Bolsista> Bolsistas { get; set; }
         public DbSet<Bolsa> Bolsas { get; set; }
+        
     }
 }

@@ -11,8 +11,10 @@ namespace colabAPI.Business.Models.Entities
         public DateTime DataPrevistaFim { get; set; }
         public Boolean Ativo { get; set; }
         public BolsaCategoria Categoria { get; set; }
-        public int BolsistaId { get; set; }
-        public Bolsista? Bolsista { get; set; }
+        
+        // Relacionamentos
+        public int PesquisadorId { get; set; } // Chave estrangeira
+        public Pesquisador? Pesquisador { get; set; }
 
     }
 }

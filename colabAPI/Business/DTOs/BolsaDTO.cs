@@ -15,7 +15,7 @@ namespace colabAPI.Business.DTOs
         
         private string CategoriaDescricao => Categoria.ToString();
 
-        public int? BolsistaId { get; set; }
-        public string? BolsistaNome { get; set; }
+        public int? PesquisadorId { get; set; }
+        public string? PesquisadorNome { get; set; }
     }
 }

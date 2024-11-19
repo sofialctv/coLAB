@@ -18,7 +18,7 @@ namespace colabAPI.Business.Repository.Implementations
         public IEnumerable<BolsaDTO> GetBolsas()
         {
             return _DbContext.Bolsas
-                .Include(b => b.Bolsista)
+                .Include(b => b.Pesquisador)
                 .Select(b => new BolsaDTO
                 {
                     Id = b.Id,
@@ -28,15 +28,15 @@ namespace colabAPI.Business.Repository.Implementations
                     DataPrevistaFim = b.DataPrevistaFim,
                     Ativo = b.Ativo,
                     Categoria = b.Categoria,
-                    BolsistaId = b.BolsistaId,
-                    BolsistaNome = b.Bolsista != null ? b.Bolsista.Nome : null
+                    PesquisadorId = b.PesquisadorId,
+                    PesquisadorNome = b.Pesquisador != null ? b.Pesquisador.Nome : null
                 }).ToList();
         }
         
         public BolsaDTO GetBolsaByID(int bolsaId)
         {
             var bolsa = _DbContext.Bolsas
-                .Include(b => b.Bolsista)
+                .Include(b => b.Pesquisador)
                 .FirstOrDefault(b => b.Id == bolsaId);
 
             if (bolsa == null) return null;
@@ -50,8 +50,8 @@ namespace colabAPI.Business.Repository.Implementations
                 DataPrevistaFim = bolsa.DataPrevistaFim,
                 Ativo = bolsa.Ativo,
                 Categoria = bolsa.Categoria,
-                BolsistaId = bolsa.BolsistaId,
-                BolsistaNome = bolsa.Bolsista != null ? bolsa.Bolsista.Nome : null
+                PesquisadorId = bolsa.PesquisadorId,
+                PesquisadorNome = bolsa.Pesquisador != null ? bolsa.Pesquisador.Nome : null
             };
         }
         
