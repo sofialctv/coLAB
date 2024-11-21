@@ -22,6 +22,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
 
+builder.Services.AddScoped<IOrientadorRepository, OrientadorRepository>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

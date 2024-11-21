@@ -1,6 +1,11 @@
-﻿namespace colabAPI.Business.DTOs
+﻿
+﻿using colabAPI.Business.Models.Entities;
+
+namespace colabAPI.Business.DTOs
 {
-    public class OrientadorDto
+    public class OrientadorDTO : PesquisadorDto
     {
+        public Bolsa? Bolsa { get; set; }
+
     }
 }
