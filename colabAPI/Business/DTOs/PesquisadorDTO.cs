@@ -13,7 +13,5 @@ namespace colabAPI.Business.DTOs
         
         public List<PesquisadorTime>? Times { get; set; }
         
-        // Relacionamentos
-        public Bolsa? Bolsa { get; set; } 
     }
 }

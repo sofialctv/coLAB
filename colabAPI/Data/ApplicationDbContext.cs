@@ -11,7 +11,6 @@ namespace colabAPI.Data
         }
 
         // Defina aqui as tabelas como DbSet
-        public DbSet<Financiador> Financiadores { get; set; }
         public DbSet<Pesquisador> Pesquisadores { get; set; }
         public DbSet<Bolsista> Bolsistas { get; set; }
         public DbSet<Bolsa> Bolsas { get; set; }
@@ -27,26 +26,5 @@ namespace colabAPI.Data
                 .HasConversion<string>();
         }
         
-        public DbSet<Projeto> Projetos { get; set; }
-        public DbSet<Orientador> Orientadores { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Projeto>()
-                .HasOne(p => p.Financiador)
-                .WithMany(f => f.Projetos)
-                .HasForeignKey(p => p.FinanciadorId)
-                .OnDelete(DeleteBehavior.Restrict); // não permite exclusão caso exista relacionamento
-
-            modelBuilder.Entity<Projeto>()
-                .Property(p => p.Categoria)
-                .HasConversion<string>();
-
-            modelBuilder.Entity<Projeto>()
-                .Property(p => p.Status)
-                .HasConversion<string>();
-        }
     }
 }

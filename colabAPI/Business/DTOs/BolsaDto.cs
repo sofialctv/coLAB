@@ -2,7 +2,7 @@
 
 namespace colabAPI.Business.DTOs
 {
-    public class BolsaDTO
+    public class BolsaDto
     {
         public int Id { get; set; }
         public double Valor { get; set; }
