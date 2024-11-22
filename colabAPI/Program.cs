@@ -1,20 +1,25 @@
-﻿using colabAPI.Data;
+﻿using colabAPI.Business.Repository.Implementations;
+using colabAPI.Business.Repository.Interfaces;
+using colabAPI.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 using colabAPI.Business.Repository.Interfaces;
 using colabAPI.Business.Repository.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// string de conexão
+// String de conexão com o banco de dados
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-// configura��o do PostgreSQL
+// Configuração do PostgreSQL
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 
-//ta certo nao
-builder.Services.AddScoped<IBolsistaRepository, BolsistaRepository>();
+// Solução para o erro 'System.Text.Json.JsonException: A possible object cycle was detected.' Lidando com Circular References enquanto relacionamentos são preservados.
+builder.Services.AddControllers().AddJsonOptions(options =>
+   options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
+builder.Services.AddScoped<IFinanciadorRepository, FinanciadorRepository>();
 builder.Services.AddScoped<IBolsaRepository, BolsaRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
