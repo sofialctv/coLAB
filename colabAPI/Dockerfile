@@ -22,8 +22,6 @@ FROM base AS final
 WORKDIR /app
 EXPOSE 80
 
-# Variáveis de ambiente que vão para dentro do container
 COPY . .
 
-# Configura o entrypoint, onde o .dll da aplicação será iniciado
 ENTRYPOINT ["dotnet", "colabAPI.dll"]

@@ -4,15 +4,18 @@ using colabAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using System.Text.Json.Serialization;
+using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
+Env.Load();
+
 // String de conexão com o banco de dados
-//var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING")
-//                       ?? builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING")
+                       ?? builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Carregar a string de conexão da variável de ambiente (substitui o appsettings.json)
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Configuração do PostgreSQL
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
