@@ -14,6 +14,7 @@ namespace colabAPI.Data
         // Definição das tabelas (DbSet) do banco de dados que serão mapeadas pelo EF
         public DbSet<Financiador> Financiadores { get; set; }
         public DbSet<Projeto> Projetos { get; set; }
+        public DbSet<Orientador> Orientadores { get; set; }
         public DbSet<Pesquisador> Pesquisadores { get; set; }
         public DbSet<Bolsista> Bolsistas { get; set; }
         public DbSet<Bolsa> Bolsas { get; set; }

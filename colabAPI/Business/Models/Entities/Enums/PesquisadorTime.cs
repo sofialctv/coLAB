@@ -1,11 +1,12 @@
-namespace colabAPI.Business.Models.Entities.Enums;
-
-public enum PesquisadorTime
+namespace colabAPI.Business.Models.Entities.Enums
 {
-    GestaoDeProjetos,
-    RecursosHumanos,
-    Marketing,
-    AnalistaDeRequisitos,
-    Qualidade,
-    Design
+    public enum PesquisadorTime
+    {
+        GestaoDeProjetos,
+        RecursosHumanos,
+        Marketing,
+        AnalistaDeRequisitos,
+        Qualidade,
+        Design
+    }
 }
