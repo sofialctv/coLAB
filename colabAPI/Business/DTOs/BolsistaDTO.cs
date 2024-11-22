@@ -2,7 +2,7 @@
 
 namespace colabAPI.Business.DTOs
 {
-    public class BolsistaDto : PesquisadorDTO
+    public class BolsistaDTO : PesquisadorDTO
     {
         // Relacionamentos
         public int? OrientadorId { get; set; }
