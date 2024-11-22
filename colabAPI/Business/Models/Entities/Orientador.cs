@@ -1,10 +1,7 @@
-using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
-
 namespace colabAPI.Business.Models.Entities
 {
-    public class Orientador : Pesquisador : Pesquisador
+    public class Orientador : Pesquisador
     {
-        List<Bolsista>? bolsistas {  get; set; }
+        List<Bolsista>? Bolsistas {  get; set; }
     }
 }

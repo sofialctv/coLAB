@@ -1,6 +1,6 @@
 ﻿namespace colabAPI.Business.DTOs
 {
-    public class FinanciadorDto
+    public class FinanciadorDTO
     {
         public int? Id { get; set; }
         public string? Nome { get; set; }

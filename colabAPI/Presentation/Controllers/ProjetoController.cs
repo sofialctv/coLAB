@@ -1,5 +1,6 @@
 ﻿using colabAPI.Business.DTOs;
 using colabAPI.Business.Models.Entities;
+using colabAPI.Business.Repository.Interfaces;
 using colabAPI.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,132 +11,129 @@ namespace colabAPI.Presentation.Controllers
     [Route("api/[controller]")]
     public class ProjetoController : ControllerBase
     {
-        private readonly ApplicationDbContext _DbContext;
+        private readonly IProjetoRepository _projetoRepository;
 
-        public ProjetoController(ApplicationDbContext context)
+        public ProjetoController(IProjetoRepository projetoRepository)
         {
-            _DbContext = context;
+            _projetoRepository = projetoRepository;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProjetoDTO>>> GetAll()
         {
-            var projetos = await _DbContext.Projetos
-                .Include(p => p.Financiador)
-                .Select(p => new ProjetoDTO
-                {
-                    Id = p.Id,
-                    Nome = p.Nome,
-                    DataInicio = p.DataInicio,
-                    DataFim = p.DataFim,
-                    DataPrevistaFim = p.DataPrevistaFim,
-                    Descricao = p.Descricao,
-                    Orcamento = p.Orcamento,
-                    FinanciadorId = p.FinanciadorId,
-                    FinanciadorNome = p.Financiador != null ? p.Financiador.Nome : null,
-                    Categoria = p.Categoria,
-                    Status = p.Status,
-                })
-                .ToListAsync();
+            var projetos = await _projetoRepository.GetAllAsync();
 
-        //    return Ok(projetos);
-        //}
+            var projetoDtos = projetos.Select(p => new ProjetoDTO
+            {
+                Id = p.Id,
+                Nome = p.Nome,
+                DataInicio = p.DataInicio,
+                DataFim = p.DataFim,
+                DataPrevistaFim = p.DataPrevistaFim,
+                Descricao = p.Descricao,
+                Orcamento = p.Orcamento,
+                FinanciadorId = p.FinanciadorId,
+                FinanciadorNome = p.Financiador != null ? p.Financiador.Nome : null,
+                OrientadorNome = p.Orientador != null ? p.Orientador.Nome : null,
+                Categoria = p.Categoria,
+                Status = p.Status,
+            }).ToList();
+
+            return Ok(projetoDtos);
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ProjetoDTO>> GetById(int id)
         {
-            var projeto = await _DbContext.Projetos
-                .Include(p => p.Financiador)
-                .Where(p => p.Id == id)
-                .Select(p => new ProjetoDTO
-                {
-                    Id = p.Id,
-                    Nome = p.Nome,
-                    DataInicio = p.DataInicio,
-                    DataFim = p.DataFim,
-                    DataPrevistaFim = p.DataPrevistaFim,
-                    Descricao = p.Descricao,
-                    Orcamento = p.Orcamento,
-                    FinanciadorId = p.FinanciadorId,
-                    FinanciadorNome = p.Financiador != null ? p.Financiador.Nome : null,
-                    Categoria = p.Categoria,
-                    Status = p.Status,
-                })
-                .FirstOrDefaultAsync();
-
-        //    if (projeto == null)
-        //    {
-        //        return NotFound(new { message = "Projeto não encontrado" });
-        //    }
-
-        //    return Ok(projeto);
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> Create(ProjetoDTO projetoDto)
-        //{
-        //    var projeto = new Projeto
-        //    {
-        //        Nome = projetoDto.Nome,
-        //        DataInicio = projetoDto.DataInicio,
-        //        DataFim = projetoDto.DataFim,
-        //        DataPrevistaFim = projetoDto.DataPrevistaFim,
-        //        Descricao = projetoDto.Descricao,
-        //        Orcamento = projetoDto.Orcamento,
-        //        FinanciadorId = projetoDto.FinanciadorId,
-        //        Categoria = projetoDto.Categoria,
-        //        Status = projetoDto.Status
-        //    };
-
-            _DbContext.Projetos.Add(projeto);
-            await _DbContext.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetAll), new { id = projeto.Id }, projeto);
-        }
-
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> Update(int id, ProjetoDTO projetoDto)
-        //{
-        //    if (id != projetoDto.Id)
-        //    {
-        //        return BadRequest(new { message = "ID do projeto não corresponde" });
-        //    }
-
-            var projeto = await _DbContext.Projetos.FindAsync(id);
+            var projeto = await _projetoRepository.GetByIdAsync(id);
             if (projeto == null)
             {
                 return NotFound(new { message = "Projeto não encontrado" });
             }
 
-        //    projeto.Nome = projetoDto.Nome;
-        //    projeto.DataInicio = projetoDto.DataInicio;
-        //    projeto.DataFim = projetoDto.DataFim;
-        //    projeto.DataPrevistaFim = projetoDto.DataPrevistaFim;
-        //    projeto.Descricao = projetoDto.Descricao;
-        //    projeto.Orcamento = projetoDto.Orcamento;
-        //    projeto.FinanciadorId = projetoDto.FinanciadorId;
-        //    projeto.Categoria = projetoDto.Categoria;
-        //    projeto.Status = projetoDto.Status;
+            var projetoDto = new ProjetoDTO
+            {
+                Id = projeto.Id,
+                Nome = projeto.Nome,
+                DataInicio = projeto.DataInicio,
+                DataFim = projeto.DataFim,
+                DataPrevistaFim = projeto.DataPrevistaFim,
+                Descricao = projeto.Descricao,
+                Orcamento = projeto.Orcamento,
+                FinanciadorId = projeto.FinanciadorId,
+                FinanciadorNome = projeto.Financiador?.Nome,
+                OrientadorNome = projeto.Orientador?.Nome,
+                Categoria = projeto.Categoria,
+                Status = projeto.Status,
+            };
 
-            _DbContext.Entry(projeto).State = EntityState.Modified;
+            return Ok(projetoDto);
+        }
 
-            await _DbContext.SaveChangesAsync();
+        [HttpPost]
+        public async Task<IActionResult> Create(ProjetoDTO projetoDto)
+        {
+            var projeto = new Projeto
+            {
+                Nome = projetoDto.Nome,
+                DataInicio = projetoDto.DataInicio,
+                DataFim = projetoDto.DataFim,
+                DataPrevistaFim = projetoDto.DataPrevistaFim,
+                Descricao = projetoDto.Descricao,
+                Orcamento = projetoDto.Orcamento,
+                FinanciadorId = projetoDto.FinanciadorId,
+                OrientadorId = projetoDto.OrientadorId,
+                Categoria = projetoDto.Categoria,
+                Status = projetoDto.Status
+            };
 
-        //    return NoContent();
-        //}
+            var createdProjeto = await _projetoRepository.AddAsync(projeto);
+
+            return CreatedAtAction(nameof(GetById), new { id = createdProjeto.Id }, createdProjeto);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, ProjetoDTO projetoDto)
+        {
+            if (id != projetoDto.Id)
+            {
+                return BadRequest(new { message = "ID do projeto não corresponde" });
+            }
+
+            var projeto = await _projetoRepository.GetByIdAsync(id);
+            if (projeto == null)
+            {
+                return NotFound(new { message = "Projeto não encontrado" });
+            }
+
+            projeto.Nome = projetoDto.Nome;
+            projeto.DataInicio = projetoDto.DataInicio;
+            projeto.DataFim = projetoDto.DataFim;
+            projeto.DataPrevistaFim = projetoDto.DataPrevistaFim;
+            projeto.Descricao = projetoDto.Descricao;
+            projeto.Orcamento = projetoDto.Orcamento;
+            projeto.FinanciadorId = projetoDto.FinanciadorId;
+            projeto.OrientadorId = projetoDto.OrientadorId;
+            projeto.Categoria = projetoDto.Categoria;
+            projeto.Status = projetoDto.Status;
+
+            await _projetoRepository.UpdateAsync(projeto);
+
+            return NoContent();
+        }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var projeto = await _DbContext.Projetos.FindAsync(id);
+            var projeto = await _projetoRepository.GetByIdAsync(id);
             if (projeto == null)
             {
                 return NotFound(new { message = "Projeto não encontrado" });
             }
 
-            _DbContext.Projetos.Remove(projeto);
-            await _DbContext.SaveChangesAsync();
+            await _projetoRepository.DeleteAsync(id);
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
     }
 }

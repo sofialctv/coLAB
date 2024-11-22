@@ -78,10 +78,6 @@ namespace colabAPI.Business.Models.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateOrientador(int id, OrientadorDTO orientadorDto)
         {
-            if (id != orientadorDto.Id)
-            {
-                return BadRequest(); // Retorna um status 400 se os IDs não coincidirem
-            }
 
             var orientador = new Orientador();
 

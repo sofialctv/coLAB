@@ -12,8 +12,8 @@ using colabAPI.Data;
 namespace colabAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241122013555_BolsistaPesquisadorBolsa")]
-    partial class BolsistaPesquisadorBolsa
+    [Migration("20241122030516_PrimeiraMigration")]
+    partial class PrimeiraMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,6 +63,25 @@ namespace colabAPI.Migrations
                     b.ToTable("Bolsas");
                 });
 
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Financiador", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Financiadores");
+                });
+
             modelBuilder.Entity("colabAPI.Business.Models.Entities.Pesquisador", b =>
                 {
                     b.Property<int>("Id")
@@ -97,6 +116,50 @@ namespace colabAPI.Migrations
                     b.UseTptMappingStrategy();
                 });
 
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Projeto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Categoria")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("DataFim")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("DataInicio")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("DataPrevistaFim")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("FinanciadorId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<double>("Orcamento")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FinanciadorId");
+
+                    b.ToTable("Projetos");
+                });
+
             modelBuilder.Entity("colabAPI.Business.Models.Entities.Bolsista", b =>
                 {
                     b.HasBaseType("colabAPI.Business.Models.Entities.Pesquisador");
@@ -113,7 +176,7 @@ namespace colabAPI.Migrations
                 {
                     b.HasBaseType("colabAPI.Business.Models.Entities.Pesquisador");
 
-                    b.ToTable("Orientador");
+                    b.ToTable("Orientadores");
                 });
 
             modelBuilder.Entity("colabAPI.Business.Models.Entities.Bolsa", b =>
@@ -127,6 +190,17 @@ namespace colabAPI.Migrations
                     b.Navigation("Pesquisador");
                 });
 
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Projeto", b =>
+                {
+                    b.HasOne("colabAPI.Business.Models.Entities.Financiador", "Financiador")
+                        .WithMany("Projetos")
+                        .HasForeignKey("FinanciadorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Financiador");
+                });
+
             modelBuilder.Entity("colabAPI.Business.Models.Entities.Bolsista", b =>
                 {
                     b.HasOne("colabAPI.Business.Models.Entities.Pesquisador", null)
@@ -136,7 +210,7 @@ namespace colabAPI.Migrations
                         .IsRequired();
 
                     b.HasOne("colabAPI.Business.Models.Entities.Orientador", "Orientador")
-                        .WithMany("Bolsistas")
+                        .WithMany()
                         .HasForeignKey("OrientadorId");
 
                     b.Navigation("Orientador");
@@ -151,14 +225,14 @@ namespace colabAPI.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Financiador", b =>
+                {
+                    b.Navigation("Projetos");
+                });
+
             modelBuilder.Entity("colabAPI.Business.Models.Entities.Pesquisador", b =>
                 {
                     b.Navigation("Bolsa");
-                });
-
-            modelBuilder.Entity("colabAPI.Business.Models.Entities.Orientador", b =>
-                {
-                    b.Navigation("Bolsistas");
                 });
 #pragma warning restore 612, 618
         }
