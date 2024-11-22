@@ -1,6 +1,8 @@
-﻿namespace colabAPI.Business.Models.Entities
+﻿
+namespace colabAPI.Business.Models.Entities
 {
-    public class Orientador
+    public class Orientador : Pesquisador
     {
+        public ICollection<Bolsista> Bolsistas { get; } = new List<Bolsista>();
     }
 }
