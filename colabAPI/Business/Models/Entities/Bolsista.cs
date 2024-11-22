@@ -2,5 +2,6 @@
 {
     public class Bolsista
     {
+        public Orientador orientador { get; set; }
     }
 }

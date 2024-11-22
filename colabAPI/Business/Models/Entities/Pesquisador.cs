@@ -11,5 +11,7 @@ namespace colabAPI.Business.Models.Entities
         public string Telefone { get; set; }
         public string Cpf { get; set; }
         public List<PesquisadorTime>? Times { get; set; }
+        public int bolsaid { get; set; }
+        public Bolsa bolsa { get; set; }
     }
 }
