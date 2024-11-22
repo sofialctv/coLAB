@@ -1,7 +1,10 @@
-﻿namespace colabAPI.Business.Models.Entities
+﻿
+namespace colabAPI.Business.Models.Entities
 {
-    public class Bolsista
+    public class Bolsista : Pesquisador
     {
-        public Orientador orientador { get; set; }
+        // Relacionamentos
+        public int? OrientadorId { get; set; }
+        public Orientador? Orientador { get; set; }
     }
 }

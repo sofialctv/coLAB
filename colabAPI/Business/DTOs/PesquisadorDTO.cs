@@ -1,4 +1,5 @@
-﻿using colabAPI.Business.Models.Entities.Enums;
+using colabAPI.Business.Models.Entities;
+using colabAPI.Business.Models.Entities.Enums;
 
 namespace colabAPI.Business.DTOs
 {
