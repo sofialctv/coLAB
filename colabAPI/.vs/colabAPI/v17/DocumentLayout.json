@@ -1,18 +1,38 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\",
+  "WorkspaceRootPath": "C:\\Users\\Joao Pedro\\source\\repos\\coLAB\\colabAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\alexj\\onedrive\\\u00E1rea de trabalho\\ifes serra\\5 per\u00EDodo\\ps\\colab\\colabapi\\presentation\\controllers\\projetocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:presentation\\controllers\\projetocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\joao pedro\\source\\repos\\colab\\colabapi\\business\\repository\\interfaces\\iorientadorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\repository\\interfaces\\iorientadorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\alexj\\onedrive\\\u00E1rea de trabalho\\ifes serra\\5 per\u00EDodo\\ps\\colab\\colabapi\\business\\models\\entities\\projeto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\models\\entities\\projeto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\joao pedro\\source\\repos\\colab\\colabapi\\business\\repository\\implementations\\orientadorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\repository\\implementations\\orientadorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\alexj\\onedrive\\\u00E1rea de trabalho\\ifes serra\\5 per\u00EDodo\\ps\\colab\\colabapi\\business\\dtos\\projetodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\dtos\\projetodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\joao pedro\\source\\repos\\colab\\colabapi\\presentation\\controllers\\orientadorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:presentation\\controllers\\orientadorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\joao pedro\\source\\repos\\colab\\colabapi\\business\\repository\\interfaces\\ipesquisadorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\repository\\interfaces\\ipesquisadorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\joao pedro\\source\\repos\\colab\\colabapi\\business\\repository\\interfaces\\iprojetorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\repository\\interfaces\\iprojetorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\joao pedro\\source\\repos\\colab\\colabapi\\business\\models\\entities\\orientador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\models\\entities\\orientador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\joao pedro\\source\\repos\\colab\\colabapi\\business\\models\\entities\\bolsa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\models\\entities\\bolsa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\joao pedro\\source\\repos\\colab\\colabapi\\business\\dtos\\orientadordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\dtos\\orientadordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,56 +42,110 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ProjetoController.cs",
-              "DocumentMoniker": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Presentation\\Controllers\\ProjetoController.cs",
-              "RelativeDocumentMoniker": "Presentation\\Controllers\\ProjetoController.cs",
-              "ToolTip": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Presentation\\Controllers\\ProjetoController.cs",
-              "RelativeToolTip": "Presentation\\Controllers\\ProjetoController.cs",
-              "ViewState": "AQIAACwAAAAAAAAAAAA9wDsAAABXAAAA",
+              "DocumentIndex": 2,
+              "Title": "OrientadorController.cs",
+              "DocumentMoniker": "C:\\Users\\Joao Pedro\\source\\repos\\coLAB\\colabAPI\\Presentation\\Controllers\\OrientadorController.cs",
+              "RelativeDocumentMoniker": "Presentation\\Controllers\\OrientadorController.cs",
+              "ToolTip": "C:\\Users\\Joao Pedro\\source\\repos\\coLAB\\colabAPI\\Presentation\\Controllers\\OrientadorController.cs",
+              "RelativeToolTip": "Presentation\\Controllers\\OrientadorController.cs",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAAwIAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-16T17:20:19.602Z",
+              "WhenOpened": "2024-11-22T01:07:14.653Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ProjetoDTO.cs",
-              "DocumentMoniker": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Business\\DTOs\\ProjetoDTO.cs",
-              "RelativeDocumentMoniker": "Business\\DTOs\\ProjetoDTO.cs",
-              "ToolTip": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Business\\DTOs\\ProjetoDTO.cs",
-              "RelativeToolTip": "Business\\DTOs\\ProjetoDTO.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAqwBIAAAAAAAAA",
+              "DocumentIndex": 1,
+              "Title": "OrientadorRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Joao Pedro\\source\\repos\\coLAB\\colabAPI\\Business\\Repository\\Implementations\\OrientadorRepository.cs",
+              "RelativeDocumentMoniker": "Business\\Repository\\Implementations\\OrientadorRepository.cs",
+              "ToolTip": "C:\\Users\\Joao Pedro\\source\\repos\\coLAB\\colabAPI\\Business\\Repository\\Implementations\\OrientadorRepository.cs",
+              "RelativeToolTip": "Business\\Repository\\Implementations\\OrientadorRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-16T17:20:40.482Z"
+              "WhenOpened": "2024-11-22T01:06:03.791Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Projeto.cs",
-              "DocumentMoniker": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Business\\Models\\Entities\\Projeto.cs",
-              "RelativeDocumentMoniker": "Business\\Models\\Entities\\Projeto.cs",
-              "ToolTip": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Business\\Models\\Entities\\Projeto.cs",
-              "RelativeToolTip": "Business\\Models\\Entities\\Projeto.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "IOrientadorRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Joao Pedro\\source\\repos\\coLAB\\colabAPI\\Business\\Repository\\Interfaces\\IOrientadorRepository.cs",
+              "RelativeDocumentMoniker": "Business\\Repository\\Interfaces\\IOrientadorRepository.cs",
+              "ToolTip": "C:\\Users\\Joao Pedro\\source\\repos\\coLAB\\colabAPI\\Business\\Repository\\Interfaces\\IOrientadorRepository.cs",
+              "RelativeToolTip": "Business\\Repository\\Interfaces\\IOrientadorRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-16T17:20:22.384Z",
+              "WhenOpened": "2024-11-22T01:05:24.212Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IPesquisadorRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Joao Pedro\\source\\repos\\coLAB\\colabAPI\\Business\\Repository\\Interfaces\\IPesquisadorRepository.cs",
+              "RelativeDocumentMoniker": "Business\\Repository\\Interfaces\\IPesquisadorRepository.cs",
+              "ToolTip": "C:\\Users\\Joao Pedro\\source\\repos\\coLAB\\colabAPI\\Business\\Repository\\Interfaces\\IPesquisadorRepository.cs",
+              "RelativeToolTip": "Business\\Repository\\Interfaces\\IPesquisadorRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-22T01:05:22.72Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IProjetoRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Joao Pedro\\source\\repos\\coLAB\\colabAPI\\Business\\Repository\\Interfaces\\IProjetoRepository.cs",
+              "RelativeDocumentMoniker": "Business\\Repository\\Interfaces\\IProjetoRepository.cs",
+              "ToolTip": "C:\\Users\\Joao Pedro\\source\\repos\\coLAB\\colabAPI\\Business\\Repository\\Interfaces\\IProjetoRepository.cs",
+              "RelativeToolTip": "Business\\Repository\\Interfaces\\IProjetoRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-22T01:05:21.513Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Orientador.cs",
+              "DocumentMoniker": "C:\\Users\\Joao Pedro\\source\\repos\\coLAB\\colabAPI\\Business\\Models\\Entities\\Orientador.cs",
+              "RelativeDocumentMoniker": "Business\\Models\\Entities\\Orientador.cs",
+              "ToolTip": "C:\\Users\\Joao Pedro\\source\\repos\\coLAB\\colabAPI\\Business\\Models\\Entities\\Orientador.cs",
+              "RelativeToolTip": "Business\\Models\\Entities\\Orientador.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-22T01:05:04.919Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Bolsa.cs",
+              "DocumentMoniker": "C:\\Users\\Joao Pedro\\source\\repos\\coLAB\\colabAPI\\Business\\Models\\Entities\\Bolsa.cs",
+              "RelativeDocumentMoniker": "Business\\Models\\Entities\\Bolsa.cs",
+              "ToolTip": "C:\\Users\\Joao Pedro\\source\\repos\\coLAB\\colabAPI\\Business\\Models\\Entities\\Bolsa.cs",
+              "RelativeToolTip": "Business\\Models\\Entities\\Bolsa.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-22T01:05:03.101Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "OrientadorDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Joao Pedro\\source\\repos\\coLAB\\colabAPI\\Business\\DTOs\\OrientadorDTO.cs",
+              "RelativeDocumentMoniker": "Business\\DTOs\\OrientadorDTO.cs",
+              "ToolTip": "C:\\Users\\Joao Pedro\\source\\repos\\coLAB\\colabAPI\\Business\\DTOs\\OrientadorDTO.cs",
+              "RelativeToolTip": "Business\\DTOs\\OrientadorDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-19T02:18:07.233Z",
               "EditorCaption": ""
             }
           ]

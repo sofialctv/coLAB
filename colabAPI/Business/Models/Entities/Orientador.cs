@@ -5,7 +5,6 @@ namespace colabAPI.Business.Models.Entities
 {
     public class Orientador : Pesquisador
     {
-        public Bolsa? Bolsa { get; set; }
 
     }
 }
