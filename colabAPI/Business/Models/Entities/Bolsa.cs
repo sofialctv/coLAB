@@ -1,4 +1,5 @@
-﻿using colabAPI.Business.Models.Entities.Enums;
+﻿using colabAPI.Business.DTOs;
+using colabAPI.Business.Models.Entities.Enums;
 
 namespace colabAPI.Business.Models.Entities
 {
@@ -15,6 +16,21 @@ namespace colabAPI.Business.Models.Entities
         // Relacionamentos
         public int PesquisadorId { get; set; } // Chave estrangeira
         public Pesquisador? Pesquisador { get; set; }
+        
+        public Bolsa() { }
+        
+        public Bolsa(BolsaDTO bolsaDTO){
+            this.Id = bolsaDTO.Id;
+            this.Valor = bolsaDTO.Valor;
+            this.DataInicio = bolsaDTO.DataInicio;
+            this.DataFim = bolsaDTO.DataFim;
+            this.DataPrevistaFim = bolsaDTO.DataPrevistaFim;
+            this.Ativo = bolsaDTO.Ativo;
+            this.Categoria = bolsaDTO.Categoria;
+            this.PesquisadorId = bolsaDTO.PesquisadorId;
+        }
 
     }
+    
+    
 }

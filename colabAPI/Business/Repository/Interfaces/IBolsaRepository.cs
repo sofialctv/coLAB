@@ -5,11 +5,11 @@ namespace colabAPI.Business.Repository.Interfaces
 {
     public interface IBolsaRepository
     {
-        IEnumerable<BolsaDto> GetBolsas();
-        BolsaDto GetBolsaByID(int bolsaId);
-        void InsertBolsa(Bolsa bolsa);
-        void DeleteBolsa(int bolsaID);
-        void UpdateBolsa(Bolsa bolsa);
-        void Save();
+        Task<IEnumerable<BolsaDTO>> GetAllAsync();
+        Task<BolsaDTO> GetByIdAsync(int id);
+        Task AddAsync(Bolsa bolsa);
+        Task UpdateAsync(Bolsa bolsa);
+        Task DeleteAsync(int id);
+        Task Save();
     }
 }

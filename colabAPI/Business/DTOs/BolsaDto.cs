@@ -2,7 +2,7 @@
 
 namespace colabAPI.Business.DTOs
 {
-    public class BolsaDto
+    public class BolsaDTO
     {
         public int Id { get; set; }
         public double Valor { get; set; }
@@ -15,7 +15,6 @@ namespace colabAPI.Business.DTOs
         
         private string CategoriaDescricao => Categoria.ToString();
 
-        public int? PesquisadorId { get; set; }
-        public string? PesquisadorNome { get; set; }
+        public int PesquisadorId { get; set; }
     }
 }

@@ -15,11 +15,11 @@ namespace colabAPI.Business.Repository.Implementations
             _DbContext = context;
         }
         
-        public IEnumerable<BolsaDto> GetBolsas()
+        public async Task<IEnumerable<BolsaDTO>> GetAllAsync()
         {
             return _DbContext.Bolsas
                 .Include(b => b.Pesquisador)
-                .Select(b => new BolsaDto
+                .Select(b => new BolsaDTO
                 {
                     Id = b.Id,
                     Valor = b.Valor,
@@ -29,19 +29,18 @@ namespace colabAPI.Business.Repository.Implementations
                     Ativo = b.Ativo,
                     Categoria = b.Categoria,
                     PesquisadorId = b.PesquisadorId,
-                    PesquisadorNome = b.Pesquisador != null ? b.Pesquisador.Nome : null
                 }).ToList();
         }
         
-        public BolsaDto GetBolsaByID(int bolsaId)
+        public async Task<BolsaDTO> GetByIdAsync(int id)
         {
             var bolsa = _DbContext.Bolsas
                 .Include(b => b.Pesquisador)
-                .FirstOrDefault(b => b.Id == bolsaId);
+                .FirstOrDefault(b => b.Id == id);
 
             if (bolsa == null) return null;
 
-            return new BolsaDto
+            return new BolsaDTO
             {
                 Id = bolsa.Id,
                 Valor = bolsa.Valor,
@@ -51,25 +50,15 @@ namespace colabAPI.Business.Repository.Implementations
                 Ativo = bolsa.Ativo,
                 Categoria = bolsa.Categoria,
                 PesquisadorId = bolsa.PesquisadorId,
-                PesquisadorNome = bolsa.Pesquisador != null ? bolsa.Pesquisador.Nome : null
-            };
+               };
         }
         
-        public void InsertBolsa(Bolsa bolsa)
+        public async Task AddAsync(Bolsa bolsa)
         {
             _DbContext.Bolsas.Add(bolsa);
         }
         
-        public void DeleteBolsa(int bolsaID)
-        {
-            var bolsa = _DbContext.Bolsas.Find(bolsaID);
-            if (bolsa != null)
-            {
-                _DbContext.Bolsas.Remove(bolsa);
-            }
-        }
-        
-        public void UpdateBolsa(Bolsa bolsa)
+        public async Task UpdateAsync(Bolsa bolsa)
         {
             if (bolsa == null || bolsa.Id <= 0)
             {
@@ -87,12 +76,20 @@ namespace colabAPI.Business.Repository.Implementations
             {
                 throw new KeyNotFoundException("Bolsa not found");
             }
-
-            // Save changes to the context
+            
             _DbContext.SaveChanges();
         }
         
-        public void Save()
+        public async Task DeleteAsync(int bolsaID)
+        {
+            var bolsa = _DbContext.Bolsas.Find(bolsaID);
+            if (bolsa != null)
+            {
+                _DbContext.Bolsas.Remove(bolsa);
+            }
+        }
+        
+        public async Task Save()
         {
             _DbContext.SaveChanges();
         }
