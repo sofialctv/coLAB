@@ -13,6 +13,7 @@ namespace colabAPI.Business.DTOs
 
         public BolsaCategoria Categoria { get; set; }
         
+        // Propriedade privada que retorna a descrição da categoria da bolsa como string
         private string CategoriaDescricao => Categoria.ToString();
 
         public int PesquisadorId { get; set; }
