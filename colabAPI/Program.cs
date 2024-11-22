@@ -3,8 +3,6 @@ using colabAPI.Business.Repository.Interfaces;
 using colabAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
-using colabAPI.Business.Repository.Interfaces;
-using colabAPI.Business.Repository.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,15 +17,18 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddControllers().AddJsonOptions(options =>
    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
-builder.Services.AddScoped<IFinanciadorRepository, FinanciadorRepository>();
+
 builder.Services.AddScoped<IBolsaRepository, BolsaRepository>();
+builder.Services.AddScoped<IBolsistaRepository, BolsistaRepository>();
+builder.Services.AddScoped<IFinanciadorRepository, FinanciadorRepository>();
+builder.Services.AddScoped<IOrientadorRepository, OrientadorRepository>();
+builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
 
-builder.Services.AddScoped<IOrientadorRepository, OrientadorRepository>();
 
 var app = builder.Build();
 

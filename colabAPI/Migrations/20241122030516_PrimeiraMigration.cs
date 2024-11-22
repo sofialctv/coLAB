@@ -7,11 +7,25 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace colabAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class BolsistaPesquisadorBolsa : Migration
+    public partial class PrimeiraMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Financiadores",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Nome = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Financiadores", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Pesquisadores",
                 columns: table => new
@@ -27,6 +41,33 @@ namespace colabAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pesquisadores", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Projetos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Nome = table.Column<string>(type: "text", nullable: false),
+                    DataInicio = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DataFim = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    DataPrevistaFim = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Descricao = table.Column<string>(type: "text", nullable: false),
+                    Orcamento = table.Column<double>(type: "double precision", nullable: false),
+                    FinanciadorId = table.Column<int>(type: "integer", nullable: false),
+                    Categoria = table.Column<int>(type: "integer", nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Projetos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Projetos_Financiadores_FinanciadorId",
+                        column: x => x.FinanciadorId,
+                        principalTable: "Financiadores",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -55,16 +96,16 @@ namespace colabAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orientador",
+                name: "Orientadores",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Orientador", x => x.Id);
+                    table.PrimaryKey("PK_Orientadores", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orientador_Pesquisadores_Id",
+                        name: "FK_Orientadores_Pesquisadores_Id",
                         column: x => x.Id,
                         principalTable: "Pesquisadores",
                         principalColumn: "Id",
@@ -82,9 +123,9 @@ namespace colabAPI.Migrations
                 {
                     table.PrimaryKey("PK_Bolsistas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bolsistas_Orientador_OrientadorId",
+                        name: "FK_Bolsistas_Orientadores_OrientadorId",
                         column: x => x.OrientadorId,
-                        principalTable: "Orientador",
+                        principalTable: "Orientadores",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Bolsistas_Pesquisadores_Id",
@@ -104,6 +145,11 @@ namespace colabAPI.Migrations
                 name: "IX_Bolsistas_OrientadorId",
                 table: "Bolsistas",
                 column: "OrientadorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Projetos_FinanciadorId",
+                table: "Projetos",
+                column: "FinanciadorId");
         }
 
         /// <inheritdoc />
@@ -116,7 +162,13 @@ namespace colabAPI.Migrations
                 name: "Bolsistas");
 
             migrationBuilder.DropTable(
-                name: "Orientador");
+                name: "Projetos");
+
+            migrationBuilder.DropTable(
+                name: "Orientadores");
+
+            migrationBuilder.DropTable(
+                name: "Financiadores");
 
             migrationBuilder.DropTable(
                 name: "Pesquisadores");
