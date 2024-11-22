@@ -1,4 +1,4 @@
-@startuml coLAB
+@startuml diagrama-classe
 class Projeto {
   +nome: String
   +data_inicio: Date
@@ -64,21 +64,21 @@ enum BolsaCategoria {
     DOUTORADO
 }
 
+Projeto "1" -u-> "1" ProjetoCategoria: Contém
+Projeto "1" -u-> "1" ProjetoStaus: Contém
+
 Projeto "1" --> "1" Orientador
-Projeto "N" --> "N" Pesquisador
 Projeto "N" --> "N" Bolsista
-Projeto "1" --> "N" Financiador: Possui
-Projeto "1" --> "1" ProjetoCategoria: Contém
-Projeto "1" --> "1" ProjetoStaus: Contém
+Projeto "1" -l-> "N" Financiador: Possui
 
-Bolsa "1" --> "1" Bolsista: Pertence
-Bolsa "1" --> "1" Orientador: Pertence
-Bolsa "1" ---> "N" BolsaCategoria: Contém
+Bolsa "1" -r-> "1" Pesquisador: Pertence
+Bolsa "1" -u-> "N" BolsaCategoria: Contém
 
-Pesquisador "1" ---> "N" PesquisadorTime: Pertence
 Pesquisador <|-- Orientador
 Pesquisador <|-- Bolsista
 
-Orientador "1" ---> "N" Bolsista: Orienta
+Pesquisador "1" -u-> "N" PesquisadorTime: Pertence
+
+Orientador "1" -d-> "N" Bolsista: Orienta
 
 @enduml

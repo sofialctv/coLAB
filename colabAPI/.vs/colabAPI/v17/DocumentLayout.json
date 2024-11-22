@@ -7,12 +7,57 @@
       "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:presentation\\controllers\\projetocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+<<<<<<< Updated upstream
       "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\alexj\\onedrive\\\u00E1rea de trabalho\\ifes serra\\5 per\u00EDodo\\ps\\colab\\colabapi\\business\\dtos\\projetodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\dtos\\projetodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\alexj\\onedrive\\\u00E1rea de trabalho\\ifes serra\\5 per\u00EDodo\\ps\\colab\\colabapi\\business\\models\\entities\\projeto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\models\\entities\\projeto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\dev\\colab\\colabapi\\business\\models\\entities\\projeto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\models\\entities\\projeto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\dev\\colab\\colabapi\\business\\models\\entities\\pesquisador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\models\\entities\\pesquisador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\dev\\colab\\colabapi\\business\\models\\entities\\orientador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\models\\entities\\orientador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\dev\\colab\\colabapi\\business\\repository\\implementations\\financiadorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\repository\\implementations\\financiadorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\dev\\colab\\colabapi\\business\\repository\\interfaces\\ifinanciadorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\repository\\interfaces\\ifinanciadorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\dev\\colab\\colabapi\\presentation\\controllers\\financiadorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:presentation\\controllers\\financiadorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\dev\\colab\\colabapi\\business\\repository\\interfaces\\ibolsarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\repository\\interfaces\\ibolsarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\dev\\colab\\colabapi\\presentation\\controllers\\bolsacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:presentation\\controllers\\bolsacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\dev\\colab\\colabapi\\business\\models\\entities\\financiador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\models\\entities\\financiador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\dev\\colab\\colabapi\\business\\dtos\\projetodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\dtos\\projetodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\dev\\colab\\colabapi\\business\\dtos\\financiadordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\dtos\\financiadordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> Stashed changes
     }
   ],
   "DocumentGroupContainers": [
@@ -21,18 +66,54 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
+<<<<<<< Updated upstream
           "DockedWidth": 200,
+=======
+          "DockedWidth": 163,
+>>>>>>> Stashed changes
           "SelectedChildIndex": 3,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Projeto.cs",
+              "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\Business\\Models\\Entities\\Projeto.cs",
+              "RelativeDocumentMoniker": "Business\\Models\\Entities\\Projeto.cs",
+              "ToolTip": "C:\\dev\\coLAB\\colabAPI\\Business\\Models\\Entities\\Projeto.cs",
+              "RelativeToolTip": "Business\\Models\\Entities\\Projeto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-19T14:03:44.919Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Pesquisador.cs",
+              "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\Business\\Models\\Entities\\Pesquisador.cs",
+              "RelativeDocumentMoniker": "Business\\Models\\Entities\\Pesquisador.cs",
+              "ToolTip": "C:\\dev\\coLAB\\colabAPI\\Business\\Models\\Entities\\Pesquisador.cs",
+              "RelativeToolTip": "Business\\Models\\Entities\\Pesquisador.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-19T14:03:43.93Z",
+              "EditorCaption": ""
             },
             {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Orientador.cs",
+              "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\Business\\Models\\Entities\\Orientador.cs",
+              "RelativeDocumentMoniker": "Business\\Models\\Entities\\Orientador.cs",
+              "ToolTip": "C:\\dev\\coLAB\\colabAPI\\Business\\Models\\Entities\\Orientador.cs",
+              "RelativeToolTip": "Business\\Models\\Entities\\Orientador.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-19T14:03:43.126Z",
+              "EditorCaption": ""
+            },
+            {
+<<<<<<< Updated upstream
               "$type": "Bookmark",
               "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
@@ -47,10 +128,36 @@
               "ViewState": "AQIAAGoAAAAAAAAAAAAcwBUAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-16T17:20:19.602Z",
+=======
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\dev\\coLAB\\colabAPI\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAACoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-19T04:47:14.301Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IFinanciadorRepository.cs",
+              "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\Business\\Repository\\Interfaces\\IFinanciadorRepository.cs",
+              "RelativeDocumentMoniker": "Business\\Repository\\Interfaces\\IFinanciadorRepository.cs",
+              "ToolTip": "C:\\dev\\coLAB\\colabAPI\\Business\\Repository\\Interfaces\\IFinanciadorRepository.cs",
+              "RelativeToolTip": "Business\\Repository\\Interfaces\\IFinanciadorRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-19T03:00:04.438Z",
+>>>>>>> Stashed changes
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 1,
               "Title": "ProjetoDTO.cs",
               "DocumentMoniker": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Business\\DTOs\\ProjetoDTO.cs",
@@ -60,10 +167,95 @@
               "ViewState": "AQIAAAEAAAAAAAAAAAASwA0AAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-16T17:20:40.482Z",
+=======
+              "DocumentIndex": 4,
+              "Title": "FinanciadorRepository.cs",
+              "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\Business\\Repository\\Implementations\\FinanciadorRepository.cs",
+              "RelativeDocumentMoniker": "Business\\Repository\\Implementations\\FinanciadorRepository.cs",
+              "ToolTip": "C:\\dev\\coLAB\\colabAPI\\Business\\Repository\\Implementations\\FinanciadorRepository.cs",
+              "RelativeToolTip": "Business\\Repository\\Implementations\\FinanciadorRepository.cs",
+              "ViewState": "AQIAACYAAAAAAAAAAAAwwAcAAABBAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T22:47:56.039Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "FinanciadorController.cs",
+              "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\Presentation\\Controllers\\FinanciadorController.cs",
+              "RelativeDocumentMoniker": "Presentation\\Controllers\\FinanciadorController.cs",
+              "ToolTip": "C:\\dev\\coLAB\\colabAPI\\Presentation\\Controllers\\FinanciadorController.cs",
+              "RelativeToolTip": "Presentation\\Controllers\\FinanciadorController.cs",
+              "ViewState": "AQIAAFIAAAAAAAAAAAAswAkAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-19T03:01:39.879Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IBolsaRepository.cs",
+              "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\Business\\Repository\\Interfaces\\IBolsaRepository.cs",
+              "RelativeDocumentMoniker": "Business\\Repository\\Interfaces\\IBolsaRepository.cs",
+              "ToolTip": "C:\\dev\\coLAB\\colabAPI\\Business\\Repository\\Interfaces\\IBolsaRepository.cs",
+              "RelativeToolTip": "Business\\Repository\\Interfaces\\IBolsaRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-19T13:44:19.818Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "BolsaController.cs",
+              "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\Presentation\\Controllers\\BolsaController.cs",
+              "RelativeDocumentMoniker": "Presentation\\Controllers\\BolsaController.cs",
+              "ToolTip": "C:\\dev\\coLAB\\colabAPI\\Presentation\\Controllers\\BolsaController.cs",
+              "RelativeToolTip": "Presentation\\Controllers\\BolsaController.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAmwAQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-19T13:49:04.17Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ProjetoDTO.cs",
+              "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\Business\\DTOs\\ProjetoDTO.cs",
+              "RelativeDocumentMoniker": "Business\\DTOs\\ProjetoDTO.cs",
+              "ToolTip": "C:\\dev\\coLAB\\colabAPI\\Business\\DTOs\\ProjetoDTO.cs",
+              "RelativeToolTip": "Business\\DTOs\\ProjetoDTO.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABgAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-19T13:24:50.448Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Financiador.cs",
+              "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\Business\\Models\\Entities\\Financiador.cs",
+              "RelativeDocumentMoniker": "Business\\Models\\Entities\\Financiador.cs",
+              "ToolTip": "C:\\dev\\coLAB\\colabAPI\\Business\\Models\\Entities\\Financiador.cs",
+              "RelativeToolTip": "Business\\Models\\Entities\\Financiador.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-19T04:15:40.736Z",
+>>>>>>> Stashed changes
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 2,
               "Title": "Projeto.cs",
               "DocumentMoniker": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Business\\Models\\Entities\\Projeto.cs",
@@ -73,6 +265,18 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-16T17:20:22.384Z"
+=======
+              "DocumentIndex": 11,
+              "Title": "FinanciadorDTO.cs",
+              "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\Business\\DTOs\\FinanciadorDTO.cs",
+              "RelativeDocumentMoniker": "Business\\DTOs\\FinanciadorDTO.cs",
+              "ToolTip": "C:\\dev\\coLAB\\colabAPI\\Business\\DTOs\\FinanciadorDTO.cs",
+              "RelativeToolTip": "Business\\DTOs\\FinanciadorDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T23:49:29.631Z",
+              "EditorCaption": ""
+>>>>>>> Stashed changes
             }
           ]
         }
