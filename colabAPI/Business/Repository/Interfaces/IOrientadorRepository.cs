@@ -1,6 +1,10 @@
-﻿namespace colabAPI.Business.Repository.Interfaces
+﻿using colabAPI.Business.DTOs;
+using colabAPI.Business.Models.Entities;
+
+namespace colabAPI.Business.Repository.Interfaces
 {
-    public class IOrientadorRepository
+    public interface IOrientadorRepository
     {
+        
     }
 }

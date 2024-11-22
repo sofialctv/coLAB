@@ -14,8 +14,10 @@ namespace colabAPI.Data
         // Definição das tabelas (DbSet) do banco de dados que serão mapeadas pelo EF
         public DbSet<Financiador> Financiadores { get; set; }
         public DbSet<Projeto> Projetos { get; set; }
-
-        // Configurações adicionais para o mapeamento do modelo relacional
+        public DbSet<Pesquisador> Pesquisadores { get; set; }
+        public DbSet<Bolsista> Bolsistas { get; set; }
+        public DbSet<Bolsa> Bolsas { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -26,14 +28,13 @@ namespace colabAPI.Data
                 .WithMany(f => f.Projetos)
                 .HasForeignKey(p => p.FinanciadorId)
                 .OnDelete(DeleteBehavior.Restrict); // Não permite exclusão caso exista relacionamento
+            
+            modelBuilder.Entity<Bolsista>().ToTable("Bolsistas");
 
-            modelBuilder.Entity<Projeto>()
-                .Property(p => p.Categoria)
-                .HasConversion<string>();
-
-            modelBuilder.Entity<Projeto>()
-                .Property(p => p.Status)
+            modelBuilder.Entity<Bolsa>()
+                .Property(b => b.Categoria)
                 .HasConversion<string>();
         }
+        
     }
 }

@@ -1,6 +1,14 @@
-﻿namespace colabAPI.Business.Models.Controllers
+﻿using colabAPI.Business.DTOs;
+using colabAPI.Business.Models.Entities;
+using colabAPI.Business.Repository.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+
+namespace colabAPI.Business.Models.Controllers
 {
-    public class OrientadorController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class OrientadorController : ControllerBase
     {
+        
     }
 }
