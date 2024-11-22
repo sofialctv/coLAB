@@ -32,6 +32,7 @@ namespace colabAPI.Data
             
             modelBuilder.Entity<Bolsista>().ToTable("Bolsistas");
 
+            // Converte o enum de int para uma string ao enviar para banco de dados
             modelBuilder.Entity<Bolsa>()
                 .Property(b => b.Categoria)
                 .HasConversion<string>();
