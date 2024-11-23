@@ -2,6 +2,7 @@
 using colabAPI.Business.Repository.Interfaces;
 using colabAPI.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 using System.Text.Json.Serialization;
 using DotNetEnv;
 
@@ -33,8 +34,24 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
 
-
 var app = builder.Build();
+
+//// Rodar as migrações no startup da aplicação
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+//    try
+//    {
+//        // Pega o contexto do banco de dados (ApplicationDbContext) e aplica as migrações
+//        var context = services.GetRequiredService<ApplicationDbContext>();
+//        context.Database.Migrate();  // Aplica as migrações pendentes ao banco de dados
+//    }
+//    catch (Exception ex)
+//    {
+//        var logger = services.GetRequiredService<ILogger<Program>>();
+//        logger.LogError(ex, "ERRO: Intercorrência ao aplicar migrações.");
+//    }
+//}
 
 if (app.Environment.IsDevelopment())
 {
