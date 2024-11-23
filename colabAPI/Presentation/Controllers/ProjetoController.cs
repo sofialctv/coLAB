@@ -12,10 +12,12 @@ namespace colabAPI.Presentation.Controllers
     public class ProjetoController : ControllerBase
     {
         private readonly IProjetoRepository _projetoRepository;
+        private readonly IBolsistaRepository _bolsistaRepository;
 
-        public ProjetoController(IProjetoRepository projetoRepository)
+        public ProjetoController(IProjetoRepository projetoRepository, IBolsistaRepository bolsistaRepository)
         {
             _projetoRepository = projetoRepository;
+            _bolsistaRepository = bolsistaRepository;
         }
 
         [HttpGet]
@@ -33,10 +35,12 @@ namespace colabAPI.Presentation.Controllers
                 Descricao = p.Descricao,
                 Orcamento = p.Orcamento,
                 FinanciadorId = p.FinanciadorId,
-                FinanciadorNome = p.Financiador != null ? p.Financiador.Nome : null,
-                OrientadorNome = p.Orientador != null ? p.Orientador.Nome : null,
+                FinanciadorNome = p.Financiador?.Nome,
+                OrientadorId = p.OrientadorId,
+                OrientadorNome = p.Orientador?.Nome,
+                BolsistasIds = p.Bolsistas?.Select(b => b.Id).ToList(),
                 Categoria = p.Categoria,
-                Status = p.Status,
+                Status = p.Status
             }).ToList();
 
             return Ok(projetoDtos);
@@ -62,9 +66,11 @@ namespace colabAPI.Presentation.Controllers
                 Orcamento = projeto.Orcamento,
                 FinanciadorId = projeto.FinanciadorId,
                 FinanciadorNome = projeto.Financiador?.Nome,
+                OrientadorId = projeto.OrientadorId,
                 OrientadorNome = projeto.Orientador?.Nome,
+                BolsistasIds = projeto.Bolsistas?.Select(b => b.Id).ToList(),
                 Categoria = projeto.Categoria,
-                Status = projeto.Status,
+                Status = projeto.Status
             };
 
             return Ok(projetoDto);
@@ -86,6 +92,20 @@ namespace colabAPI.Presentation.Controllers
                 Categoria = projetoDto.Categoria,
                 Status = projetoDto.Status
             };
+
+            // Associando Bolsistas pelo Id
+            if (projetoDto.BolsistasIds != null && projetoDto.BolsistasIds.Any())
+            {
+                Console.WriteLine("BolsistasIds: " + string.Join(", ", projetoDto.BolsistasIds));
+
+                var bolsistas = await _bolsistaRepository.GetByIdsAsync(projetoDto.BolsistasIds);
+                if (bolsistas.Count != projetoDto.BolsistasIds.Count)
+                {
+                    return BadRequest(new { message = "Um ou mais Bolsistas fornecidos não foram encontrados" });
+                }
+
+                projeto.Bolsistas = bolsistas;
+            }
 
             var createdProjeto = await _projetoRepository.AddAsync(projeto);
 
@@ -116,6 +136,18 @@ namespace colabAPI.Presentation.Controllers
             projeto.OrientadorId = projetoDto.OrientadorId;
             projeto.Categoria = projetoDto.Categoria;
             projeto.Status = projetoDto.Status;
+
+            // Atualiza os bolsistas associados
+            if (projetoDto.BolsistasIds != null)
+            {
+                var bolsistasExistentes = await _bolsistaRepository.GetByIdsAsync(projetoDto.BolsistasIds);
+                if (bolsistasExistentes.Count != projetoDto.BolsistasIds.Count)
+                {
+                    return BadRequest(new { message = "Um ou mais Bolsistas não foram encontrados" });
+                }
+
+                projeto.Bolsistas = bolsistasExistentes;
+            }
 
             await _projetoRepository.UpdateAsync(projeto);
 

@@ -29,9 +29,24 @@ namespace colabAPI.Data
                 .WithMany(f => f.Projetos)
                 .HasForeignKey(p => p.FinanciadorId)
                 .OnDelete(DeleteBehavior.Restrict); // Não permite exclusão caso exista relacionamento
-            
+
+            modelBuilder.Entity<Projeto>()
+                .HasOne(p => p.Orientador)
+                .WithMany()
+                .HasForeignKey(p => p.OrientadorId);
+
+            modelBuilder.Entity<Projeto>()
+                .HasMany(p => p.Bolsistas)
+                .WithMany(b => b.Projetos)
+                .UsingEntity<Dictionary<string, object>>(
+                    "ProjetoBolsista", // Essa é a tabela intermediária gerada para relação N<->N
+                    j => j.HasOne<Bolsista>().WithMany().HasForeignKey("BolsistaId"),
+                    j => j.HasOne<Projeto>().WithMany().HasForeignKey("ProjetoId")
+                );
+
             modelBuilder.Entity<Bolsista>().ToTable("Bolsistas");
 
+            // Converte o enum de int para uma string ao enviar para banco de dados
             modelBuilder.Entity<Bolsa>()
                 .Property(b => b.Categoria)
                 .HasConversion<string>();
