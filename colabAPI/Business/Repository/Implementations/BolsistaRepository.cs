@@ -13,7 +13,6 @@ namespace colabAPI.Business.Repository.Implementations
         {
             _context = context;
         }
-
         
         // GET all bolsistas
         public async Task<IEnumerable<Bolsista>> GetAllAsync()
@@ -34,6 +33,14 @@ namespace colabAPI.Business.Repository.Implementations
                 .Include(b => b.Bolsa)
                 .Include(b => b.Orientador)
                 .FirstOrDefaultAsync(b => b.Id == id);
+        }
+
+        // GET bolsistas by id
+        public async Task<List<Bolsista>> GetByIdsAsync(List<int> bolsistasIds)
+        {
+            return await _context.Bolsistas
+                .Where(b => bolsistasIds.Contains(b.Id))
+                .ToListAsync();
         }
 
         // POST
