@@ -203,7 +203,7 @@
         {
 <<<<<<< HEAD
           "DockedWidth": 163,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Document",

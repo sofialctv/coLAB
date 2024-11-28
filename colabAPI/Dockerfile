@@ -1,4 +1,4 @@
-# Etapa 1: Build da aplicação
+# Etapa 1: Build da aplicaÃ§Ã£o
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
