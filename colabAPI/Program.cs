@@ -14,8 +14,6 @@ Env.Load();
 var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING")
                        ?? builder.Configuration.GetConnectionString("DefaultConnection");
 
-// Carregar a string de conexão da variável de ambiente (substitui o appsettings.json)
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Configuração do PostgreSQL
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -34,6 +32,9 @@ builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Registro dos Repositories
+builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
 
 builder.Services.AddControllers();
 
