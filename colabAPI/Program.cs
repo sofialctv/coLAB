@@ -32,6 +32,9 @@ builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Registro dos Repositories
+builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
+
 builder.Services.AddControllers();
 
 var app = builder.Build();
