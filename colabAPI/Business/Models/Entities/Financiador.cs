@@ -6,7 +6,7 @@
         public String? Nome { get; set; }
         public String? Email { get; set; }
 
-        // Relacionamento
-        public ICollection<Projeto>? Projetos { get; set; }
+        // Definição do relacionamento com Projetos
+        public ICollection<Projeto> Projetos { get; set; }
     }
 }

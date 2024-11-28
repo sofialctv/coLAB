@@ -18,6 +18,7 @@ namespace colabAPI.Business.Repository.Implementations
         {
             return await _context.Projetos
                 .Include(p => p.Financiador)
+                .Include(p => p.Bolsistas)
                 .ToListAsync();
         }
 
@@ -25,6 +26,7 @@ namespace colabAPI.Business.Repository.Implementations
         {
             return await _context.Projetos
                 .Include(p => p.Financiador)
+                .Include(p => p.Bolsistas)
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
 

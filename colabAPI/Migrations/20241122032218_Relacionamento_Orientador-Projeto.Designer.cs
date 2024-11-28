@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using colabAPI.Data;
@@ -11,9 +12,11 @@ using colabAPI.Data;
 namespace colabAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241122032218_Relacionamento_Orientador-Projeto")]
+    partial class Relacionamento_OrientadorProjeto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace colabAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("ProjetoBolsista", b =>
-                {
-                    b.Property<int>("BolsistaId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("ProjetoId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("BolsistaId", "ProjetoId");
-
-                    b.HasIndex("ProjetoId");
-
-                    b.ToTable("ProjetoBolsista");
-                });
 
             modelBuilder.Entity("colabAPI.Business.Models.Entities.Bolsa", b =>
                 {
@@ -162,7 +150,7 @@ namespace colabAPI.Migrations
                     b.Property<double>("Orcamento")
                         .HasColumnType("double precision");
 
-                    b.Property<int?>("OrientadorId")
+                    b.Property<int>("OrientadorId")
                         .HasColumnType("integer");
 
                     b.Property<int>("Status")
@@ -184,7 +172,12 @@ namespace colabAPI.Migrations
                     b.Property<int?>("OrientadorId")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("ProjetoId")
+                        .HasColumnType("integer");
+
                     b.HasIndex("OrientadorId");
+
+                    b.HasIndex("ProjetoId");
 
                     b.ToTable("Bolsistas", (string)null);
                 });
@@ -194,21 +187,6 @@ namespace colabAPI.Migrations
                     b.HasBaseType("colabAPI.Business.Models.Entities.Pesquisador");
 
                     b.ToTable("Orientadores");
-                });
-
-            modelBuilder.Entity("ProjetoBolsista", b =>
-                {
-                    b.HasOne("colabAPI.Business.Models.Entities.Bolsista", null)
-                        .WithMany()
-                        .HasForeignKey("BolsistaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("colabAPI.Business.Models.Entities.Projeto", null)
-                        .WithMany()
-                        .HasForeignKey("ProjetoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("colabAPI.Business.Models.Entities.Bolsa", b =>
@@ -232,7 +210,9 @@ namespace colabAPI.Migrations
 
                     b.HasOne("colabAPI.Business.Models.Entities.Orientador", "Orientador")
                         .WithMany()
-                        .HasForeignKey("OrientadorId");
+                        .HasForeignKey("OrientadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Financiador");
 
@@ -250,6 +230,10 @@ namespace colabAPI.Migrations
                     b.HasOne("colabAPI.Business.Models.Entities.Orientador", "Orientador")
                         .WithMany()
                         .HasForeignKey("OrientadorId");
+
+                    b.HasOne("colabAPI.Business.Models.Entities.Projeto", null)
+                        .WithMany("Bolsistas")
+                        .HasForeignKey("ProjetoId");
 
                     b.Navigation("Orientador");
                 });
@@ -271,6 +255,11 @@ namespace colabAPI.Migrations
             modelBuilder.Entity("colabAPI.Business.Models.Entities.Pesquisador", b =>
                 {
                     b.Navigation("Bolsa");
+                });
+
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Projeto", b =>
+                {
+                    b.Navigation("Bolsistas");
                 });
 #pragma warning restore 612, 618
         }

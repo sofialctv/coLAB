@@ -18,7 +18,12 @@ namespace colabAPI.Business.Models.Entities
         public int FinanciadorId { get; set; }
         public Financiador Financiador { get; set; }
 
-        // Enum Properties
+        public int? OrientadorId { get; set; }
+        public Orientador? Orientador { get; set; }
+
+        public ICollection<Bolsista>? Bolsistas { get; set; }
+
+        // Enums
         public ProjetoCategoria Categoria { get; set; }
         public ProjetoStatus Status { get; set; }
     }
