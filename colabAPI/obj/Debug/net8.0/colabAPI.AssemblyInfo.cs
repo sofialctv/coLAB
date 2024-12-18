@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("colabAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+45b6f0fca9a36b7bc3adf8d3f60e2774c23c0df7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+49d2575d377d334596337f58dac30ff209d4e689")]
 [assembly: System.Reflection.AssemblyProductAttribute("colabAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("colabAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
