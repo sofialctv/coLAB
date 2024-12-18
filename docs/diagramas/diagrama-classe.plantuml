@@ -9,14 +9,6 @@ class Projeto {
   +orcamento: Double
 }
 
-
-enum ProjetoStaus {
-  INATIVO
-  ATIVO
-  CANCELADO
-  FINALIZADO
-}
-
 enum ProjetoCategoria {
     INOVAÇÃO
     EXTENSÃO
@@ -35,27 +27,16 @@ class Papel {
 }
 
 class Pessoa {
-
-class Orientador {
-}
-
-class Bolsista {
-}
-
-class Pesquisador {
-
   +nome: String
   +email: String
   +telefone: String
   +cpf: String
 }
 
-
 class HistoricoBolsa {
   +data: Date
   +descricao: String
 }
-
 
 class HistoricoProjeto {
   +data: Date
@@ -66,18 +47,6 @@ class HistoricoPapel{
   +data: Date
   +descricao: String
 }
-
-
-enum PesquisadorTime {
-    GESTAO_DE_PROJETOS
-    RECURSOS_HUMANOS
-    MARKETING
-    DESENVOLVIMENTO
-    ANALISTA_DE_REQUISITOS
-    QUALIDADE
-    DESIGN
-}
-
 
 class Bolsa {
   +valor: Double
@@ -104,14 +73,6 @@ enum Escolaridade {
     
 }
 
-enum BolsaCategoria {
-    TECNICO
-    GRADUACAO
-
-    MESTRADO
-    DOUTORADO
-}
-
 Projeto "1" -l-> "1" ProjetoCategoria : classifica <  
 Projeto "1" -r- "N" Bolsa: contém >
 Projeto "N" --> "1" Financiador : financia <
@@ -131,21 +92,5 @@ Pessoa "1" -- "N" HistoricoPapel : arquiva >
 
 HistoricoPapel "1" -- "1" Papel : armazena >
 
-Projeto "1" -u-> "1" ProjetoCategoria: Contém
-Projeto "1" -u-> "1" ProjetoStaus: Contém
-
-Projeto "1" --> "1" Orientador
-Projeto "N" --> "N" Bolsista
-Projeto "1" -l-> "N" Financiador: Possui
-
-Bolsa "1" -r-> "1" Pesquisador: Pertence
-Bolsa "1" -u-> "N" BolsaCategoria: Contém
-
-Pesquisador <|-- Orientador
-Pesquisador <|-- Bolsista
-
-Pesquisador "1" -u-> "N" PesquisadorTime: Pertence
-
-Orientador "1" -d-> "N" Bolsista: Orienta
 
 @enduml
