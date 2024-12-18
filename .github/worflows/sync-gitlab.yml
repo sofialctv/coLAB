@@ -23,4 +23,4 @@ jobs:
         run: |
           git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/sofialctv/colab.git
           git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/sofialctv/colab-api.git
-          git push --force gitlab
+          git push -u gitlab --force
