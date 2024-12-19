@@ -42,7 +42,8 @@ builder.Services.AddCors(options =>
     {
         policy.AllowAnyOrigin()
               .AllowAnyMethod()
-              .AllowAnyHeader();
+              .AllowAnyHeader()
+              .WithExposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Headers", "Access-Control-Allow-Methods");
     });
 });
 
@@ -59,6 +60,13 @@ if (app.Environment.IsDevelopment())
         c.RoutePrefix = string.Empty;
     });
 }
+
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Append("Referrer-Policy", "no-referrer-when-downgrade");
+    await next();
+});
+
 
 // Habilita CORS
 app.UseCors("AllowAllOrigins");
