@@ -18,8 +18,19 @@ namespace colabAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<HistoricoCargo>()
+                .HasOne(h => h.Pessoa)
+                .WithMany(p => p.HistoricosCargo)
+                .HasForeignKey(h => h.PessoaId)
+                .IsRequired();
+            
+            modelBuilder.Entity<HistoricoCargo>()
+                .HasOne(h => h.Cargo)
+                .WithOne(c => c.HistoricoCargo)
+                .HasForeignKey<HistoricoCargo>(c => c.CargoId)
+                .IsRequired();
+            
             base.OnModelCreating(modelBuilder);
-
         }
         
     }
