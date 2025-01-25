@@ -1,15 +1,13 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using colabAPI.Business.Models.Entities;
 
 namespace colabAPI.Business.Repository.Interfaces
 {
     public interface ICargoRepository
     {
-        Task<IEnumerable< >> GetAllAsync();
-        Task< > GetByIdAsync(int id);
-        Task AddAsync();
-        Task UpdateAsync();
+        Task<IEnumerable<Cargo>> GetAllAsync();
+        Task<Cargo> GetByIdAsync(int id);
+        Task<Cargo> AddAsync(Cargo cargo);
+        Task<Cargo> UpdateAsync(Cargo cargo);
         Task DeleteAsync(int id);
-        Task Save();
     }
 }

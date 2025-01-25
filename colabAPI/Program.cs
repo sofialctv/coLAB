@@ -1,8 +1,9 @@
-﻿using colabAPI.Business.Repository.Implementations;
-using colabAPI.Business.Repository.Interfaces;
-using colabAPI.Data;
+﻿using colabAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using colabAPI.AutoMapper;
+using colabAPI.Business.Repository.Implementations;
+using colabAPI.Business.Repository.Interfaces;
 using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,31 +22,41 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddControllers().AddJsonOptions(options =>
    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
+// AutoMapper
+builder.Services.AddAutoMapper(typeof(ConfigMapping));
+
 // Injeção de dependências
-builder.Services.AddScoped<IBolsaRepository, BolsaRepository>();
-builder.Services.AddScoped<IBolsistaRepository, BolsistaRepository>();
-builder.Services.AddScoped<IFinanciadorRepository, FinanciadorRepository>();
-builder.Services.AddScoped<IOrientadorRepository, OrientadorRepository>();
-builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
+builder.Services.AddScoped<IPessoaRepository, PessoaRepository>();
+builder.Services.AddScoped<ICargoRepository, CargoRepository>();
+builder.Services.AddScoped<IHistoricoCargoRepository, HistoricoCargoRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddControllers();
+// Adicionar serviços ao contêiner
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .WithExposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Headers", "Access-Control-Allow-Methods");
+    });
+});
 
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+app.Use(async (context, next) =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "coLAB API v1");
-        c.RoutePrefix = string.Empty;
-    });
-}
+    context.Response.Headers.Append("Referrer-Policy", "no-referrer-when-downgrade");
+    await next();
+});
 
+// Habilita CORS
+app.UseCors("AllowAllOrigins");
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

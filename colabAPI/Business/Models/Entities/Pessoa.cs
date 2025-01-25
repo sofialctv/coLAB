@@ -7,5 +7,7 @@ namespace colabAPI.Business.Models.Entities
         public string Email { get; set; }
         public string Telefone { get; set; }
         public string Cpf { get; set; }
+        
+        public List<HistoricoCargo> HistoricosCargo { get; set; }
     }
 }

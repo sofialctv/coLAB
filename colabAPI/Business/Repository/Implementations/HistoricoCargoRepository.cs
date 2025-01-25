@@ -18,12 +18,14 @@ namespace colabAPI.Business.Repository.Implementations
 
         public async Task<IEnumerable<HistoricoCargo>> GetAllAsync()
         {
-            return await _context.HistoricosCargo.ToListAsync();
+            return await _context.HistoricosCargo
+                .ToListAsync();
         }
 
         public async Task<HistoricoCargo> GetByIdAsync(int id)
         {
-            return await _context.HistoricosCargo.FindAsync(id);
+            return await _context.HistoricosCargo
+                .FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<HistoricoCargo> AddAsync(HistoricoCargo historicoCargo)
@@ -35,7 +37,7 @@ namespace colabAPI.Business.Repository.Implementations
 
         public async Task<HistoricoCargo> UpdateAsync(HistoricoCargo historicoCargo)
         {
-            _context.HistoricoCargo.Update(historicoCargo);
+            _context.HistoricosCargo.Update(historicoCargo);
             await _context.SaveChangesAsync();
             return historicoCargo;
         }

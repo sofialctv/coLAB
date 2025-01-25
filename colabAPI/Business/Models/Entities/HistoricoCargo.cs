@@ -8,5 +8,11 @@ namespace colabAPI.Business.Models.Entities
         public DateTime Data_inicio { get; set; }
         public DateTime Data_fim {  get; set; }
         public string Descricao { get; set; }
+        
+        public int PessoaId { get; set; }
+        public Pessoa Pessoa { get; set; }
+        
+        public int CargoId { get; set; }
+        public Cargo Cargo { get; set; }
     }
 }

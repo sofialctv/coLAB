@@ -1,12 +1,11 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using AutoMapper;
-using colabAPI.Business.DTOs;
+using colabAPI.Business.DTOs.Request;
+using colabAPI.Business.DTOs.Response;
 using colabAPI.Business.Models.Entities;
 using colabAPI.Business.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace colabAPI.Business.Models.Controllers
+namespace colabAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -23,7 +22,7 @@ namespace colabAPI.Business.Models.Controllers
 
         // GET: api/Pessoa
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<ActionResult<IEnumerable<PessoaResponseDTO>>> GetAll()
         {
             var pessoas = await _pessoaRepository.GetAllAsync();
             var pessoasDTO = _mapper.Map<IEnumerable<PessoaResponseDTO>>(pessoas);
@@ -32,7 +31,7 @@ namespace colabAPI.Business.Models.Controllers
 
         // GET: api/Pessoa/{id}
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<ActionResult<PessoaResponseDTO>> GetById(int id)
         {
             var pessoa = await _pessoaRepository.GetByIdAsync(id);
             if (pessoa == null)
@@ -47,38 +46,38 @@ namespace colabAPI.Business.Models.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PessoaRequestDTO pessoaRequestDTO)
         {
-            if (!ModelState.IsValid) // Valida o modelo
+            if (!ModelState.IsValid) 
             {
-                return BadRequest(ModelState); // Solicitação inválida erro 400
+                return BadRequest(ModelState);
             }
 
             var pessoa = _mapper.Map<Pessoa>(pessoaRequestDTO);
 
             await _pessoaRepository.AddAsync(pessoa);
-            await _pessoaRepository.Save();
+            
+            var pessoaResponseDTO = _mapper.Map<PessoaResponseDTO>(pessoa);
 
-            return CreatedAtAction(nameof(GetById), new { id = pessoa.Id }, pessoa);
+            return CreatedAtAction(nameof(GetById), new { id = pessoa.Id }, pessoaResponseDTO);
         }
 
         // PUT: api/Pessoa/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] PessoaRequestDTO pessoaRequestDTO)
         {
-            if (id != pessoaRequestDTO.Id || !ModelState.IsValid) // Verifica se o ID corresponde e o modelo é válido
+            if (id != pessoaRequestDTO.Id || !ModelState.IsValid) 
             {
-                return BadRequest(); // Solicitação inválida erro 400
+                return BadRequest(); 
             }
 
             var existingPessoa = await _pessoaRepository.GetByIdAsync(id);
             if (existingPessoa == null)
             {
-                return NotFound(); // Famoso erro 404
+                return NotFound(); 
             }
 
             var pessoa = _mapper.Map(pessoaRequestDTO, existingPessoa);
 
             await _pessoaRepository.UpdateAsync(pessoa);
-            await _pessoaRepository.Save();
 
             return NoContent();
         }
@@ -90,11 +89,10 @@ namespace colabAPI.Business.Models.Controllers
             var pessoa = await _pessoaRepository.GetByIdAsync(id);
             if (pessoa == null)
             {
-                return NotFound(); // Famoso erro 404
+                return NotFound(); 
             }
 
             await _pessoaRepository.DeleteAsync(id);
-            await _pessoaRepository.Save();
 
             return NoContent();
         }

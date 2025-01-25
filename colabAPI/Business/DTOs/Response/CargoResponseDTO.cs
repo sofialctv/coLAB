@@ -1,9 +1,8 @@
 namespace colabAPI.Business.DTOs.Response
 {
-    public class CargoReponseDTO
+    public class CargoResponseDTO
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public string Descricao { get; set; }
     }
 }

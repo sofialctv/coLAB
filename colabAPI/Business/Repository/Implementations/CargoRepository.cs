@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using colabAPI.Business.Models.Entities;
 using colabAPI.Business.Repository.Interfaces;
 using colabAPI.Data;
@@ -19,13 +17,15 @@ namespace colabAPI.Business.Repository.Implementations
         public async Task<IEnumerable<Cargo>> GetAllAsync()
         {
             return await _context.Cargos
-                
+                .ToListAsync();
+
         }
 
         public async Task<Cargo> GetByIdAsync(int id)
         {
             return await _context.Cargos
-                
+                .FirstOrDefaultAsync(c => c.Id == id);
+
         }
 
         public async Task<Cargo> AddAsync(Cargo cargo)
@@ -37,7 +37,7 @@ namespace colabAPI.Business.Repository.Implementations
 
         public async Task<Cargo> UpdateAsync(Cargo cargo)
         {
-            _context.Cargo.Update(cargo);
+            _context.Cargos.Update(cargo);
             await _context.SaveChangesAsync();
             return cargo;
         }

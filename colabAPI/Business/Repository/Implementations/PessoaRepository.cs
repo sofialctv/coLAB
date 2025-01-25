@@ -18,12 +18,14 @@ namespace colabAPI.Business.Repository.Implementations
 
         public async Task<IEnumerable<Pessoa>> GetAllAsync()
         {
-            return await _context.Pessoas.ToListAsync();
+            return await _context.Pessoas
+                .ToListAsync();
         }
 
         public async Task<Pessoa> GetByIdAsync(int id)
         {
-            return await _context.Pessoas.FindAsync(id);
+            return await _context.Pessoas
+                .FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<Pessoa> AddAsync(Pessoa pessoa)
@@ -35,7 +37,7 @@ namespace colabAPI.Business.Repository.Implementations
 
         public async Task<Pessoa> UpdateAsync(Pessoa pessoa)
         {
-            _context.Pessoa.Update(pessoa);
+            _context.Pessoas.Update(pessoa);
             await _context.SaveChangesAsync();
             return pessoa;
         }

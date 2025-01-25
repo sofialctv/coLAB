@@ -1,19 +1,18 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using AutoMapper;
-using colabAPI.Business.DTOs;
+ï»¿using AutoMapper;
+using colabAPI.Business.DTOs.Request;
+using colabAPI.Business.DTOs.Response;
 using colabAPI.Business.Models.Entities;
 using colabAPI.Business.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace colabAPI.Business.Models.Controllers
+namespace colabAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class HistoricoCargoController : ControllerBase
     {
-        private readonly IHistoricoCargoRepository _historicoCargoRepository;
-        private readonly IMapper _mapper;
+        private readonly IHistoricoCargoRepository _historicoCargoRepository; 
+        private readonly IMapper _mapper; 
 
         public HistoricoCargoController(IHistoricoCargoRepository historicoCargoRepository, IMapper mapper)
         {
@@ -21,80 +20,79 @@ namespace colabAPI.Business.Models.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/Pessoa
+        // GET: api/HistoricoCargo
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<ActionResult<IEnumerable<HistoricoCargoResponseDTO>>> GetAll()
         {
             var historicosCargo = await _historicoCargoRepository.GetAllAsync();
-            var historicosCargoDTO = _mapper.Map<IEnumerable<HistoricoCargoResponseDTO>>(historicoscargo);
+            var historicosCargoDTO = _mapper.Map<IEnumerable<HistoricoCargoResponseDTO>>(historicosCargo);
             return Ok(historicosCargoDTO);
         }
 
-        // GET: api/Pessoa/{id}
+        // GET: api/HistoricoCargo/{id}
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<ActionResult<HistoricoCargoResponseDTO>> GetById(int id)
         {
-            var historicosCargo = await _historicoCargoRepository.GetByIdAsync(id);
-            if (historicosCargo == null)
+            var historicoCargo = await _historicoCargoRepository.GetByIdAsync(id);
+            if (historicoCargo == null)
             {
                 return NotFound();
             }
-            var pessoaDTO = _mapper.Map<PessoaResponseDTO>(pessoa);
-            return Ok(pessoaDTO);
+            var historicoCargoDTO = _mapper.Map<HistoricoCargoResponseDTO>(historicoCargo);
+            return Ok(historicoCargoDTO);
         }
 
-        // POST: api/Pessoa
+        // POST: api/HistoricoCargo
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] PessoaRequestDTO pessoaRequestDTO)
+        public async Task<IActionResult> Create([FromBody] HistoricoCargoRequestDTO historicoCargoRequestDTO)
         {
-            if (!ModelState.IsValid) // Valida o modelo
+            if (!ModelState.IsValid) 
             {
-                return BadRequest(ModelState); // Solicitação inválida erro 400
+                return BadRequest(ModelState);
             }
 
-            var pessoa = _mapper.Map<Pessoa>(pessoaRequestDTO);
+            var historicoCargo = _mapper.Map<HistoricoCargo>(historicoCargoRequestDTO);
 
-            await _pessoaRepository.AddAsync(pessoa);
-            await _pessoaRepository.Save();
+            await _historicoCargoRepository.AddAsync(historicoCargo);
+            
+            var historicoCargoResponseDTO = _mapper.Map<HistoricoCargoResponseDTO>(historicoCargo);
 
-            return CreatedAtAction(nameof(GetById), new { id = pessoa.Id }, pessoa);
+            return CreatedAtAction(nameof(GetById), new { id = historicoCargo.Id }, historicoCargoResponseDTO);
         }
 
-        // PUT: api/Pessoa/{id}
+        // PUT: api/HistoricoCargo/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] PessoaRequestDTO pessoaRequestDTO)
+        public async Task<IActionResult> Update(int id, [FromBody] HistoricoCargoRequestDTO historicoCargoRequestDTO)
         {
-            if (id != pessoaRequestDTO.Id || !ModelState.IsValid) // Verifica se o ID corresponde e o modelo é válido
+            if (id != historicoCargoRequestDTO.Id || !ModelState.IsValid) 
             {
-                return BadRequest(); // Solicitação inválida erro 400
+                return BadRequest(); 
             }
 
-            var existingPessoa = await _pessoaRepository.GetByIdAsync(id);
-            if (existingPessoa == null)
+            var existingHistoricoCargo = await _historicoCargoRepository.GetByIdAsync(id);
+            if (existingHistoricoCargo == null)
             {
-                return NotFound(); // Famoso erro 404
+                return NotFound(); 
             }
 
-            var pessoa = _mapper.Map(pessoaRequestDTO, existingPessoa);
+            var historicoCargo = _mapper.Map(historicoCargoRequestDTO, existingHistoricoCargo);
 
-            await _pessoaRepository.UpdateAsync(pessoa);
-            await _pessoaRepository.Save();
+            await _historicoCargoRepository.UpdateAsync(historicoCargo);
 
             return NoContent();
         }
 
-        // DELETE: api/Pessoa/{id}
+        // DELETE: api/HistoricoCargo/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var pessoa = await _pessoaRepository.GetByIdAsync(id);
-            if (pessoa == null)
+            var historicoCargo = await _historicoCargoRepository.GetByIdAsync(id);
+            if (historicoCargo == null)
             {
-                return NotFound(); // Famoso erro 404
+                return NotFound(); 
             }
 
-            await _pessoaRepository.DeleteAsync(id);
-            await _pessoaRepository.Save();
+            await _historicoCargoRepository.DeleteAsync(id);
 
             return NoContent();
         }
