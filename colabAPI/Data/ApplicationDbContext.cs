@@ -11,46 +11,52 @@ namespace colabAPI.Data
         {
         }
 
-        // Definição das tabelas (DbSet) do banco de dados que serão mapeadas pelo EF
+        // Definição das tabelas (DbSet) do banco de dados
         public DbSet<Financiador> Financiadores { get; set; }
         public DbSet<Projeto> Projetos { get; set; }
+        public DbSet<Bolsa> Bolsas { get; set; }
+        public DbSet<HistoricoProjetoStatus> HistoricoStatusProjetos { get; set; }
+
+        // Antigo, possivelmente serão 'removidos'
         public DbSet<Orientador> Orientadores { get; set; }
         public DbSet<Pesquisador> Pesquisadores { get; set; }
         public DbSet<Bolsista> Bolsistas { get; set; }
-        public DbSet<Bolsa> Bolsas { get; set; }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Relacionamento entre 'Projeto' e 'Financiador'
+            // relacionamento entre 'Projeto' e 'Financiador'
             modelBuilder.Entity<Projeto>()
                 .HasOne(p => p.Financiador)
                 .WithMany(f => f.Projetos)
                 .HasForeignKey(p => p.FinanciadorId)
-                .OnDelete(DeleteBehavior.Restrict); // Não permite exclusão caso exista relacionamento
+                .OnDelete(DeleteBehavior.Restrict);
 
+            // relacionamento 1:N entre 'Projeto' e 'Bolsa'
             modelBuilder.Entity<Projeto>()
-                .HasOne(p => p.Orientador)
-                .WithMany()
-                .HasForeignKey(p => p.OrientadorId);
+                .HasMany(p => p.Bolsas)
+                .WithOne()
+                .HasForeignKey(b => b.ProjetoId);
 
+            // relacionamento 1:N entre 'Projeto' e 'HistoricoStatusProjeto'
             modelBuilder.Entity<Projeto>()
-                .HasMany(p => p.Bolsistas)
-                .WithMany(b => b.Projetos)
-                .UsingEntity<Dictionary<string, object>>(
-                    "ProjetoBolsista", // Essa é a tabela intermediária gerada para relação N<->N
-                    j => j.HasOne<Bolsista>().WithMany().HasForeignKey("BolsistaId"),
-                    j => j.HasOne<Projeto>().WithMany().HasForeignKey("ProjetoId")
-                );
+                .HasMany(p => p.HistoricoStatus)
+                .WithOne(h => h.Projeto)
+                .HasForeignKey(h => h.ProjetoId);
 
+            // config. para o enum 'ProjetoStatus' dentro de 'HistoricoStatusProjeto'
+            modelBuilder.Entity<HistoricoProjetoStatus>()
+                .Property(h => h.Status)
+                .HasConversion<int>();
+
+            // Antigo, possivelmente serão 'removidos'
             modelBuilder.Entity<Bolsista>().ToTable("Bolsistas");
 
-            // Converte o enum de int para uma string ao enviar para banco de dados
             modelBuilder.Entity<Bolsa>()
                 .Property(b => b.Categoria)
                 .HasConversion<string>();
         }
-        
     }
+
 }

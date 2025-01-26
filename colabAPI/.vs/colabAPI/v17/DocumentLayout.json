@@ -1,33 +1,37 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\dev\\coLAB\\colabAPI\\",
+  "WorkspaceRootPath": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\dev\\colab\\colabapi\\presentation\\controllers\\projetocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\alexj\\onedrive\\\u00E1rea de trabalho\\ifes serra\\5 per\u00EDodo\\ps\\colab\\colabapi\\business\\models\\entities\\historicoprojetostatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\models\\entities\\historicoprojetostatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\alexj\\onedrive\\\u00E1rea de trabalho\\ifes serra\\5 per\u00EDodo\\ps\\colab\\colabapi\\business\\dtos\\projetoresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\dtos\\projetoresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\alexj\\onedrive\\\u00E1rea de trabalho\\ifes serra\\5 per\u00EDodo\\ps\\colab\\colabapi\\business\\models\\entities\\projeto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\models\\entities\\projeto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\alexj\\onedrive\\\u00E1rea de trabalho\\ifes serra\\5 per\u00EDodo\\ps\\colab\\colabapi\\presentation\\controllers\\projetocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:presentation\\controllers\\projetocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\dev\\colab\\colabapi\\presentation\\controllers\\financiadorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:presentation\\controllers\\financiadorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\alexj\\onedrive\\\u00E1rea de trabalho\\ifes serra\\5 per\u00EDodo\\ps\\colab\\colabapi\\business\\repository\\implementations\\projetorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\repository\\implementations\\projetorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\dev\\colab\\colabapi\\presentation\\controllers\\bolsistacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:presentation\\controllers\\bolsistacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\alexj\\onedrive\\\u00E1rea de trabalho\\ifes serra\\5 per\u00EDodo\\ps\\colab\\colabapi\\business\\repository\\interfaces\\iprojetorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\repository\\interfaces\\iprojetorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\dev\\colab\\colabapi\\presentation\\controllers\\bolsacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:presentation\\controllers\\bolsacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\alexj\\onedrive\\\u00E1rea de trabalho\\ifes serra\\5 per\u00EDodo\\ps\\colab\\colabapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\dev\\colab\\colabapi\\business\\dtos\\projetodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\dtos\\projetodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\dev\\colab\\colabapi\\business\\repository\\implementations\\bolsarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:business\\repository\\implementations\\bolsarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\dev\\colab\\colabapi\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|c:\\users\\alexj\\onedrive\\\u00E1rea de trabalho\\ifes serra\\5 per\u00EDodo\\ps\\colab\\colabapi\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{30C401EE-CE3B-43B9-A10E-B26977E642AE}|colabAPI.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -50,102 +54,107 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:4:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ProjetoController.cs",
-              "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\Presentation\\Controllers\\ProjetoController.cs",
-              "RelativeDocumentMoniker": "Presentation\\Controllers\\ProjetoController.cs",
-              "ToolTip": "C:\\dev\\coLAB\\colabAPI\\Presentation\\Controllers\\ProjetoController.cs",
-              "RelativeToolTip": "Presentation\\Controllers\\ProjetoController.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAA7wBsAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-23T01:55:09.21Z",
-              "EditorCaption": ""
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "FinanciadorController.cs",
-              "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\Presentation\\Controllers\\FinanciadorController.cs",
-              "RelativeDocumentMoniker": "Presentation\\Controllers\\FinanciadorController.cs",
-              "ToolTip": "C:\\dev\\coLAB\\colabAPI\\Presentation\\Controllers\\FinanciadorController.cs",
-              "RelativeToolTip": "Presentation\\Controllers\\FinanciadorController.cs",
-              "ViewState": "AQIAADsAAAAAAAAAAAAAwAAAAAAAAAAA",
+              "Title": "ProjetoResponseDTO.cs",
+              "DocumentMoniker": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Business\\DTOs\\ProjetoResponseDTO.cs",
+              "RelativeDocumentMoniker": "Business\\DTOs\\ProjetoResponseDTO.cs",
+              "ToolTip": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Business\\DTOs\\ProjetoResponseDTO.cs",
+              "RelativeToolTip": "Business\\DTOs\\ProjetoResponseDTO.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAA0wBgAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-23T01:55:05.587Z",
+              "WhenOpened": "2025-01-26T14:46:59.339Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BolsistaController.cs",
-              "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\Presentation\\Controllers\\BolsistaController.cs",
-              "RelativeDocumentMoniker": "Presentation\\Controllers\\BolsistaController.cs",
-              "ToolTip": "C:\\dev\\coLAB\\colabAPI\\Presentation\\Controllers\\BolsistaController.cs",
-              "RelativeToolTip": "Presentation\\Controllers\\BolsistaController.cs",
-              "ViewState": "AQIAAEcAAAAAAAAAAAAAwAAAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "HistoricoProjetoStatus.cs",
+              "DocumentMoniker": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Business\\Models\\Entities\\HistoricoProjetoStatus.cs",
+              "RelativeDocumentMoniker": "Business\\Models\\Entities\\HistoricoProjetoStatus.cs",
+              "ToolTip": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Business\\Models\\Entities\\HistoricoProjetoStatus.cs",
+              "RelativeToolTip": "Business\\Models\\Entities\\HistoricoProjetoStatus.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-23T01:54:43.951Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ProjetoDTO.cs",
-              "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\Business\\DTOs\\ProjetoDTO.cs",
-              "RelativeDocumentMoniker": "Business\\DTOs\\ProjetoDTO.cs",
-              "ToolTip": "C:\\dev\\coLAB\\colabAPI\\Business\\DTOs\\ProjetoDTO.cs",
-              "RelativeToolTip": "Business\\DTOs\\ProjetoDTO.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAwwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-23T01:54:28.756Z",
+              "WhenOpened": "2025-01-26T14:42:22.992Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "BolsaRepository.cs",
-              "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\Business\\Repository\\Implementations\\BolsaRepository.cs",
-              "RelativeDocumentMoniker": "Business\\Repository\\Implementations\\BolsaRepository.cs",
-              "ToolTip": "C:\\dev\\coLAB\\colabAPI\\Business\\Repository\\Implementations\\BolsaRepository.cs",
-              "RelativeToolTip": "Business\\Repository\\Implementations\\BolsaRepository.cs",
-              "ViewState": "AQIAAD4AAAAAAAAAAAAuwD8AAAAIAAAA",
+              "Title": "IProjetoRepository.cs",
+              "DocumentMoniker": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Business\\Repository\\Interfaces\\IProjetoRepository.cs",
+              "RelativeDocumentMoniker": "Business\\Repository\\Interfaces\\IProjetoRepository.cs",
+              "ToolTip": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Business\\Repository\\Interfaces\\IProjetoRepository.cs",
+              "RelativeToolTip": "Business\\Repository\\Interfaces\\IProjetoRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-23T01:53:30.685Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-25T19:28:52.574Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ProjetoRepository.cs",
+              "DocumentMoniker": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Business\\Repository\\Implementations\\ProjetoRepository.cs",
+              "RelativeDocumentMoniker": "Business\\Repository\\Implementations\\ProjetoRepository.cs",
+              "ToolTip": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Business\\Repository\\Implementations\\ProjetoRepository.cs",
+              "RelativeToolTip": "Business\\Repository\\Implementations\\ProjetoRepository.cs",
+              "ViewState": "AQIAAEgAAAAAAAAAAAAqwFQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T19:26:13.839Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "BolsaController.cs",
-              "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\Presentation\\Controllers\\BolsaController.cs",
-              "RelativeDocumentMoniker": "Presentation\\Controllers\\BolsaController.cs",
-              "ToolTip": "C:\\dev\\coLAB\\colabAPI\\Presentation\\Controllers\\BolsaController.cs",
-              "RelativeToolTip": "Presentation\\Controllers\\BolsaController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAtAAAA",
+              "Title": "ProjetoController.cs",
+              "DocumentMoniker": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Presentation\\Controllers\\ProjetoController.cs",
+              "RelativeDocumentMoniker": "Presentation\\Controllers\\ProjetoController.cs",
+              "ToolTip": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Presentation\\Controllers\\ProjetoController.cs",
+              "RelativeToolTip": "Presentation\\Controllers\\ProjetoController.cs",
+              "ViewState": "AQIAAGEAAAAAAAAAAAAowDAAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-23T01:53:07.451Z",
+              "WhenOpened": "2025-01-25T19:17:45.408Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Projeto.cs",
+              "DocumentMoniker": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Business\\Models\\Entities\\Projeto.cs",
+              "RelativeDocumentMoniker": "Business\\Models\\Entities\\Projeto.cs",
+              "ToolTip": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Business\\Models\\Entities\\Projeto.cs",
+              "RelativeToolTip": "Business\\Models\\Entities\\Projeto.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABUAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T18:55:51.797Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-25T18:51:50.073Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\dev\\coLAB\\colabAPI\\Data\\ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\dev\\coLAB\\colabAPI\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\alexj\\OneDrive\\\u00C1rea de Trabalho\\Ifes Serra\\5 Per\u00EDodo\\PS\\coLAB\\colabAPI\\Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "Data\\ApplicationDbContext.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAuwAoAAAAJAAAA",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAQwBEAAABEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-23T01:52:43.211Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-25T17:38:42.02Z"
             }
           ]
         }

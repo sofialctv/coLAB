@@ -4,7 +4,7 @@ using System;
 
 namespace colabAPI.Business.DTOs
 {
-    public class ProjetoDTO
+    public class ProjetoResponseDTO
     {
         public int Id { get; set; }
         public string Nome { get; set; }
@@ -14,20 +14,18 @@ namespace colabAPI.Business.DTOs
         public string Descricao { get; set; }
         public double Orcamento { get; set; }
 
-        // Relacionamentos
+        // Relacionamento
         public int FinanciadorId { get; set; }
-        public string? FinanciadorNome { get; set; }
+        public string FinanciadorNome { get; set; }
 
-        public int? OrientadorId { get; set; }
-        public string? OrientadorNome { get; set; }
-
-        public List<int>? BolsistasIds { get; set; }
-
-        // Enums
-        public ProjetoCategoria Categoria { get; set; }
-        public string CategoriaDescricao => Categoria.ToString();
-
+        // Enum
         public ProjetoStatus Status { get; set; }
         public string StatusDescricao => Status.ToString();
+
+        // Histórico de status
+        public List<HistoricoProjetoStatusResponseDTO> HistoricoStatus { get; set; }
+
+        // Bolsas
+        public List<BolsaDTO> Bolsas { get; set; }
     }
 }

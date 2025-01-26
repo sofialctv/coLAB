@@ -1,10 +1,10 @@
-﻿using colabAPI.Business.Models.Entities.Enums;
+﻿using colabAPI.Business.Models.Entities;
+using colabAPI.Business.Models.Entities.Enums;
 using System;
-using System.Collections.Generic;
 
-namespace colabAPI.Business.Models.Entities
+namespace colabAPI.Business.DTOs
 {
-    public class Projeto
+    public class ProjetoRequestDTO
     {
         public int Id { get; set; }
         public string Nome { get; set; }
@@ -14,11 +14,11 @@ namespace colabAPI.Business.Models.Entities
         public string Descricao { get; set; }
         public double Orcamento { get; set; }
 
-        // Relacionamentos
+        // Relacionamento
         public int FinanciadorId { get; set; }
-        public Financiador Financiador { get; set; }
 
-        public ICollection<Bolsa>? Bolsas { get; set; }
-        public ICollection<HistoricoProjetoStatus>? HistoricoStatus { get; set; }
+        // Enum
+        public ProjetoStatus Status { get; set; }
     }
+
 }

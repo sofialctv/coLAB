@@ -17,5 +17,7 @@ namespace colabAPI.Business.DTOs
         private string CategoriaDescricao => Categoria.ToString();
 
         public int PesquisadorId { get; set; }
+
+        public int ProjetoId { get; set; }
     }
 }

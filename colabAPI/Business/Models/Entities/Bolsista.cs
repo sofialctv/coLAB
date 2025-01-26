@@ -7,6 +7,7 @@ namespace colabAPI.Business.Models.Entities
         public int? OrientadorId { get; set; }
         public Orientador? Orientador { get; set; }
 
-        public ICollection<Projeto>? Projetos { get; set; }
+        // Antigo, possivelmente será 'removido'
+        // public ICollection<Projeto>? Projetos { get; set; }
     }
 }

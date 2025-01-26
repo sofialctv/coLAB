@@ -16,6 +16,8 @@ namespace colabAPI.Business.Models.Entities
         // Relacionamentos
         public int PesquisadorId { get; set; } // Chave estrangeira
         public Pesquisador? Pesquisador { get; set; }
+        public int ProjetoId { get; set; } // Chave estrangeira
+        public Projeto Projeto { get; set; } // ref. ao Projeto
 
         public Bolsa() { }
         
@@ -30,9 +32,8 @@ namespace colabAPI.Business.Models.Entities
             this.Ativo = bolsaDTO.Ativo;
             this.Categoria = bolsaDTO.Categoria;
             this.PesquisadorId = bolsaDTO.PesquisadorId;
+            this.ProjetoId = bolsaDTO.ProjetoId;
         }
 
     }
-
-
 }
