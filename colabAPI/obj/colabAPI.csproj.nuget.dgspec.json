@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\dev\\coLAB\\colabAPI\\colabAPI.csproj": {}
+    "C:\\Users\\Davidson\\Desktop\\PS\\colabAPI\\colabAPI.csproj": {}
   },
   "projects": {
-    "C:\\dev\\coLAB\\colabAPI\\colabAPI.csproj": {
+    "C:\\Users\\Davidson\\Desktop\\PS\\colabAPI\\colabAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\dev\\coLAB\\colabAPI\\colabAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Davidson\\Desktop\\PS\\colabAPI\\colabAPI.csproj",
         "projectName": "colabAPI",
-        "projectPath": "C:\\dev\\coLAB\\colabAPI\\colabAPI.csproj",
-        "packagesPath": "C:\\Users\\sofia\\.nuget\\packages\\",
-        "outputPath": "C:\\dev\\coLAB\\colabAPI\\obj\\",
+        "projectPath": "C:\\Users\\Davidson\\Desktop\\PS\\colabAPI\\colabAPI.csproj",
+        "packagesPath": "C:\\Users\\Davidson\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Davidson\\Desktop\\PS\\colabAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\sofia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Davidson\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -46,6 +46,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
             "DotNetEnv": {
               "target": "Package",
               "version": "[3.1.1, )"
@@ -104,7 +108,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

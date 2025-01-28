@@ -19,6 +19,8 @@ namespace colabAPI.Data
         public DbSet<Bolsista> Bolsistas { get; set; }
         public DbSet<Bolsa> Bolsas { get; set; }
         
+        public DbSet<TipoBolsa> TipoBolsa { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -47,8 +49,8 @@ namespace colabAPI.Data
             modelBuilder.Entity<Bolsista>().ToTable("Bolsistas");
 
             // Converte o enum de int para uma string ao enviar para banco de dados
-            modelBuilder.Entity<Bolsa>()
-                .Property(b => b.Categoria)
+            modelBuilder.Entity<TipoBolsa>()
+                .Property(b => b.escolaridade)
                 .HasConversion<string>();
         }
         

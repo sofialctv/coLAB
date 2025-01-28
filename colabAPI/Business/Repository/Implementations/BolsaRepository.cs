@@ -16,44 +16,28 @@ namespace colabAPI.Business.Repository.Implementations
             _DbContext = context;
         }
         
-        public async Task<IEnumerable<BolsaDTO>> GetAllAsync()
+        public async Task<IEnumerable<Bolsa>> GetAllAsync()
         {
-            return _DbContext.Bolsas
+            return await _DbContext.Bolsas
                 .Include(b => b.Pesquisador) // Inclui o relacionamento Pesquisador
-                .Select(b => new BolsaDTO // Converte as entidades para DTOs
-                {
-                    Id = b.Id,
-                    Valor = b.Valor,
-                    DataInicio = b.DataInicio,
-                    DataFim = b.DataFim,
-                    DataPrevistaFim = b.DataPrevistaFim,
-                    Ativo = b.Ativo,
-                    Categoria = b.Categoria,
-                    PesquisadorId = b.PesquisadorId,
-                }).ToList();
+                .Include(b => b.TipoBolsa) // Inclui o relacionamento tipoBolsa
+                .ToListAsync(); // Retorna as entidades diretamente como uma lista
         }
         
         // Retorna uma bolsa específica como BolsaDTO pelo ID
-        public async Task<BolsaDTO> GetByIdAsync(int id)
+        public async Task<Bolsa> GetByIdAsync(int id)
         {
-            var bolsa = _DbContext.Bolsas
+            var bolsa = await _DbContext.Bolsas
                 .Include(b => b.Pesquisador) // Inclui o relacionamento Pesquisador
-                .FirstOrDefault(b => b.Id == id); // Busca pelo ID
+                .Include(b => b.TipoBolsa) // Inclui o relacionamento tipoBolsa
+                .FirstOrDefaultAsync(b => b.Id == id);
 
-            if (bolsa == null) return null;
-            
-            // Converte a entidade para um DTO e retorna
-            return new BolsaDTO
+            if (bolsa == null)
             {
-                Id = bolsa.Id,
-                Valor = bolsa.Valor,
-                DataInicio = bolsa.DataInicio,
-                DataFim = bolsa.DataFim,
-                DataPrevistaFim = bolsa.DataPrevistaFim,
-                Ativo = bolsa.Ativo,
-                Categoria = bolsa.Categoria,
-                PesquisadorId = bolsa.PesquisadorId,
-               };
+                throw new KeyNotFoundException($"Bolsa com ID {id} não foi encontrada.");
+            }
+
+            return bolsa;
         }
         
         // Adiciona uma nova bolsa ao banco de dados

@@ -1,4 +1,6 @@
-﻿using colabAPI.Business.DTOs;
+﻿using AutoMapper;
+using colabAPI.Business.DTOs;
+using colabAPI.Business.DTOs.Request;
 using colabAPI.Business.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using colabAPI.Business.Repository.Interfaces;
@@ -10,18 +12,25 @@ namespace colabAPI.Business.Models.Controllers
     public class BolsaController : ControllerBase
     {
         private readonly IBolsaRepository _bolsaRepository; // Interface para acessar o repositorio de Bolsa
+        private readonly IMapper _mapper; 
         
         // Injeta o repositório no construtor
-        public BolsaController(IBolsaRepository bolsaRepository)
+        public BolsaController(IBolsaRepository bolsaRepository, IMapper mapper)
         {   
             _bolsaRepository = bolsaRepository;
+            _mapper = mapper;
         }
+        
         // GET: api/Bolsa
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var bolsas = await _bolsaRepository.GetAllAsync();
-            return Ok(bolsas);
+    
+            // Mapeia as entidades Bolsa para os DTOs BolsaResponseDTO
+            var bolsaDtos = _mapper.Map<IEnumerable<BolsaResponseDTO>>(bolsas);
+    
+            return Ok(bolsaDtos);
         }
         
         // GET: api/Bolsa/{id}
@@ -31,65 +40,81 @@ namespace colabAPI.Business.Models.Controllers
             var bolsa = await _bolsaRepository.GetByIdAsync(id);
             if (bolsa == null)
             {
-                return NotFound(); // Famoso erro 404
+                return NotFound(); // Retorna 404 se a bolsa não for encontrada
             }
-            return Ok(bolsa);
+
+            // Mapeia a entidade Bolsa para o DTO BolsaResponseDTO
+            var bolsaDto = _mapper.Map<BolsaResponseDTO>(bolsa);
+    
+            return Ok(bolsaDto);
         }
         
         // POST: api/Bolsa
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] BolsaDTO bolsaDTO)
+        public async Task<IActionResult> Create([FromBody] BolsaRequestDTO bolsaRequestDto)
         {
-            if (!ModelState.IsValid) // Valida o modelo
+            if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState); // Solicitação invalida erro 400
+                return BadRequest(ModelState); // Retorna erro 400 caso o modelo seja inválido
             }
 
-            Bolsa bolsa = new Bolsa(bolsaDTO);
+            // Mapeia o DTO BolsaRequestDTO para a entidade Bolsa
+            var bolsa = _mapper.Map<Bolsa>(bolsaRequestDto);
 
             await _bolsaRepository.AddAsync(bolsa);
             await _bolsaRepository.Save();
 
-            return CreatedAtAction(nameof(GetById), new { id = bolsa.Id }, bolsa);
+            // Mapeia a entidade Bolsa salva para o DTO BolsaResponseDTO para retornar ao cliente
+            var bolsaResponseDto = _mapper.Map<BolsaResponseDTO>(bolsa);
+    
+            return CreatedAtAction(nameof(GetById), new { id = bolsa.Id }, bolsaResponseDto);
         }
+
+
         
         // PUT: api/Bolsa/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] BolsaDTO bolsaDTO)
+        public async Task<IActionResult> Update(int id, [FromBody] BolsaRequestDTO bolsaRequestDto)
         {
-            if (id != bolsaDTO.Id || !ModelState.IsValid) // Verifica se o ID corresponde e o modelo é valido
+            if (!ModelState.IsValid || id <= 0)
             {
-                return BadRequest(); // Solicitação invalida erro 400
+                return BadRequest(); // Retorna erro 400 para solicitação inválida
             }
 
             var existingBolsa = await _bolsaRepository.GetByIdAsync(id);
-            Bolsa bolsa = new Bolsa(bolsaDTO);
             if (existingBolsa == null)
             {
-                return NotFound(); // Famoso erro 404
+                return NotFound(); // Retorna erro 404 se a bolsa não for encontrada
             }
 
-            await _bolsaRepository.UpdateAsync(bolsa);
+            // Atualiza a entidade existente com os valores do DTO
+            _mapper.Map(bolsaRequestDto, existingBolsa);
+
+            await _bolsaRepository.UpdateAsync(existingBolsa);
             await _bolsaRepository.Save();
 
-            return NoContent();
+            return NoContent(); // Retorna 204 quando a atualização é bem-sucedida
         }
+
         
         // DELETE: api/Bolsa/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
+            // Busca a bolsa pelo ID
             var bolsa = await _bolsaRepository.GetByIdAsync(id);
             if (bolsa == null)
             {
-                return NotFound(); // Famoso erro 404
+                return NotFound(); // Retorna erro 404 caso não encontre a bolsa
             }
 
+            // Remove a bolsa
             await _bolsaRepository.DeleteAsync(id);
             await _bolsaRepository.Save();
 
-            return NoContent();
+            return NoContent(); // Retorna 204, indicando que a operação foi bem-sucedida
         }
+
         
         
     }

@@ -1,8 +1,8 @@
-﻿using colabAPI.Business.Models.Entities.Enums;
+﻿using colabAPI.Business.Models.Entities;
 
 namespace colabAPI.Business.DTOs
 {
-    public class BolsaDTO
+    public class BolsaResponseDTO
     {
         public int Id { get; set; }
         public double Valor { get; set; }
@@ -11,10 +11,7 @@ namespace colabAPI.Business.DTOs
         public DateTime DataPrevistaFim { get; set; }
         public bool Ativo { get; set; }
 
-        public BolsaCategoria Categoria { get; set; }
-        
-        // Propriedade privada que retorna a descrição da categoria da bolsa como string
-        private string CategoriaDescricao => Categoria.ToString();
+        public TipoBolsa TipoBolsa { get; set; } // TipoBolsa não deve ser do tipo ID, já que estamos retornando as informações completas do TipoBolsa
 
         public int PesquisadorId { get; set; }
     }
