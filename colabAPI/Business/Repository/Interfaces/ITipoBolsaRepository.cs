@@ -2,7 +2,7 @@
 
 namespace colabAPI.Business.Repository.Interfaces;
 
-public class ITipoBolsaRepository
+public interface ITipoBolsaRepository
 { 
     Task<IEnumerable<TipoBolsa>> GetAllAsync();
     Task<TipoBolsa> GetByIdAsync(int id);

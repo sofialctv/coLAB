@@ -11,7 +11,7 @@ namespace colabAPI.Business.DTOs
         public DateTime DataPrevistaFim { get; set; }
         public bool Ativo { get; set; }
 
-        public TipoBolsa TipoBolsa { get; set; } // TipoBolsa não deve ser do tipo ID, já que estamos retornando as informações completas do TipoBolsa
+        public TipoBolsa TipoBolsa { get; set; }
 
         public Pessoa Pessoa { get; set; }
     }

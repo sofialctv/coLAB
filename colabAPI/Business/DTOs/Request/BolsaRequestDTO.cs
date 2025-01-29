@@ -8,7 +8,7 @@
         public DateTime DataPrevistaFim { get; set; }
         public bool Ativo { get; set; }
 
-        public int TipoBolsaId { get; set; } // Referência ao TipoBolsa
-        public int PessoaId { get; set; } // Referência ao Pesquisador
+        public int TipoBolsaId { get; set; }
+        public int PessoaId { get; set; }
     }
 }
