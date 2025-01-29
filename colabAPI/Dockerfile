@@ -1,27 +1,32 @@
-# Etapa 1: Build da aplicação
+# Etapa 1: Imagem base para runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER app
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
+# Etapa 2: Build da aplicação
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["colabAPI.csproj", "."]
-RUN dotnet restore "./colabAPI.csproj"
+
+# Copiar apenas o arquivo do projeto para restaurar dependências
+COPY ["colabAPI.csproj", "./"]
+RUN dotnet restore "colabAPI.csproj"
+
+# Copiar todo o código-font após o restore
 COPY . .
-WORKDIR "/src/."
-RUN dotnet build "./colabAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
+# Build da aplicação
+RUN dotnet build "colabAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+# Etapa 3: Publicação da aplicação
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./colabAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "colabAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
+# Etapa 4: Criando a imagem final com a aplicação publicada
 FROM base AS final
 WORKDIR /app
-EXPOSE 80
+COPY --from=publish /app/publish .
 
-COPY . .
-
+# Comando de inicialização
 ENTRYPOINT ["dotnet", "colabAPI.dll"]
