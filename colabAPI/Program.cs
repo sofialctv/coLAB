@@ -5,10 +5,14 @@ using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using System.Text.Json.Serialization;
 using DotNetEnv;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
 Env.Load();
+
+// Adicione AutoMapper
+builder.Services.AddAutoMapper(typeof(Program));
 
 // String de conexão com o banco de dados
 var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING")
@@ -24,16 +28,10 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
 // Injeção de dependências
 builder.Services.AddScoped<IBolsaRepository, BolsaRepository>();
-builder.Services.AddScoped<IBolsistaRepository, BolsistaRepository>();
-builder.Services.AddScoped<IFinanciadorRepository, FinanciadorRepository>();
-builder.Services.AddScoped<IOrientadorRepository, OrientadorRepository>();
-builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Registro dos Repositories
-builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
 
 // Adicionar serviços ao contêiner
 builder.Services.AddCors(options =>

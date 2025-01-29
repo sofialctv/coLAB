@@ -12,42 +12,30 @@ namespace colabAPI.Data
         }
 
         // Definição das tabelas (DbSet) do banco de dados que serão mapeadas pelo EF
-        public DbSet<Financiador> Financiadores { get; set; }
-        public DbSet<Projeto> Projetos { get; set; }
-        public DbSet<Orientador> Orientadores { get; set; }
-        public DbSet<Pesquisador> Pesquisadores { get; set; }
-        public DbSet<Bolsista> Bolsistas { get; set; }
+        public DbSet<Cargo> Cargos { get; set; }
+        public DbSet<HistoricoCargo> HistoricosCargo { get; set; }
+        public DbSet<Pessoa> Pessoas { get; set; }
+        
         public DbSet<Bolsa> Bolsas { get; set; }
         
         public DbSet<TipoBolsa> TipoBolsa { get; set; }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<HistoricoCargo>()
+                .HasOne(h => h.Pessoa)
+                .WithMany(p => p.HistoricosCargo)
+                .HasForeignKey(h => h.PessoaId)
+                .IsRequired();
+            
+            modelBuilder.Entity<HistoricoCargo>()
+                .HasOne(h => h.Cargo)
+                .WithOne(c => c.HistoricoCargo)
+                .HasForeignKey<HistoricoCargo>(c => c.CargoId)
+                .IsRequired();
+            
             base.OnModelCreating(modelBuilder);
-
-            // Relacionamento entre 'Projeto' e 'Financiador'
-            modelBuilder.Entity<Projeto>()
-                .HasOne(p => p.Financiador)
-                .WithMany(f => f.Projetos)
-                .HasForeignKey(p => p.FinanciadorId)
-                .OnDelete(DeleteBehavior.Restrict); // Não permite exclusão caso exista relacionamento
-
-            modelBuilder.Entity<Projeto>()
-                .HasOne(p => p.Orientador)
-                .WithMany()
-                .HasForeignKey(p => p.OrientadorId);
-
-            modelBuilder.Entity<Projeto>()
-                .HasMany(p => p.Bolsistas)
-                .WithMany(b => b.Projetos)
-                .UsingEntity<Dictionary<string, object>>(
-                    "ProjetoBolsista", // Essa é a tabela intermediária gerada para relação N<->N
-                    j => j.HasOne<Bolsista>().WithMany().HasForeignKey("BolsistaId"),
-                    j => j.HasOne<Projeto>().WithMany().HasForeignKey("ProjetoId")
-                );
-
-            modelBuilder.Entity<Bolsista>().ToTable("Bolsistas");
-
+            
             // Converte o enum de int para uma string ao enviar para banco de dados
             modelBuilder.Entity<TipoBolsa>()
                 .Property(b => b.escolaridade)

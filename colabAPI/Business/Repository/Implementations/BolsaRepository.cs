@@ -19,7 +19,7 @@ namespace colabAPI.Business.Repository.Implementations
         public async Task<IEnumerable<Bolsa>> GetAllAsync()
         {
             return await _DbContext.Bolsas
-                .Include(b => b.Pesquisador) // Inclui o relacionamento Pesquisador
+                .Include(b => b.Pessoa) // Inclui o relacionamento Pesquisador
                 .Include(b => b.TipoBolsa) // Inclui o relacionamento tipoBolsa
                 .ToListAsync(); // Retorna as entidades diretamente como uma lista
         }
@@ -28,7 +28,7 @@ namespace colabAPI.Business.Repository.Implementations
         public async Task<Bolsa> GetByIdAsync(int id)
         {
             var bolsa = await _DbContext.Bolsas
-                .Include(b => b.Pesquisador) // Inclui o relacionamento Pesquisador
+                .Include(b => b.Pessoa) // Inclui o relacionamento Pesquisador
                 .Include(b => b.TipoBolsa) // Inclui o relacionamento tipoBolsa
                 .FirstOrDefaultAsync(b => b.Id == id);
 

@@ -9,6 +9,6 @@
         public bool Ativo { get; set; }
 
         public int TipoBolsaId { get; set; } // Referência ao TipoBolsa
-        public int PesquisadorId { get; set; } // Referência ao Pesquisador
+        public int PessoaId { get; set; } // Referência ao Pesquisador
     }
 }

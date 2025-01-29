@@ -1,9 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using colabAPI.Business.Models.Entities.Enums;
-
-namespace colabAPI.Business.Models.Entities
+﻿namespace colabAPI.Business.Models.Entities
 {
-    public class Pesquisador
+    public class Pessoa
     {
         public int Id { get; set; }
         public string Nome { get; set; }
@@ -11,9 +8,6 @@ namespace colabAPI.Business.Models.Entities
         public string Telefone { get; set; }
         public string Cpf { get; set; }
         
-        public List<PesquisadorTime>? Times { get; set; }
-        
-        // Relacionamentos
-        public Bolsa? Bolsa { get; set; } 
+        public List<HistoricoCargo> HistoricosCargo { get; set; }
     }
 }

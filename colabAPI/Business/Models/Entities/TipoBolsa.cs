@@ -5,6 +5,8 @@ namespace colabAPI.Business.Models.Entities;
 
 public class TipoBolsa
 {
+    public int Id { get; set; }
+    
     public String nome { get; set; }
     
     public String descricao { get; set; }

@@ -18,8 +18,8 @@ namespace colabAPI.Business.Models.Entities
         
         public TipoBolsa TipoBolsa { get; set; }
         
-        public int PesquisadorId { get; set; } // Chave estrangeira
-        public Pesquisador? Pesquisador { get; set; }
+        public int PessoaId { get; set; } // Chave estrangeira
+        public Pessoa Pessoa { get; set; }
         
     }
 
