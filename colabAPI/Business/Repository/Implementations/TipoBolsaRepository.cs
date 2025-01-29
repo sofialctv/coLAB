@@ -22,7 +22,6 @@ namespace colabAPI.Business.Repository.Implementations
                 .ToListAsync(); // Retorna as entidades diretamente como uma lista
         }
         
-        // Retorna uma bolsa específica como BolsaDTO pelo ID
         public async Task<TipoBolsa> GetByIdAsync(int id)
         {
             var tipoBolsa = await _DbContext.TipoBolsa
@@ -36,13 +35,13 @@ namespace colabAPI.Business.Repository.Implementations
             return tipoBolsa;
         }
         
-        // Adiciona uma nova bolsa ao banco de dados
+        // Adiciona uma nova tipo de bolsa ao banco de dados
         public async Task AddAsync(TipoBolsa tipoBolsa)
         {
             _DbContext.TipoBolsa.Add(tipoBolsa);
         }
         
-        // Atualiza os dados de uma bolsa existente
+        // Atualiza os dados de uma tipo de bolsa existente
         public async Task UpdateAsync(TipoBolsa tipoBolsa)
         {
             if (tipoBolsa == null || tipoBolsa.Id <= 0)
@@ -51,7 +50,7 @@ namespace colabAPI.Business.Repository.Implementations
             }
 
             
-            var existeBolsa = _DbContext.TipoBolsa.Find(tipoBolsa.Id); // Verifica se a bolsa existe
+            var existeBolsa = _DbContext.TipoBolsa.Find(tipoBolsa.Id); // Verifica se o Tipo de bolsa existe
             if (existeBolsa != null) 
             {
                 // Atualiza os valores da bolsa existente
@@ -67,10 +66,10 @@ namespace colabAPI.Business.Repository.Implementations
         
         public async Task DeleteAsync(int tipoBolsaID)
         {
-            var tipoBolsa = _DbContext.TipoBolsa.Find(tipoBolsaID); // Busca a bolsa pelo ID
+            var tipoBolsa = _DbContext.TipoBolsa.Find(tipoBolsaID); // Busca o Tipo de bolsa pelo ID
             if (tipoBolsa != null)
             {
-                _DbContext.TipoBolsa.Remove(tipoBolsa); // Remove a bolsa  
+                _DbContext.TipoBolsa.Remove(tipoBolsa); // Remove a Tipo de bolsa  
             }
         }
         

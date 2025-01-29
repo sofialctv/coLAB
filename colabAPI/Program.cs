@@ -28,6 +28,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
 // Injeção de dependências
 builder.Services.AddScoped<IBolsaRepository, BolsaRepository>();
+builder.Services.AddScoped<ITipoBolsaRepository, TipoBolsaRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
