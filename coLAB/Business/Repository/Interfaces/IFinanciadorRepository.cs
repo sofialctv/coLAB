@@ -6,8 +6,8 @@ namespace colab.Business.Repository.Interfaces
     {
         Task<IEnumerable<Financiador>> GetAllAsync();
         Task<Financiador> GetByIdAsync(int id);
-        Task<Financiador> AddAsync(Financiador cargo);
-        Task<Financiador> UpdateAsync(Financiador cargo);
+        Task<Financiador> AddAsync(Financiador financiador);
+        Task<Financiador> UpdateAsync(Financiador financiador);
         Task DeleteAsync(int id);
     }
 }
