@@ -1,7 +1,6 @@
-﻿
-namespace colab.Business.DTOs.Request
+﻿namespace colab.Business.DTOs.Response
 {
-    public class FinanciadorRequestDTO
+    public class FinanciadorResponseDTO
     {
         public int Id { get; set; }
         public string Nome { get; set; }

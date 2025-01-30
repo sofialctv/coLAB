@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using colab.AutoMapper;
 using colab.Business.Repository.Interfaces;
 using colab.Business.Repository.Implementations;
+using colab.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,7 @@ var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING")
                        ?? builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Configuração do PostgreSQL
-builder.Services.AddDbContext<colabAPI.Data.ApplicationDbContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 
 // Solução para o erro 'System.Text.Json.JsonException: A possible object cycle was detected.' Lidando com Circular References enquanto relacionamentos são preservados.
@@ -23,11 +24,13 @@ builder.Services.AddAutoMapper(typeof(ConfigMapping));
 
 // Injeção de dependências
 builder.Services.AddScoped<IFinanciadorRepository, FinanciadorRepository>();
+builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Registro dos Repositories
+builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
 
 // Adicionar serviços ao contêiner
 builder.Services.AddCors(options =>

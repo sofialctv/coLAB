@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using colab.Business.Repository.Interfaces;
-using colabAPI.Business.DTOs.Request;
-using colabAPI.Business.DTOs.Response;
-using colabAPI.Business.Models.Entities;
+using colab.Business.DTOs.Request;
+using colab.Business.DTOs.Response;
+using colab.Business.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace colabAPI.Presentation.Controllers

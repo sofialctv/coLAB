@@ -1,4 +1,4 @@
-﻿using colabAPI.Business.Models.Entities;
+﻿using colab.Business.Models.Entities;
 
 namespace colab.Business.Repository.Interfaces
 {

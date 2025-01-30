@@ -1,6 +1,6 @@
 ﻿using colab.Business.Repository.Interfaces;
-using colabAPI.Business.Models.Entities;
-using colabAPI.Data;
+using colab.Business.Models.Entities;
+using colab.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace colab.Business.Repository.Implementations
