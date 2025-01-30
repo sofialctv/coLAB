@@ -10,6 +10,4 @@ public class TipoBolsaRequestDTO
 
     public Escolaridade escolaridade { get; set; }
 
-    private string escolaridadeDescricao => escolaridade.ToString();
-
 }

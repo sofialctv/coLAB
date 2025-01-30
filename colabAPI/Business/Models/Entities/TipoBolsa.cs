@@ -13,5 +13,7 @@ public class TipoBolsa
     
     public Escolaridade escolaridade { get; set; }
     
+    public Bolsa Bolsa { get; set; }
+    
     private string escolaridadeDescricao => escolaridade.ToString();
 }

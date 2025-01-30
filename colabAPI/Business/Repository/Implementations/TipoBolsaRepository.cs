@@ -18,22 +18,25 @@ namespace colabAPI.Business.Repository.Implementations
         
         public async Task<IEnumerable<TipoBolsa>> GetAllAsync()
         {
-            return await _DbContext.TipoBolsa
-                .ToListAsync(); // Retorna as entidades diretamente como uma lista
+            var tipoBolsas = await _DbContext.TipoBolsa.ToListAsync();
+
+            return tipoBolsas;
         }
         
         public async Task<TipoBolsa> GetByIdAsync(int id)
         {
+
             var tipoBolsa = await _DbContext.TipoBolsa
-                .FirstOrDefaultAsync(b => b.Id == id);
+                .FirstOrDefaultAsync(tb => tb.Id == id);
 
             if (tipoBolsa == null)
             {
                 throw new KeyNotFoundException($"Tipo de Bolsa com ID {id} não foi encontrada.");
             }
-
+            
             return tipoBolsa;
         }
+
         
         // Adiciona uma nova tipo de bolsa ao banco de dados
         public async Task AddAsync(TipoBolsa tipoBolsa)

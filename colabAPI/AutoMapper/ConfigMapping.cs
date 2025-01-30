@@ -16,7 +16,7 @@ public class ConfigMapping : Profile
         
         CreateMap<TipoBolsa, TipoBolsaResponseDTO>()
             .ReverseMap();
-        CreateMap<TipoBolsa, TipoBolsaResponseDTO>()
+        CreateMap<TipoBolsa, TipoBolsaRequestDTO>()
             .ReverseMap();
         
     }

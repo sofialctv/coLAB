@@ -4,6 +4,8 @@ using colabAPI.Business.DTOs.Request;
 using colabAPI.Business.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using colabAPI.Business.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 namespace colabAPI.Business.Models.Controllers
 {
@@ -61,8 +63,27 @@ namespace colabAPI.Business.Models.Controllers
             // Mapeia o DTO BolsaRequestDTO para a entidade Bolsa
             var bolsa = _mapper.Map<Bolsa>(bolsaRequestDto);
 
-            await _bolsaRepository.AddAsync(bolsa);
-            await _bolsaRepository.Save();
+            try
+            {
+                // Adiciona a bolsa e tenta salvar no banco de dados
+                await _bolsaRepository.AddAsync(bolsa);
+                await _bolsaRepository.Save();
+            }
+            catch (DbUpdateException ex)
+            {
+                // Verifica se o erro é uma violação de chave duplicada
+                if (ex.InnerException is PostgresException postgresEx && postgresEx.SqlState == "23505")
+                {
+                    // Lidar com a violação de chave duplicada
+                    return Conflict(new { message = "Já existe uma bolsa com este TipoBolsaId." }); 
+                }
+                else
+                {
+                    // Caso o erro não seja uma violação de chave duplicada, relança o erro
+                    throw;
+                }
+            }
+
 
             // Mapeia a entidade Bolsa salva para o DTO BolsaResponseDTO para retornar ao cliente
             var bolsaResponseDto = _mapper.Map<BolsaResponseDTO>(bolsa);
