@@ -4,6 +4,7 @@ using colab.Business.Models.Entities;
 using colab.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace colab.Presentation.Controllers
 {
@@ -13,51 +14,20 @@ namespace colab.Presentation.Controllers
     {
         private readonly IProjetoRepository _projetoRepository;
         private readonly IBolsaRepository _bolsaRepository;
+        private readonly IMapper _mapper;
 
-        public ProjetoController(IProjetoRepository projetoRepository, IBolsaRepository bolsaRepository)
+        public ProjetoController(IProjetoRepository projetoRepository, IBolsaRepository bolsaRepository, IMapper mapper)
         {
             _projetoRepository = projetoRepository;
             _bolsaRepository = bolsaRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProjetoResponseDTO>>> GetAll()
         {
             var projetos = await _projetoRepository.GetAllAsync();
-
-            var projetoDtos = projetos.Select(p => new ProjetoResponseDTO
-            {
-                Id = p.Id,
-                Nome = p.Nome,
-                DataInicio = p.DataInicio,
-                DataFim = p.DataFim,
-                DataPrevistaFim = p.DataPrevistaFim,
-                Descricao = p.Descricao,
-                Orcamento = p.Orcamento,
-                FinanciadorId = p.FinanciadorId,
-                FinanciadorNome = p.Financiador?.Nome,
-                // Mapeando o Histórico de Status do Projeto para o DTO
-                HistoricoStatus = p.HistoricoStatus?.Select(h => new HistoricoProjetoStatusResponseDTO
-                {
-                    Id = h.Id,
-                    DataInicio = h.DataInicio,
-                    DataFim = h.DataFim,
-                    Status = (int)h.Status,
-                    ProjetoId = p.Id,
-                    ProjetoNome = p.Nome
-                }).ToList(),
-                // Mapeando Bolsas para o DTO
-                Bolsas = p.Bolsas?.Select(b => new BolsaDTO
-                {
-                    Id = b.Id,
-                    Valor = b.Valor,
-                    Categoria = b.Categoria,
-                    DataInicio = b.DataInicio,
-                    DataFim = b.DataFim,
-                    Ativo = b.Ativo
-                }).ToList()
-            }).ToList();
-
+            var projetoDtos = _mapper.Map<List<ProjetoResponseDTO>>(projetos);
             return Ok(projetoDtos);
         }
 
@@ -70,64 +40,21 @@ namespace colab.Presentation.Controllers
                 return NotFound(new { message = "Projeto não encontrado" });
             }
 
-            var projetoDto = new ProjetoResponseDTO
-            {
-                Id = projeto.Id,
-                Nome = projeto.Nome,
-                DataInicio = projeto.DataInicio,
-                DataFim = projeto.DataFim,
-                DataPrevistaFim = projeto.DataPrevistaFim,
-                Descricao = projeto.Descricao,
-                Orcamento = projeto.Orcamento,
-                FinanciadorId = projeto.FinanciadorId,
-                FinanciadorNome = projeto.Financiador?.Nome,
-                // histórico de status para DTO
-                HistoricoStatus = projeto.HistoricoStatus?.Select(h => new HistoricoProjetoStatusResponseDTO
-                {
-                    Id = h.Id,
-                    DataInicio = h.DataInicio,
-                    DataFim = h.DataFim,
-                    Status = (int)h.Status,
-                    ProjetoId = projeto.Id,
-                    ProjetoNome = projeto.Nome
-                }).ToList(),
-                // bolsas para DTO
-                Bolsas = projeto.Bolsas?.Select(b => new BolsaDTO
-                {
-                    Id = b.Id,
-                    Valor = b.Valor,
-                    Categoria = b.Categoria,
-                    DataInicio = b.DataInicio,
-                    DataFim = b.DataFim,
-                    Ativo = b.Ativo
-                }).ToList()
-            };
-
+            var projetoDto = _mapper.Map<ProjetoResponseDTO>(projeto);
             return Ok(projetoDto);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(ProjetoRequestDTO projetoDto)
         {
-            var projeto = new Projeto
-            {
-                Nome = projetoDto.Nome,
-                DataInicio = projetoDto.DataInicio,
-                DataFim = projetoDto.DataFim,
-                DataPrevistaFim = projetoDto.DataPrevistaFim,
-                Descricao = projetoDto.Descricao,
-                Orcamento = projetoDto.Orcamento,
-                FinanciadorId = projetoDto.FinanciadorId
-            };
-
+            var projeto = _mapper.Map<Projeto>(projetoDto);
             var createdProjeto = await _projetoRepository.AddAsync(projeto);
 
-            // Criar registro de histórico de status
             var historicoStatus = new HistoricoProjetoStatus
             {
                 ProjetoId = createdProjeto.Id,
                 Status = projetoDto.Status,
-                DataInicio = DateTime.UtcNow // Definindo o início como o momento da criação
+                DataInicio = DateTime.UtcNow
             };
 
             await _projetoRepository.AddHistoricoStatusAsync(historicoStatus);
@@ -143,7 +70,7 @@ namespace colab.Presentation.Controllers
                 return BadRequest(new { message = "ID do projeto não corresponde" });
             }
 
-            var projeto = await _projetoRepository.GetByIdAsync(id); // Certifique-se de incluir o carregamento do histórico
+            var projeto = await _projetoRepository.GetByIdAsync(id);
             if (projeto == null)
             {
                 return NotFound(new { message = "Projeto não encontrado" });
@@ -155,29 +82,23 @@ namespace colab.Presentation.Controllers
                 .FirstOrDefault();
 
             // Verificar se o status mudou
-            var statusAlterado = ultimoStatus?.Status != projetoDto.Status;
+            bool statusAlterado = ultimoStatus?.Status != projetoDto.Status;
 
-            projeto.Nome = projetoDto.Nome;
-            projeto.DataInicio = projetoDto.DataInicio;
-            projeto.DataFim = projetoDto.DataFim;
-            projeto.DataPrevistaFim = projetoDto.DataPrevistaFim;
-            projeto.Descricao = projetoDto.Descricao;
-            projeto.Orcamento = projetoDto.Orcamento;
-            projeto.FinanciadorId = projetoDto.FinanciadorId;
-
+            // Atualizar os campos do projeto
+            _mapper.Map(projetoDto, projeto);
             await _projetoRepository.UpdateAsync(projeto);
 
             // Criar novo registro de histórico se o status mudou
             if (statusAlterado)
             {
-                var historicoStatus = new HistoricoProjetoStatus
+                var novoHistorico = new HistoricoProjetoStatus
                 {
                     ProjetoId = projeto.Id,
                     Status = projetoDto.Status,
                     DataInicio = DateTime.UtcNow
                 };
 
-                await _projetoRepository.AddHistoricoStatusAsync(historicoStatus);
+                await _projetoRepository.AddHistoricoStatusAsync(novoHistorico);
 
                 if (ultimoStatus != null)
                 {
