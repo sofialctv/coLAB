@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using colab.AutoMapper;
 using colab.Business.Repository.Interfaces;
 using colab.Business.Repository.Implementations;
 
@@ -16,6 +17,9 @@ builder.Services.AddDbContext<colabAPI.Data.ApplicationDbContext>(options =>
 // Solução para o erro 'System.Text.Json.JsonException: A possible object cycle was detected.' Lidando com Circular References enquanto relacionamentos são preservados.
 builder.Services.AddControllers().AddJsonOptions(options =>
    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+
+// AutoMapper
+builder.Services.AddAutoMapper(typeof(ConfigMapping));
 
 // Injeção de dependências
 builder.Services.AddScoped<IFinanciadorRepository, FinanciadorRepository>();
