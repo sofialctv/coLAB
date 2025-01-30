@@ -10,14 +10,14 @@ namespace colabAPI.Data
             : base(options)
         {
         }
-        
+
         // Definição das tabelas (DbSet) do banco de dados que serão mapeadas pelo EF
         public DbSet<Cargo> Cargos { get; set; }
         public DbSet<HistoricoCargo> HistoricosCargo { get; set; }
         public DbSet<Pessoa> Pessoas { get; set; }
-        
+
         public DbSet<Bolsa> Bolsas { get; set; }
-        
+
         public DbSet<TipoBolsa> TipoBolsa { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -27,28 +27,35 @@ namespace colabAPI.Data
                 .WithMany(p => p.HistoricosCargo)
                 .HasForeignKey(h => h.PessoaId)
                 .IsRequired();
-            
+
             modelBuilder.Entity<HistoricoCargo>()
                 .HasOne(h => h.Cargo)
                 .WithOne(c => c.HistoricoCargo)
                 .HasForeignKey<HistoricoCargo>(c => c.CargoId)
                 .IsRequired();
-            
-           modelBuilder.Entity<TipoBolsa>()
-            .HasOne(t => t.Bolsa) // TipoBolsa tem uma Bolsa
-            .WithOne(b => b.TipoBolsa) // Bolsa tem um TipoBolsa
-            .HasForeignKey<Bolsa>(b => b.TipoBolsaId) // Chave estrangeira em Bolsa
-            .IsRequired(); // Garantir que o relacionamento seja obrigatório
 
-        modelBuilder.Entity<Bolsa>()
-            .HasIndex(b => b.TipoBolsaId) // Definir um índice único para garantir 1 para 1
-            .IsUnique(); // Garantir que cada TipoBolsaId seja único
+            // Relacionamento 1 para 1 entre Bolsa e Pessoa
+            modelBuilder.Entity<Bolsa>()
+                .HasOne(b => b.Pessoa) // Cada Bolsa tem uma Pessoa
+                .WithOne(p => p.Bolsa) // Cada Pessoa tem uma Bolsa
+                .HasForeignKey<Bolsa>(b => b.PessoaId) // Definir a chave estrangeira
+                .IsRequired(); // Tornar o relacionamento obrigatório
 
-            // Converte o enum de int para uma string ao enviar para banco de dados
+            // Restante das configurações
+            modelBuilder.Entity<TipoBolsa>()
+                .HasOne(t => t.Bolsa)
+                .WithOne(b => b.TipoBolsa)
+                .HasForeignKey<Bolsa>(b => b.TipoBolsaId)
+                .IsRequired();
+
+            modelBuilder.Entity<Bolsa>()
+                .HasIndex(b => b.TipoBolsaId)
+                .IsUnique();
+
             modelBuilder.Entity<TipoBolsa>()
                 .Property(b => b.escolaridade)
                 .HasConversion<string>();
+
         }
-        
     }
 }

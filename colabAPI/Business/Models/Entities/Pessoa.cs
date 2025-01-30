@@ -9,5 +9,7 @@
         public string Cpf { get; set; }
         
         public List<HistoricoCargo> HistoricosCargo { get; set; }
+        
+        public Bolsa Bolsa { get; set; }
     }
 }

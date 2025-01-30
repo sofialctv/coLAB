@@ -77,36 +77,20 @@ namespace colabAPI.Business.Models.Controllers
                 return BadRequest(ModelState); // Retorna erro 400 caso o modelo seja inválido
             }
 
-            // Mapeia o DTO BolsaRequestDTO para a entidade Bolsa
+            // Mapeia o DTO para a entidade
             var bolsa = _mapper.Map<Bolsa>(bolsaRequestDto);
 
-            try
-            {
-                // Adiciona a bolsa e tenta salvar no banco de dados
-                await _bolsaRepository.AddAsync(bolsa);
-                await _bolsaRepository.Save();
-            }
-            catch (DbUpdateException ex)
-            {
-                // Verifica se o erro é uma violação de chave duplicada
-                if (ex.InnerException is PostgresException postgresEx && postgresEx.SqlState == "23505")
-                {
-                    // Lidar com a violação de chave duplicada
-                    return Conflict(new { message = "Já existe uma bolsa com este TipoBolsaId." }); 
-                }
-                else
-                {
-                    // Caso o erro não seja uma violação de chave duplicada, relança o erro
-                    throw;
-                }
-            }
 
-
-            // Mapeia a entidade Bolsa salva para o DTO BolsaResponseDTO para retornar ao cliente
+            // Adiciona a bolsa e tenta salvar no banco de dados
+            await _bolsaRepository.AddAsync(bolsa);
+            await _bolsaRepository.Save();
+            
+            // Mapeia a entidade Bolsa salva para o DTO de resposta
             var bolsaResponseDto = _mapper.Map<BolsaResponseDTO>(bolsa);
-    
+
             return CreatedAtAction(nameof(GetById), new { id = bolsa.Id }, bolsaResponseDto);
         }
+
 
 
         
