@@ -21,19 +21,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="7.2.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Properties\launchSettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Business\Models\Entities\Orientador.cs" />
-    <Compile Remove="Business\Repository\Implementations\FinanciadorRepository.cs" />
-    <Compile Remove="Business\Repository\Implementations\OrientadorRepository.cs" />
-    <Compile Remove="Business\Repository\Implementations\ProjetoRepository.cs" />
-    <Compile Remove="Business\Repository\Interfaces\IBolsistaRepository.cs" />
-    <Compile Remove="Business\Repository\Interfaces\IOrientadorRepository.cs" />
-    <Compile Remove="Presentation\Controllers\OrientadorController.cs" />
-    <Compile Remove="Presentation\Controllers\ProjetoController.cs" />
-  </ItemGroup>
-
 </Project>
