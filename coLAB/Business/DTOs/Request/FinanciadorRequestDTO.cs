@@ -1,6 +1,7 @@
-﻿namespace colabAPI.Business.Models.Entities
+﻿
+namespace colabAPI.Business.DTOs.Request
 {
-    public class Financiador
+    public class FinanciadorRequestDTO
     {
         public int Id { get; set; }
         public string Nome { get; set; }
