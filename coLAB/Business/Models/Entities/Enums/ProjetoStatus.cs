@@ -2,9 +2,9 @@
 {
     public enum ProjetoStatus
     {
-        Planejado = 1,
-        EmAndamento = 2,
-        Concluido = 3,
-        Cancelado = 4
+        Inativo = 0,
+        Ativo = 1,
+        Cancelado = 2,
+        Finalizado = 3
     }
 }
