@@ -1,6 +1,6 @@
 ﻿namespace colab.Business.Models.Entities.Enums;
 
-public enum Escolaridade
+public enum BolsaCategoria
 {
     Tecnico,
     Graduacao,

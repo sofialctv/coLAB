@@ -11,18 +11,10 @@ namespace colab.Data
         {
         }
 
-        // Definição das tabelas (DbSet) do banco de dados que serão mapeadas pelo EF
-        public DbSet<Cargo> Cargos { get; set; }
-        public DbSet<HistoricoCargo> HistoricosCargo { get; set; }
-        public DbSet<Pessoa> Pessoas { get; set; }
-
-        public DbSet<Bolsa> Bolsas { get; set; }
-
-        public DbSet<TipoBolsa> TipoBolsa { get; set; }
-
         // Definição das tabelas (DbSet) do banco de dados
         public DbSet<Financiador> Financiadores { get; set; }
         public DbSet<Projeto> Projetos { get; set; }
+        public DbSet<Bolsa> Bolsas { get; set; }
         public DbSet<HistoricoProjetoStatus> HistoricoStatusProjetos { get; set; }
 
         // Antigo, possivelmente serão 'removidos'
@@ -32,11 +24,6 @@ namespace colab.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<HistoricoCargo>()
-                .HasOne(h => h.Pessoa)
-                .WithMany(p => p.HistoricosCargo)
-                .HasForeignKey(h => h.PessoaId)
-                .IsRequired();
             base.OnModelCreating(modelBuilder);
 
             // relacionamento entre 'Projeto' e 'Financiador'
@@ -46,37 +33,28 @@ namespace colab.Data
                 .HasForeignKey(p => p.FinanciadorId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<HistoricoCargo>()
-                .HasOne(h => h.Cargo)
-                .WithOne(c => c.HistoricoCargo)
-                .HasForeignKey<HistoricoCargo>(c => c.CargoId)
-                .IsRequired();
             // relacionamento 1:N entre 'Projeto' e 'Bolsa'
             modelBuilder.Entity<Projeto>()
                 .HasMany(p => p.Bolsas)
                 .WithOne(b => b.Projeto)
                 .HasForeignKey(b => b.ProjetoId);
 
-            // Relacionamento 1 para 1 entre Bolsa e Pessoa
+            // relacionamento 1:N entre 'Projeto' e 'HistoricoStatusProjeto'
+            modelBuilder.Entity<Projeto>()
+                .HasMany(p => p.HistoricoStatus)
+                .WithOne(h => h.Projeto)
+                .HasForeignKey(h => h.ProjetoId);
+
+            // config. para o enum 'ProjetoStatus' dentro de 'HistoricoStatusProjeto'
+            modelBuilder.Entity<HistoricoProjetoStatus>()
+                .Property(h => h.Status)
+                .HasConversion<int>();
+
+            // Antigo, possivelmente serão 'removidos'
+            modelBuilder.Entity<Bolsista>().ToTable("Bolsistas");
+
             modelBuilder.Entity<Bolsa>()
-                .HasOne(b => b.Pessoa) // Cada Bolsa tem uma Pessoa
-                .WithOne(p => p.Bolsa) // Cada Pessoa tem uma Bolsa
-                .HasForeignKey<Bolsa>(b => b.PessoaId) // Definir a chave estrangeira
-                .IsRequired(); // Tornar o relacionamento obrigatório
-
-            // Restante das configurações
-            modelBuilder.Entity<TipoBolsa>()
-                .HasOne(t => t.Bolsa)
-                .WithOne(b => b.TipoBolsa)
-                .HasForeignKey<Bolsa>(b => b.TipoBolsaId)
-                .IsRequired();
-
-            modelBuilder.Entity<Bolsa>()
-                .HasIndex(b => b.TipoBolsaId)
-                .IsUnique();
-
-            modelBuilder.Entity<TipoBolsa>()
-                .Property(b => b.escolaridade)
+                .Property(b => b.Categoria)
                 .HasConversion<string>();
         }
     }

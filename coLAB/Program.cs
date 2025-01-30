@@ -7,8 +7,6 @@ using colab.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-Env.Load();
-
 // String de conexão com o banco de dados
 var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING")
                        ?? builder.Configuration.GetConnectionString("DefaultConnection");
@@ -20,6 +18,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Solução para o erro 'System.Text.Json.JsonException: A possible object cycle was detected.' Lidando com Circular References enquanto relacionamentos são preservados.
 builder.Services.AddControllers().AddJsonOptions(options =>
    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+
+// AutoMapper
+builder.Services.AddAutoMapper(typeof(ConfigMapping));
 
 // Injeção de dependências
 builder.Services.AddScoped<IBolsaRepository, BolsaRepository>();
@@ -56,7 +57,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "coLAB API v1");
-        c.RoutePrefix = string.Empty;
     });
 }
 
@@ -65,7 +65,6 @@ app.Use(async (context, next) =>
     context.Response.Headers.Append("Referrer-Policy", "no-referrer-when-downgrade");
     await next();
 });
-
 
 // Habilita CORS
 app.UseCors("AllowAllOrigins");
