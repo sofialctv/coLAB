@@ -16,9 +16,11 @@ namespace colab.Presentation.Controllers
         private readonly IPessoaRepository _pessoaRepository;
         private readonly IMapper _mapper; 
 
-        public HistoricoCargoController(IHistoricoCargoRepository historicoCargoRepository, IMapper mapper)
+        public HistoricoCargoController(IHistoricoCargoRepository historicoCargoRepository, ICargoRepository cargoRepository, IPessoaRepository pessoaRepository, IMapper mapper)
         {
             _historicoCargoRepository = historicoCargoRepository;
+            _pessoaRepository = pessoaRepository;
+            _cargoRepository = cargoRepository;
             _mapper = mapper;
         }
 

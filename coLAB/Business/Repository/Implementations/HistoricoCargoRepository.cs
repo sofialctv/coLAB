@@ -17,6 +17,8 @@ namespace colab.Business.Repository.Implementations
         public async Task<IEnumerable<HistoricoCargo>> GetAllAsync()
         {
             return await _context.HistoricosCargo
+                .Include(h => h.Cargo)
+                .Include(h => h.Pessoa)
                 .ToListAsync();
         }
 
