@@ -10,29 +10,29 @@ namespace colab.Business.Models.Entities
         public DateTime DataInicio { get; set; }
         public DateTime? DataFim { get; set; }
         public DateTime DataPrevistaFim { get; set; }
-        public bool Ativo { get; set; }
+        public Boolean Ativo { get; set; }
         public BolsaCategoria Categoria { get; set; }
 
         // Relacionamentos
         public int PesquisadorId { get; set; } // Chave estrangeira
         public Pesquisador? Pesquisador { get; set; }
+        public int ProjetoId { get; set; } // Chave estrangeira
+        public Projeto Projeto { get; set; } // ref. ao Projeto
 
         public Bolsa() { }
 
         //Constroi uma nova Bolsa a partir de BolsaDTO 
         public Bolsa(BolsaDTO bolsaDTO)
         {
-            Id = bolsaDTO.Id;
-            Valor = bolsaDTO.Valor;
-            DataInicio = bolsaDTO.DataInicio;
-            DataFim = bolsaDTO.DataFim;
-            DataPrevistaFim = bolsaDTO.DataPrevistaFim;
-            Ativo = bolsaDTO.Ativo;
-            Categoria = bolsaDTO.Categoria;
-            PesquisadorId = bolsaDTO.PesquisadorId;
+            this.Id = bolsaDTO.Id;
+            this.Valor = bolsaDTO.Valor;
+            this.DataInicio = bolsaDTO.DataInicio;
+            this.DataFim = bolsaDTO.DataFim;
+            this.DataPrevistaFim = bolsaDTO.DataPrevistaFim;
+            this.Ativo = bolsaDTO.Ativo;
+            this.Categoria = bolsaDTO.Categoria;
+            this.PesquisadorId = bolsaDTO.PesquisadorId;
+            this.ProjetoId = bolsaDTO.ProjetoId;
         }
-
     }
-
-
 }

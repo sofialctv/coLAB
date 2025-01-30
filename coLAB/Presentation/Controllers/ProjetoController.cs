@@ -12,20 +12,20 @@ namespace colab.Presentation.Controllers
     public class ProjetoController : ControllerBase
     {
         private readonly IProjetoRepository _projetoRepository;
-        private readonly IBolsistaRepository _bolsistaRepository;
+        private readonly IBolsaRepository _bolsaRepository;
 
-        public ProjetoController(IProjetoRepository projetoRepository, IBolsistaRepository bolsistaRepository)
+        public ProjetoController(IProjetoRepository projetoRepository, IBolsaRepository bolsaRepository)
         {
             _projetoRepository = projetoRepository;
-            _bolsistaRepository = bolsistaRepository;
+            _bolsaRepository = bolsaRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProjetoDTO>>> GetAll()
+        public async Task<ActionResult<IEnumerable<ProjetoResponseDTO>>> GetAll()
         {
             var projetos = await _projetoRepository.GetAllAsync();
 
-            var projetoDtos = projetos.Select(p => new ProjetoDTO
+            var projetoDtos = projetos.Select(p => new ProjetoResponseDTO
             {
                 Id = p.Id,
                 Nome = p.Nome,
@@ -36,18 +36,33 @@ namespace colab.Presentation.Controllers
                 Orcamento = p.Orcamento,
                 FinanciadorId = p.FinanciadorId,
                 FinanciadorNome = p.Financiador?.Nome,
-                OrientadorId = p.OrientadorId,
-                OrientadorNome = p.Orientador?.Nome,
-                BolsistasIds = p.Bolsistas?.Select(b => b.Id).ToList(),
-                Categoria = p.Categoria,
-                Status = p.Status
+                // Mapeando o Histórico de Status do Projeto para o DTO
+                HistoricoStatus = p.HistoricoStatus?.Select(h => new HistoricoProjetoStatusResponseDTO
+                {
+                    Id = h.Id,
+                    DataInicio = h.DataInicio,
+                    DataFim = h.DataFim,
+                    Status = (int)h.Status,
+                    ProjetoId = p.Id,
+                    ProjetoNome = p.Nome
+                }).ToList(),
+                // Mapeando Bolsas para o DTO
+                Bolsas = p.Bolsas?.Select(b => new BolsaDTO
+                {
+                    Id = b.Id,
+                    Valor = b.Valor,
+                    Categoria = b.Categoria,
+                    DataInicio = b.DataInicio,
+                    DataFim = b.DataFim,
+                    Ativo = b.Ativo
+                }).ToList()
             }).ToList();
 
             return Ok(projetoDtos);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProjetoDTO>> GetById(int id)
+        public async Task<ActionResult<ProjetoResponseDTO>> GetById(int id)
         {
             var projeto = await _projetoRepository.GetByIdAsync(id);
             if (projeto == null)
@@ -55,7 +70,7 @@ namespace colab.Presentation.Controllers
                 return NotFound(new { message = "Projeto não encontrado" });
             }
 
-            var projetoDto = new ProjetoDTO
+            var projetoDto = new ProjetoResponseDTO
             {
                 Id = projeto.Id,
                 Nome = projeto.Nome,
@@ -66,18 +81,33 @@ namespace colab.Presentation.Controllers
                 Orcamento = projeto.Orcamento,
                 FinanciadorId = projeto.FinanciadorId,
                 FinanciadorNome = projeto.Financiador?.Nome,
-                OrientadorId = projeto.OrientadorId,
-                OrientadorNome = projeto.Orientador?.Nome,
-                BolsistasIds = projeto.Bolsistas?.Select(b => b.Id).ToList(),
-                Categoria = projeto.Categoria,
-                Status = projeto.Status
+                // histórico de status para DTO
+                HistoricoStatus = projeto.HistoricoStatus?.Select(h => new HistoricoProjetoStatusResponseDTO
+                {
+                    Id = h.Id,
+                    DataInicio = h.DataInicio,
+                    DataFim = h.DataFim,
+                    Status = (int)h.Status,
+                    ProjetoId = projeto.Id,
+                    ProjetoNome = projeto.Nome
+                }).ToList(),
+                // bolsas para DTO
+                Bolsas = projeto.Bolsas?.Select(b => new BolsaDTO
+                {
+                    Id = b.Id,
+                    Valor = b.Valor,
+                    Categoria = b.Categoria,
+                    DataInicio = b.DataInicio,
+                    DataFim = b.DataFim,
+                    Ativo = b.Ativo
+                }).ToList()
             };
 
             return Ok(projetoDto);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ProjetoDTO projetoDto)
+        public async Task<IActionResult> Create(ProjetoRequestDTO projetoDto)
         {
             var projeto = new Projeto
             {
@@ -87,44 +117,45 @@ namespace colab.Presentation.Controllers
                 DataPrevistaFim = projetoDto.DataPrevistaFim,
                 Descricao = projetoDto.Descricao,
                 Orcamento = projetoDto.Orcamento,
-                FinanciadorId = projetoDto.FinanciadorId,
-                OrientadorId = projetoDto.OrientadorId,
-                Categoria = projetoDto.Categoria,
-                Status = projetoDto.Status
+                FinanciadorId = projetoDto.FinanciadorId
             };
 
-            // Associando Bolsistas pelo Id
-            if (projetoDto.BolsistasIds != null && projetoDto.BolsistasIds.Any())
-            {
-                Console.WriteLine("BolsistasIds: " + string.Join(", ", projetoDto.BolsistasIds));
-
-                var bolsistas = await _bolsistaRepository.GetByIdsAsync(projetoDto.BolsistasIds);
-                if (bolsistas.Count != projetoDto.BolsistasIds.Count)
-                {
-                    return BadRequest(new { message = "Um ou mais Bolsistas fornecidos não foram encontrados" });
-                }
-
-                projeto.Bolsistas = bolsistas;
-            }
-
             var createdProjeto = await _projetoRepository.AddAsync(projeto);
+
+            // Criar registro de histórico de status
+            var historicoStatus = new HistoricoProjetoStatus
+            {
+                ProjetoId = createdProjeto.Id,
+                Status = projetoDto.Status,
+                DataInicio = DateTime.UtcNow // Definindo o início como o momento da criação
+            };
+
+            await _projetoRepository.AddHistoricoStatusAsync(historicoStatus);
 
             return CreatedAtAction(nameof(GetById), new { id = createdProjeto.Id }, createdProjeto);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, ProjetoDTO projetoDto)
+        public async Task<IActionResult> Update(int id, ProjetoRequestDTO projetoDto)
         {
             if (id != projetoDto.Id)
             {
                 return BadRequest(new { message = "ID do projeto não corresponde" });
             }
 
-            var projeto = await _projetoRepository.GetByIdAsync(id);
+            var projeto = await _projetoRepository.GetByIdAsync(id); // Certifique-se de incluir o carregamento do histórico
             if (projeto == null)
             {
                 return NotFound(new { message = "Projeto não encontrado" });
             }
+
+            // Buscar o último status no histórico
+            var ultimoStatus = projeto.HistoricoStatus?
+                .OrderByDescending(h => h.DataInicio)
+                .FirstOrDefault();
+
+            // Verificar se o status mudou
+            var statusAlterado = ultimoStatus?.Status != projetoDto.Status;
 
             projeto.Nome = projetoDto.Nome;
             projeto.DataInicio = projetoDto.DataInicio;
@@ -133,23 +164,27 @@ namespace colab.Presentation.Controllers
             projeto.Descricao = projetoDto.Descricao;
             projeto.Orcamento = projetoDto.Orcamento;
             projeto.FinanciadorId = projetoDto.FinanciadorId;
-            projeto.OrientadorId = projetoDto.OrientadorId;
-            projeto.Categoria = projetoDto.Categoria;
-            projeto.Status = projetoDto.Status;
-
-            // Atualiza os bolsistas associados
-            if (projetoDto.BolsistasIds != null)
-            {
-                var bolsistasExistentes = await _bolsistaRepository.GetByIdsAsync(projetoDto.BolsistasIds);
-                if (bolsistasExistentes.Count != projetoDto.BolsistasIds.Count)
-                {
-                    return BadRequest(new { message = "Um ou mais Bolsistas não foram encontrados" });
-                }
-
-                projeto.Bolsistas = bolsistasExistentes;
-            }
 
             await _projetoRepository.UpdateAsync(projeto);
+
+            // Criar novo registro de histórico se o status mudou
+            if (statusAlterado)
+            {
+                var historicoStatus = new HistoricoProjetoStatus
+                {
+                    ProjetoId = projeto.Id,
+                    Status = projetoDto.Status,
+                    DataInicio = DateTime.UtcNow
+                };
+
+                await _projetoRepository.AddHistoricoStatusAsync(historicoStatus);
+
+                if (ultimoStatus != null)
+                {
+                    ultimoStatus.DataFim = DateTime.UtcNow;
+                    await _projetoRepository.UpdateHistoricoStatusAsync(ultimoStatus);
+                }
+            }
 
             return NoContent();
         }

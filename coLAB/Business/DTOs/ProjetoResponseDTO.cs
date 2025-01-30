@@ -1,6 +1,8 @@
-﻿namespace colab.Business.Models.Entities
+﻿using colab.Business.Models.Entities.Enums;
+
+namespace colab.Business.DTOs
 {
-    public class Projeto
+    public class ProjetoResponseDTO
     {
         public int Id { get; set; }
         public string Nome { get; set; }
@@ -10,11 +12,14 @@
         public string Descricao { get; set; }
         public double Orcamento { get; set; }
 
-        // Relacionamentos
+        // Relacionamento
         public int FinanciadorId { get; set; }
-        public Financiador Financiador { get; set; }
+        public string FinanciadorNome { get; set; }
 
-        public ICollection<Bolsa>? Bolsas { get; set; }
-        public ICollection<HistoricoProjetoStatus>? HistoricoStatus { get; set; }
+        // Histórico de status
+        public List<HistoricoProjetoStatusResponseDTO> HistoricoStatus { get; set; }
+
+        // Bolsas
+        public List<BolsaDTO> Bolsas { get; set; }
     }
 }
