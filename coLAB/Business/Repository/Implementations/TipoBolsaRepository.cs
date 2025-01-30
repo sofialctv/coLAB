@@ -6,60 +6,58 @@ using Microsoft.EntityFrameworkCore;
 
 namespace colabAPI.Business.Repository.Implementations
 {
-    public class BolsaRepository : IBolsaRepository, IDisposable
+    public class TipoBolsaRepository : ITipoBolsaRepository, IDisposable
     {
         private readonly ApplicationDbContext _DbContext;
 
         // Injeta o contexto do banco no construtor
-        public BolsaRepository(ApplicationDbContext context)
+        public TipoBolsaRepository(ApplicationDbContext context)
         {
             _DbContext = context;
         }
         
-        public async Task<IEnumerable<Bolsa>> GetAllAsync()
+        public async Task<IEnumerable<TipoBolsa>> GetAllAsync()
         {
-            return await _DbContext.Bolsas
-                .Include(b => b.Pessoa) // Inclui o relacionamento Pesquisador
-                .Include(b => b.TipoBolsa) // Inclui o relacionamento tipoBolsa
-                .ToListAsync(); // Retorna as entidades diretamente como uma lista
+            var tipoBolsas = await _DbContext.TipoBolsa.ToListAsync();
+
+            return tipoBolsas;
         }
         
-        // Retorna uma bolsa específica como BolsaDTO pelo ID
-        public async Task<Bolsa> GetByIdAsync(int id)
+        public async Task<TipoBolsa> GetByIdAsync(int id)
         {
-            var bolsa = await _DbContext.Bolsas
-                .Include(b => b.Pessoa) // Inclui o relacionamento Pesquisador
-                .Include(b => b.TipoBolsa) // Inclui o relacionamento tipoBolsa
-                .FirstOrDefaultAsync(b => b.Id == id);
 
-            if (bolsa == null)
+            var tipoBolsa = await _DbContext.TipoBolsa
+                .FirstOrDefaultAsync(tb => tb.Id == id);
+
+            if (tipoBolsa == null)
             {
-                throw new KeyNotFoundException($"Bolsa com ID {id} não foi encontrada.");
+                throw new KeyNotFoundException($"Tipo de Bolsa com ID {id} não foi encontrada.");
             }
+            
+            return tipoBolsa;
+        }
 
-            return bolsa;
+        
+        // Adiciona uma nova tipo de bolsa ao banco de dados
+        public async Task AddAsync(TipoBolsa tipoBolsa)
+        {
+            _DbContext.TipoBolsa.Add(tipoBolsa);
         }
         
-        // Adiciona uma nova bolsa ao banco de dados
-        public async Task AddAsync(Bolsa bolsa)
+        // Atualiza os dados de uma tipo de bolsa existente
+        public async Task UpdateAsync(TipoBolsa tipoBolsa)
         {
-            _DbContext.Bolsas.Add(bolsa);
-        }
-        
-        // Atualiza os dados de uma bolsa existente
-        public async Task UpdateAsync(Bolsa bolsa)
-        {
-            if (bolsa == null || bolsa.Id <= 0)
+            if (tipoBolsa == null || tipoBolsa.Id <= 0)
             {
                 throw new ArgumentException("Dados de bolsa invalido");
             }
 
             
-            var existeBolsa = _DbContext.Bolsas.Find(bolsa.Id); // Verifica se a bolsa existe
+            var existeBolsa = _DbContext.TipoBolsa.Find(tipoBolsa.Id); // Verifica se o Tipo de bolsa existe
             if (existeBolsa != null) 
             {
                 // Atualiza os valores da bolsa existente
-                _DbContext.Entry(existeBolsa).CurrentValues.SetValues(bolsa);
+                _DbContext.Entry(existeBolsa).CurrentValues.SetValues(tipoBolsa);
             }
             else
             {
@@ -69,12 +67,12 @@ namespace colabAPI.Business.Repository.Implementations
             _DbContext.SaveChanges();
         }
         
-        public async Task DeleteAsync(int bolsaID)
+        public async Task DeleteAsync(int tipoBolsaID)
         {
-            var bolsa = _DbContext.Bolsas.Find(bolsaID); // Busca a bolsa pelo ID
-            if (bolsa != null)
+            var tipoBolsa = _DbContext.TipoBolsa.Find(tipoBolsaID); // Busca o Tipo de bolsa pelo ID
+            if (tipoBolsa != null)
             {
-                _DbContext.Bolsas.Remove(bolsa); // Remove a bolsa  
+                _DbContext.TipoBolsa.Remove(tipoBolsa); // Remove a Tipo de bolsa  
             }
         }
         
