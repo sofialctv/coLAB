@@ -5,6 +5,7 @@ using colabAPI.Business.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using colabAPI.Business.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Npgsql;
 
 namespace colabAPI.Business.Models.Controllers
@@ -32,7 +33,15 @@ namespace colabAPI.Business.Models.Controllers
             // Mapeia as entidades Bolsa para os DTOs BolsaResponseDTO
             var bolsaDtos = _mapper.Map<IEnumerable<BolsaResponseDTO>>(bolsas);
     
-            return Ok(bolsaDtos);
+            var settings = new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+
+            // Serializa a resposta com as configurações de loop de referência ignoradas
+            var jsonResponse = JsonConvert.SerializeObject(bolsaDtos, settings);
+
+            return Content(jsonResponse, "application/json");
         }
         
         // GET: api/Bolsa/{id}
@@ -48,7 +57,15 @@ namespace colabAPI.Business.Models.Controllers
             // Mapeia a entidade Bolsa para o DTO BolsaResponseDTO
             var bolsaDto = _mapper.Map<BolsaResponseDTO>(bolsa);
     
-            return Ok(bolsaDto);
+            var settings = new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+
+            // Serializa a resposta com as configurações de loop de referência ignoradas
+            var jsonResponse = JsonConvert.SerializeObject(bolsaDto, settings);
+
+            return Content(jsonResponse, "application/json");
         }
         
         // POST: api/Bolsa
