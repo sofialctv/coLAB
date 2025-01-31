@@ -1,4 +1,4 @@
-﻿namespace colabAPI.Business.DTOs.Response
+﻿namespace colab.Business.DTOs
 {
     public class FinanciadorResponseDTO
     {

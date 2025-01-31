@@ -1,7 +1,5 @@
 using AutoMapper;
 using colab.Business.DTOs;
-using colab.Business.DTOs.Request;
-using colab.Business.DTOs.Response;
 using colab.Business.Models.Entities;
 namespace colab.AutoMapper;
 public class ConfigMapping : Profile
