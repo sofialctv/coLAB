@@ -38,7 +38,6 @@ bld/
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 colabAPI/.vs/
-colabAPI/.obj/
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
@@ -483,5 +482,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # Vim temporary swap files
-*.swpc o l a b A P I / a p p s e t t i n g s . D e v e l o p m e n t . j s o n  
- 
+*.swp
