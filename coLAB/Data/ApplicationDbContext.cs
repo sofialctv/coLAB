@@ -16,6 +16,7 @@ namespace colab.Data
         public DbSet<Projeto> Projetos { get; set; }
         public DbSet<Orientador> Orientadores { get; set; }
         public DbSet<Pesquisador> Pesquisadores { get; set; }
+        public DbSet<HistoricoProjetoStatus> HistoricoStatusProjetos { get; set; }
         public DbSet<Bolsista> Bolsistas { get; set; }
         public DbSet<Bolsa> Bolsas { get; set; }
 
