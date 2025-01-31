@@ -4,14 +4,12 @@ using colabAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using System.Text.Json.Serialization;
-using DotNetEnv;
 using AutoMapper;
 using colabAPI.Business.Models.Entities;
 using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
-Env.Load();
 
 // Adicione AutoMapper
 builder.Services.AddAutoMapper(typeof(Program));
