@@ -1,9 +1,10 @@
-﻿namespace colab.Business.Models.Entities.Enums;
-
-public enum BolsaCategoria
+﻿namespace colab.Business.Models.Entities.Enums
 {
-    Tecnico,
-    Graduacao,
-    Mestrado,
-    Doutorado
+    public enum BolsaCategoria
+    {
+        Tecnico,
+        Graduacao,
+        Mestrado,
+        Doutorado
+    }
 }

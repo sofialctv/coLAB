@@ -1,93 +1,93 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using colab.Business.DTOs;
+﻿using AutoMapper;
 using colab.Business.Repository.Interfaces;
 using colab.Business.Models.Entities;
+using Microsoft.AspNetCore.Mvc;
+using colab.Business.DTOs;
 
-namespace colab.Presentation.Controllers
+namespace colabAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class FinanciadorController : ControllerBase
     {
         private readonly IFinanciadorRepository _financiadorRepository;
+        private readonly IMapper _mapper;
 
-        public FinanciadorController(IFinanciadorRepository financiadorRepository)
+        public FinanciadorController(IFinanciadorRepository financiadorRepository, IMapper mapper)
         {
             _financiadorRepository = financiadorRepository;
+            _mapper = mapper;
         }
 
-        // Método GET para obter todos os financiadores
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Financiador>>> GetAll()
+        public async Task<ActionResult<IEnumerable<FinanciadorResponseDTO>>> GetAll()
         {
             var financiadores = await _financiadorRepository.GetAllAsync();
-            return Ok(financiadores);
+            var financiadoresDTO = _mapper.Map<IEnumerable<FinanciadorResponseDTO>>(financiadores);
+            return Ok(financiadoresDTO);
         }
 
-        // Método GET para obter um financiador por ID
         [HttpGet("{id}")]
-        public async Task<ActionResult<Financiador>> GetById(int id)
+        public async Task<ActionResult<FinanciadorResponseDTO>> GetById(int id)
         {
             var financiador = await _financiadorRepository.GetByIdAsync(id);
-
             if (financiador == null)
             {
-                return NotFound(new { message = "Financiador não encontrado." });
+                return NotFound();
             }
-
-            return Ok(financiador);
+            var financiadorDTO = _mapper.Map<FinanciadorResponseDTO>(financiador);
+            return Ok(financiadorDTO);
         }
 
-        // Método POST para criar um novo financiador
         [HttpPost]
-        public async Task<ActionResult<Financiador>> Create(FinanciadorDTO financiadorDto)
+        public async Task<IActionResult> Create([FromBody] FinanciadorRequestDTO financiadorRequestDTO)
         {
-
-            var financiador = new Financiador
+            if (!ModelState.IsValid)
             {
-                Nome = financiadorDto.Nome,
-                Email = financiadorDto.Email
-            };
+                return BadRequest(ModelState);
+            }
+
+            var financiador = _mapper.Map<Financiador>(financiadorRequestDTO);
 
             await _financiadorRepository.AddAsync(financiador);
-            return CreatedAtAction(nameof(GetAll), new { id = financiador.Id }, financiador);
+
+            var financiadorResponseDTO = _mapper.Map<FinanciadorResponseDTO>(financiador);
+
+            return CreatedAtAction(nameof(GetById), new { id = financiador.Id }, financiadorResponseDTO);
         }
 
-        // Método PUT para atualizar um financiador existente
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, FinanciadorDTO financiadorDto)
+        public async Task<IActionResult> Update(int id, [FromBody] FinanciadorRequestDTO financiadorRequestDTO)
         {
-            if (id != financiadorDto.Id)
+            if (id != financiadorRequestDTO.Id || !ModelState.IsValid)
             {
-                return BadRequest(new { message = "ID do Financiador não encontrado." });
+                return BadRequest();
             }
 
-            var financiador = await _financiadorRepository.GetByIdAsync(id);
-
-            if (financiador == null)
+            var existingfinanciador = await _financiadorRepository.GetByIdAsync(id);
+            if (existingfinanciador == null)
             {
-                return NotFound(new { message = "Financiador não encontrado." });
+                return NotFound();
             }
 
-            financiador.Nome = financiadorDto.Nome;
-            financiador.Email = financiadorDto.Email;
+            var financiador = _mapper.Map(financiadorRequestDTO, existingfinanciador);
 
             await _financiadorRepository.UpdateAsync(financiador);
+
             return NoContent();
         }
 
-        // Método DELETE para excluir um financiador pelo ID
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var financiador = await _financiadorRepository.GetByIdAsync(id);
-
             if (financiador == null)
             {
-                return NotFound(new { message = "Financiador não encontrado." });
+                return NotFound();
             }
 
             await _financiadorRepository.DeleteAsync(id);
+
             return NoContent();
         }
     }

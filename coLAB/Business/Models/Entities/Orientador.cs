@@ -1,4 +1,4 @@
-namespace colab.Business.Models.Entities
+﻿namespace colab.Business.Models.Entities
 {
     public class Orientador : Pesquisador
     {

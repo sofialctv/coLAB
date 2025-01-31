@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using colab.Business.Models.Entities.Enums;
+﻿using colab.Business.Models.Entities.Enums;
 
 namespace colab.Business.Models.Entities
 {

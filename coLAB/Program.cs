@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
-using colab.AutoMapper;
 using colab.Business.Repository.Interfaces;
 using colab.Business.Repository.Implementations;
 using colab.Data;
+using colab.AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 

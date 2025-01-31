@@ -22,267 +22,256 @@ namespace colabAPI.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("colab.Business.Models.Entities.Bolsa", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+            modelBuilder.Entity("ProjetoBolsista", b =>
+            {
+                b.Property<int>("BolsistaId")
+                    .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                b.Property<int>("ProjetoId")
+                    .HasColumnType("integer");
 
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("boolean");
+                b.HasKey("BolsistaId", "ProjetoId");
 
-                    b.Property<string>("Categoria")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.HasIndex("ProjetoId");
 
-                    b.Property<DateTime?>("DataFim")
-                        .HasColumnType("timestamp with time zone");
+                b.ToTable("ProjetoBolsista");
+            });
 
-                    b.Property<DateTime>("DataInicio")
-                        .HasColumnType("timestamp with time zone");
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Bolsa", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("integer");
 
-                    b.Property<DateTime>("DataPrevistaFim")
-                        .HasColumnType("timestamp with time zone");
+                NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("PesquisadorId")
-                        .HasColumnType("integer");
+                b.Property<bool>("Ativo")
+                    .HasColumnType("boolean");
 
-                    b.Property<int>("ProjetoId")
-                        .HasColumnType("integer");
+                b.Property<string>("Categoria")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.Property<double>("Valor")
-                        .HasColumnType("double precision");
+                b.Property<DateTime?>("DataFim")
+                    .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("Id");
+                b.Property<DateTime>("DataInicio")
+                    .HasColumnType("timestamp with time zone");
 
-                    b.HasIndex("PesquisadorId")
-                        .IsUnique();
+                b.Property<DateTime>("DataPrevistaFim")
+                    .HasColumnType("timestamp with time zone");
 
-                    b.HasIndex("ProjetoId");
+                b.Property<int>("PesquisadorId")
+                    .HasColumnType("integer");
 
-                    b.ToTable("Bolsas");
-                });
+                b.Property<double>("Valor")
+                    .HasColumnType("double precision");
 
-            modelBuilder.Entity("colab.Business.Models.Entities.Financiador", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                b.HasKey("Id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                b.HasIndex("PesquisadorId")
+                    .IsUnique();
 
-                    b.Property<string>("Email")
-                        .HasColumnType("text");
+                b.ToTable("Bolsas");
+            });
 
-                    b.Property<string>("Nome")
-                        .HasColumnType("text");
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Financiador", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.ToTable("Financiadores");
-                });
+                b.Property<string>("Email")
+                    .HasColumnType("text");
 
-            modelBuilder.Entity("colab.Business.Models.Entities.HistoricoProjetoStatus", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                b.Property<string>("Nome")
+                    .HasColumnType("text");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                b.HasKey("Id");
 
-                    b.Property<DateTime?>("DataFim")
-                        .HasColumnType("timestamp with time zone");
+                b.ToTable("Financiadores");
+            });
 
-                    b.Property<DateTime>("DataInicio")
-                        .HasColumnType("timestamp with time zone");
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Pesquisador", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("integer");
 
-                    b.Property<int>("ProjetoId")
-                        .HasColumnType("integer");
+                NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Status")
-                        .HasColumnType("integer");
+                b.Property<string>("Cpf")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.HasKey("Id");
+                b.Property<string>("Email")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.HasIndex("ProjetoId");
+                b.Property<string>("Nome")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.ToTable("HistoricoStatusProjetos");
-                });
+                b.Property<string>("Telefone")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-            modelBuilder.Entity("colab.Business.Models.Entities.Pesquisador", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                b.Property<int[]>("Times")
+                    .HasColumnType("integer[]");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                b.HasKey("Id");
 
-                    b.Property<string>("Cpf")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.ToTable("Pesquisadores");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.UseTptMappingStrategy();
+            });
 
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("text");
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Projeto", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("integer");
 
-                    b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasColumnType("text");
+                NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int[]>("Times")
-                        .HasColumnType("integer[]");
+                b.Property<int>("Categoria")
+                    .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                b.Property<DateTime?>("DataFim")
+                    .HasColumnType("timestamp with time zone");
 
-                    b.ToTable("Pesquisadores");
+                b.Property<DateTime>("DataInicio")
+                    .HasColumnType("timestamp with time zone");
 
-                    b.UseTptMappingStrategy();
-                });
+                b.Property<DateTime>("DataPrevistaFim")
+                    .HasColumnType("timestamp with time zone");
 
-            modelBuilder.Entity("colab.Business.Models.Entities.Projeto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                b.Property<string>("Descricao")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                b.Property<int>("FinanciadorId")
+                    .HasColumnType("integer");
 
-                    b.Property<DateTime?>("DataFim")
-                        .HasColumnType("timestamp with time zone");
+                b.Property<string>("Nome")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.Property<DateTime>("DataInicio")
-                        .HasColumnType("timestamp with time zone");
+                b.Property<double>("Orcamento")
+                    .HasColumnType("double precision");
 
-                    b.Property<DateTime>("DataPrevistaFim")
-                        .HasColumnType("timestamp with time zone");
+                b.Property<int?>("OrientadorId")
+                    .HasColumnType("integer");
 
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<int>("Status")
+                    .HasColumnType("integer");
 
-                    b.Property<int>("FinanciadorId")
-                        .HasColumnType("integer");
+                b.HasKey("Id");
 
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.HasIndex("FinanciadorId");
 
-                    b.Property<double>("Orcamento")
-                        .HasColumnType("double precision");
+                b.HasIndex("OrientadorId");
 
-                    b.HasKey("Id");
+                b.ToTable("Projetos");
+            });
 
-                    b.HasIndex("FinanciadorId");
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Bolsista", b =>
+            {
+                b.HasBaseType("colabAPI.Business.Models.Entities.Pesquisador");
 
-                    b.ToTable("Projetos");
-                });
+                b.Property<int?>("OrientadorId")
+                    .HasColumnType("integer");
 
-            modelBuilder.Entity("colab.Business.Models.Entities.Bolsista", b =>
-                {
-                    b.HasBaseType("colab.Business.Models.Entities.Pesquisador");
+                b.HasIndex("OrientadorId");
 
-                    b.Property<int?>("OrientadorId")
-                        .HasColumnType("integer");
+                b.ToTable("Bolsistas", (string)null);
+            });
 
-                    b.HasIndex("OrientadorId");
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Orientador", b =>
+            {
+                b.HasBaseType("colabAPI.Business.Models.Entities.Pesquisador");
 
-                    b.ToTable("Bolsistas", (string)null);
-                });
+                b.ToTable("Orientadores");
+            });
 
-            modelBuilder.Entity("colab.Business.Models.Entities.Orientador", b =>
-                {
-                    b.HasBaseType("colab.Business.Models.Entities.Pesquisador");
+            modelBuilder.Entity("ProjetoBolsista", b =>
+            {
+                b.HasOne("colabAPI.Business.Models.Entities.Bolsista", null)
+                    .WithMany()
+                    .HasForeignKey("BolsistaId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.ToTable("Orientadores");
-                });
+                b.HasOne("colabAPI.Business.Models.Entities.Projeto", null)
+                    .WithMany()
+                    .HasForeignKey("ProjetoId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
-            modelBuilder.Entity("colab.Business.Models.Entities.Bolsa", b =>
-                {
-                    b.HasOne("colab.Business.Models.Entities.Pesquisador", "Pesquisador")
-                        .WithOne("Bolsa")
-                        .HasForeignKey("colab.Business.Models.Entities.Bolsa", "PesquisadorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Bolsa", b =>
+            {
+                b.HasOne("colabAPI.Business.Models.Entities.Pesquisador", "Pesquisador")
+                    .WithOne("Bolsa")
+                    .HasForeignKey("colabAPI.Business.Models.Entities.Bolsa", "PesquisadorId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.HasOne("colab.Business.Models.Entities.Projeto", "Projeto")
-                        .WithMany("Bolsas")
-                        .HasForeignKey("ProjetoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.Navigation("Pesquisador");
+            });
 
-                    b.Navigation("Pesquisador");
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Projeto", b =>
+            {
+                b.HasOne("colabAPI.Business.Models.Entities.Financiador", "Financiador")
+                    .WithMany("Projetos")
+                    .HasForeignKey("FinanciadorId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-                    b.Navigation("Projeto");
-                });
+                b.HasOne("colabAPI.Business.Models.Entities.Orientador", "Orientador")
+                    .WithMany()
+                    .HasForeignKey("OrientadorId");
 
-            modelBuilder.Entity("colab.Business.Models.Entities.HistoricoProjetoStatus", b =>
-                {
-                    b.HasOne("colab.Business.Models.Entities.Projeto", "Projeto")
-                        .WithMany("HistoricoStatus")
-                        .HasForeignKey("ProjetoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.Navigation("Financiador");
 
-                    b.Navigation("Projeto");
-                });
+                b.Navigation("Orientador");
+            });
 
-            modelBuilder.Entity("colab.Business.Models.Entities.Projeto", b =>
-                {
-                    b.HasOne("colab.Business.Models.Entities.Financiador", "Financiador")
-                        .WithMany("Projetos")
-                        .HasForeignKey("FinanciadorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Bolsista", b =>
+            {
+                b.HasOne("colabAPI.Business.Models.Entities.Pesquisador", null)
+                    .WithOne()
+                    .HasForeignKey("colabAPI.Business.Models.Entities.Bolsista", "Id")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.Navigation("Financiador");
-                });
+                b.HasOne("colabAPI.Business.Models.Entities.Orientador", "Orientador")
+                    .WithMany()
+                    .HasForeignKey("OrientadorId");
 
-            modelBuilder.Entity("colab.Business.Models.Entities.Bolsista", b =>
-                {
-                    b.HasOne("colab.Business.Models.Entities.Pesquisador", null)
-                        .WithOne()
-                        .HasForeignKey("colab.Business.Models.Entities.Bolsista", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.Navigation("Orientador");
+            });
 
-                    b.HasOne("colab.Business.Models.Entities.Orientador", "Orientador")
-                        .WithMany()
-                        .HasForeignKey("OrientadorId");
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Orientador", b =>
+            {
+                b.HasOne("colabAPI.Business.Models.Entities.Pesquisador", null)
+                    .WithOne()
+                    .HasForeignKey("colabAPI.Business.Models.Entities.Orientador", "Id")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
-                    b.Navigation("Orientador");
-                });
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Financiador", b =>
+            {
+                b.Navigation("Projetos");
+            });
 
-            modelBuilder.Entity("colab.Business.Models.Entities.Orientador", b =>
-                {
-                    b.HasOne("colab.Business.Models.Entities.Pesquisador", null)
-                        .WithOne()
-                        .HasForeignKey("colab.Business.Models.Entities.Orientador", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("colab.Business.Models.Entities.Financiador", b =>
-                {
-                    b.Navigation("Projetos");
-                });
-
-            modelBuilder.Entity("colab.Business.Models.Entities.Pesquisador", b =>
-                {
-                    b.Navigation("Bolsa");
-                });
-
-            modelBuilder.Entity("colab.Business.Models.Entities.Projeto", b =>
-                {
-                    b.Navigation("Bolsas");
-
-                    b.Navigation("HistoricoStatus");
-                });
+            modelBuilder.Entity("colabAPI.Business.Models.Entities.Pesquisador", b =>
+            {
+                b.Navigation("Bolsa");
+            });
 #pragma warning restore 612, 618
         }
     }

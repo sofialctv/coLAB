@@ -6,6 +6,12 @@ public class ConfigMapping : Profile
 {
     public ConfigMapping()
     {
+
+        CreateMap<Financiador, FinanciadorResponseDTO>()
+            .ReverseMap();
+        CreateMap<Financiador, FinanciadorRequestDTO>()
+            .ReverseMap();
+
         // Map de Projeto para ProjetoResponseDTO
         CreateMap<Projeto, ProjetoResponseDTO>()
             .ForMember(dest => dest.FinanciadorNome, opt => opt.MapFrom(src => src.Financiador.Nome));
