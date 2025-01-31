@@ -1,4 +1,6 @@
-﻿namespace colabAPI.Business.Models.Entities
+﻿using Newtonsoft.Json;
+
+namespace colabAPI.Business.Models.Entities
 {
     public class Pessoa
     {
@@ -10,6 +12,7 @@
         
         public List<HistoricoCargo> HistoricosCargo { get; set; }
         
+        [JsonIgnore]
         public Bolsa Bolsa { get; set; }
     }
 }

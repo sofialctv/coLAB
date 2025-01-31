@@ -14,6 +14,7 @@ public class TipoBolsa
     
     public Escolaridade escolaridade { get; set; }
     
+    [JsonIgnore]
     public Bolsa Bolsa { get; set; }
     
     private string escolaridadeDescricao => escolaridade.ToString();
