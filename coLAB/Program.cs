@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
-using colab.AutoMapper;
 using colab.Business.Repository.Interfaces;
 using colab.Business.Repository.Implementations;
 using colab.Data;
@@ -19,11 +18,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddControllers().AddJsonOptions(options =>
    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
-// AutoMapper
-builder.Services.AddAutoMapper(typeof(ConfigMapping));
-
 // Injeção de dependências
+builder.Services.AddScoped<IBolsaRepository, BolsaRepository>();
+builder.Services.AddScoped<IBolsistaRepository, BolsistaRepository>();
 builder.Services.AddScoped<IFinanciadorRepository, FinanciadorRepository>();
+builder.Services.AddScoped<IOrientadorRepository, OrientadorRepository>();
 builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
