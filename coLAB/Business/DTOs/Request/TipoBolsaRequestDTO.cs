@@ -1,6 +1,6 @@
-﻿using colabAPI.Business.Models.Entities.Enums;
+using colab.Business.Models.Entities.Enums;
 
-namespace colabAPI.Business.DTOs;
+namespace colab.Business.DTOs.Request;
 
 public class TipoBolsaRequestDTO
 {

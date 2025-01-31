@@ -1,7 +1,5 @@
-﻿using colabAPI.Business.DTOs;
-using colabAPI.Business.Models.Entities.Enums;
-
-namespace colabAPI.Business.Models.Entities
+﻿
+namespace colab.Business.Models.Entities
 {
     public class Bolsa
     {

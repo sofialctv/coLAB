@@ -1,4 +1,4 @@
-﻿namespace colabAPI.Business.Models.Entities.Enums;
+﻿namespace colab.Business.Models.Entities.Enums;
 
 public enum Escolaridade
 {

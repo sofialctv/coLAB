@@ -1,4 +1,6 @@
-﻿using colab.Business.Models.Entities.Enums;
+﻿
+using colab.Business.DTOs.Response;
+using colab.Business.Models.Entities;
 
 namespace colab.Business.DTOs
 {
@@ -20,6 +22,6 @@ namespace colab.Business.DTOs
         public List<HistoricoProjetoStatusResponseDTO> HistoricoStatus { get; set; }
 
         // Bolsas
-        public List<BolsaDTO> Bolsas { get; set; }
+        public List<Bolsa> Bolsas { get; set; }
     }
 }

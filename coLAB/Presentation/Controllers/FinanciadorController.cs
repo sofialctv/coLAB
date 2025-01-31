@@ -3,6 +3,8 @@ using colab.Business.Repository.Interfaces;
 using colab.Business.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using colab.Business.DTOs;
+using colab.Business.DTOs.Request;
+using colab.Business.DTOs.Response;
 
 namespace colabAPI.Presentation.Controllers
 {
@@ -21,6 +23,7 @@ namespace colabAPI.Presentation.Controllers
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<FinanciadorResponseDTO>>> GetAll()
+
         {
             var financiadores = await _financiadorRepository.GetAllAsync();
             var financiadoresDTO = _mapper.Map<IEnumerable<FinanciadorResponseDTO>>(financiadores);

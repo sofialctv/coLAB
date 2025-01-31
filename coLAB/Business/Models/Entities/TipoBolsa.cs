@@ -1,8 +1,7 @@
-﻿using System.Runtime.InteropServices.JavaScript;
-using colabAPI.Business.Models.Entities.Enums;
+﻿using colab.Business.Models.Entities.Enums;
 using Newtonsoft.Json;
 
-namespace colabAPI.Business.Models.Entities;
+namespace colab.Business.Models.Entities;
 
 public class TipoBolsa
 {

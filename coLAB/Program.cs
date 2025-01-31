@@ -4,8 +4,6 @@ using colab.AutoMapper;
 using colab.Business.Repository.Interfaces;
 using colab.Business.Repository.Implementations;
 using colab.Data;
-using colabAPI.Business.Models.Entities;
-using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +27,8 @@ builder.Services.AddAutoMapper(typeof(ConfigMapping));
 builder.Services.AddScoped<IPessoaRepository, PessoaRepository>();
 builder.Services.AddScoped<ICargoRepository, CargoRepository>();
 builder.Services.AddScoped<IHistoricoCargoRepository, HistoricoCargoRepository>();
-
+builder.Services.AddScoped<IFinanciadorRepository, FinanciadorRepository>();
+builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
 builder.Services.AddScoped<IBolsaRepository, BolsaRepository>();
 builder.Services.AddScoped<ITipoBolsaRepository, TipoBolsaRepository>();
 

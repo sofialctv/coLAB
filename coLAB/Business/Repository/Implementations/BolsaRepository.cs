@@ -1,10 +1,9 @@
-﻿using colabAPI.Business.Models.Entities;
-using colabAPI.Business.DTOs;
-using colabAPI.Business.Repository.Interfaces;
-using colabAPI.Data;
+﻿using colab.Business.Models.Entities;
+using colab.Business.Repository.Interfaces;
+using colab.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace colabAPI.Business.Repository.Implementations
+namespace colab.Business.Repository.Implementations
 {
     public class BolsaRepository : IBolsaRepository, IDisposable
     {

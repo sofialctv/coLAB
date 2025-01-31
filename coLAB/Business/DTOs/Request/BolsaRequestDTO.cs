@@ -1,4 +1,4 @@
-﻿namespace colabAPI.Business.DTOs.Request
+﻿namespace colab.Business.DTOs.Request
 {
     public class BolsaRequestDTO
     {

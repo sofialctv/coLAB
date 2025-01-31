@@ -1,6 +1,6 @@
-﻿using colabAPI.Business.Models.Entities;
+﻿using colab.Business.Models.Entities;
 
-namespace colabAPI.Business.Repository.Interfaces;
+namespace colab.Business.Repository.Interfaces;
 
 public interface ITipoBolsaRepository
 { 

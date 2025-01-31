@@ -1,4 +1,4 @@
-﻿namespace colab.Business.DTOs
+﻿namespace colab.Business.DTOs.Request
 {
     public class HistoricoProjetoStatusRequestDTO
     {

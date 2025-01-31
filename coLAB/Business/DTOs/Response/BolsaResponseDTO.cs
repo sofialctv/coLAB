@@ -1,6 +1,6 @@
-﻿using colabAPI.Business.Models.Entities;
+﻿using colab.Business.Models.Entities;
 
-namespace colabAPI.Business.DTOs
+namespace colab.Business.DTOs.Response
 {
     public class BolsaResponseDTO
     {

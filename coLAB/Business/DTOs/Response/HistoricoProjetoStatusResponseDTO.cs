@@ -1,6 +1,6 @@
 ﻿using colab.Business.Models.Entities.Enums;
 
-namespace colab.Business.DTOs
+namespace colab.Business.DTOs.Response
 {
     public class HistoricoProjetoStatusResponseDTO
     {

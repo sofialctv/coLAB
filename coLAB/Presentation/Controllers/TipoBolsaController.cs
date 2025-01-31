@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using colabAPI.Business.DTOs;
-using colabAPI.Business.DTOs.Request;
-using colabAPI.Business.Models.Entities;
+using colab.Business.DTOs.Response;
+using colab.Business.DTOs.Request;
+using colab.Business.Models.Entities;
+using colab.Business.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using colabAPI.Business.Repository.Interfaces;
 
-namespace colabAPI.Business.Models.Controllers
+namespace colab.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
