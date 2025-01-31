@@ -37,7 +37,7 @@ public class ConfigMapping : Profile
                 => opt.MapFrom(src => src.Pessoa.Nome));
 
         CreateMap<Financiador, FinanciadorResponseDTO>();
-        CreateMap<Financiador, FinanciadorRequestDTO>();
+        CreateMap<FinanciadorRequestDTO, Financiador>();
         
         CreateMap<HistoricoCargoRequestDTO, HistoricoCargo>()
             .ReverseMap();
