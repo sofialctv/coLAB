@@ -29,14 +29,11 @@ namespace colab.Data
                 .WithMany(p => p.HistoricosCargo)
                 .HasForeignKey(h => h.PessoaId)
                 .IsRequired();
-
             modelBuilder.Entity<HistoricoCargo>()
                 .HasOne(h => h.Cargo)
                 .WithOne(c => c.HistoricoCargo)
                 .HasForeignKey<HistoricoCargo>(h => h.CargoId)
                 .IsRequired();
-
-            base.OnModelCreating(modelBuilder);
 
             // Relacionamento entre 'Projeto' e 'Financiador'
             modelBuilder.Entity<Projeto>()
@@ -44,6 +41,8 @@ namespace colab.Data
                 .WithMany(f => f.Projetos)
                 .HasForeignKey(p => p.FinanciadorId)
                 .OnDelete(DeleteBehavior.Restrict); // Não permite exclusão caso exista relacionamento
+            
+            base.OnModelCreating(modelBuilder);
         }
     } 
 }
