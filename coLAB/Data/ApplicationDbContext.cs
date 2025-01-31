@@ -3,25 +3,39 @@ using Microsoft.EntityFrameworkCore;
 
 namespace colab.Data
 {
-    // Classe que representa o contexto do banco de dados, estendendo DbContext do Entity Framework
     public class ApplicationDbContext : DbContext
     {
+        // Classe que representa o contexto do banco de dados, estendendo DbContext do Entity Framework
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
-
+        
         // Definição das tabelas (DbSet) do banco de dados que serão mapeadas pelo EF
+        public DbSet<Pessoa> Pessoas { get; set; }
+        public DbSet<Cargo> Cargos { get; set; }
+        public DbSet<HistoricoCargo> HistoricosCargo { get; set; }
         public DbSet<Financiador> Financiadores { get; set; }
         public DbSet<Projeto> Projetos { get; set; }
-        public DbSet<Orientador> Orientadores { get; set; }
-        public DbSet<Pesquisador> Pesquisadores { get; set; }
         public DbSet<HistoricoProjetoStatus> HistoricoStatusProjetos { get; set; }
-        public DbSet<Bolsista> Bolsistas { get; set; }
         public DbSet<Bolsa> Bolsas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
+            // Relações de HistoricoCargo com Cargo e Pessoa
+            modelBuilder.Entity<HistoricoCargo>()
+                .HasOne(h => h.Pessoa)
+                .WithMany(p => p.HistoricosCargo)
+                .HasForeignKey(h => h.PessoaId)
+                .IsRequired();
+
+            modelBuilder.Entity<HistoricoCargo>()
+                .HasOne(h => h.Cargo)
+                .WithOne(c => c.HistoricoCargo)
+                .HasForeignKey<HistoricoCargo>(h => h.CargoId)
+                .IsRequired();
+
             base.OnModelCreating(modelBuilder);
 
             // Relacionamento entre 'Projeto' e 'Financiador'
@@ -30,16 +44,6 @@ namespace colab.Data
                 .WithMany(f => f.Projetos)
                 .HasForeignKey(p => p.FinanciadorId)
                 .OnDelete(DeleteBehavior.Restrict); // Não permite exclusão caso exista relacionamento
-
-            
-
-            modelBuilder.Entity<Bolsista>().ToTable("Bolsistas");
-
-            // Converte o enum de int para uma string ao enviar para banco de dados
-            modelBuilder.Entity<Bolsa>()
-                .Property(b => b.Categoria)
-                .HasConversion<string>();
         }
-
-    }
+    } 
 }

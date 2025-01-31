@@ -1,5 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using colab.AutoMapper;
 using colab.Business.Repository.Interfaces;
 using colab.Business.Repository.Implementations;
 using colab.Data;
@@ -23,17 +24,12 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddAutoMapper(typeof(ConfigMapping));
 
 // Injeção de dependências
-builder.Services.AddScoped<IBolsaRepository, BolsaRepository>();
-builder.Services.AddScoped<IBolsistaRepository, BolsistaRepository>();
-builder.Services.AddScoped<IFinanciadorRepository, FinanciadorRepository>();
-builder.Services.AddScoped<IOrientadorRepository, OrientadorRepository>();
-builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
+builder.Services.AddScoped<IPessoaRepository, PessoaRepository>();
+builder.Services.AddScoped<ICargoRepository, CargoRepository>();
+builder.Services.AddScoped<IHistoricoCargoRepository, HistoricoCargoRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-// Registro dos Repositories
-builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
 
 // Adicionar serviços ao contêiner
 builder.Services.AddCors(options =>
