@@ -19,15 +19,14 @@ public class ConfigMapping : Profile
         CreateMap<Cargo, CargoRequestDTO>()
             .ReverseMap();
         
+        CreateMap<HistoricoCargoRequestDTO, HistoricoCargo>()
+            .ReverseMap();
+        
         CreateMap<HistoricoCargo, HistoricoCargoResponseDTO>()
             .ForMember(dest => dest.CargoNome, opt 
                 => opt.MapFrom(src => src.Cargo.Nome))
             .ForMember(dest => dest.PessoaNome, opt 
                 => opt.MapFrom(src => src.Pessoa.Nome))
             .ReverseMap();
-        CreateMap<HistoricoCargo, HistoricoCargoRequestDTO>();
-        CreateMap<HistoricoCargoRequestDTO, HistoricoCargo>()
-            .ForMember(dest => dest.Cargo, opt 
-                => opt.Ignore());
     }
 }

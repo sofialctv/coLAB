@@ -26,11 +26,11 @@ namespace colab.Presentation.Controllers
 
         // GET: api/HistoricoCargo
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<HistoricoCargoResponseDTO>>> GetAll()
+        public async Task<IEnumerable<HistoricoCargoResponseDTO>> GetAll()
         {
             var historicosCargo = await _historicoCargoRepository.GetAllAsync();
             var historicosCargoDTO = _mapper.Map<IEnumerable<HistoricoCargoResponseDTO>>(historicosCargo);
-            return Ok(historicosCargoDTO);
+            return (historicosCargoDTO);
         }
 
         // GET: api/HistoricoCargo/{id}
