@@ -4,9 +4,11 @@ using colab.AutoMapper;
 using colab.Business.Repository.Interfaces;
 using colab.Business.Repository.Implementations;
 using colab.Data;
-using colab.AutoMapper;
+using colabAPI.Business.Models.Entities;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // String de conexão com o banco de dados
 var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING")
@@ -27,6 +29,9 @@ builder.Services.AddAutoMapper(typeof(ConfigMapping));
 builder.Services.AddScoped<IPessoaRepository, PessoaRepository>();
 builder.Services.AddScoped<ICargoRepository, CargoRepository>();
 builder.Services.AddScoped<IHistoricoCargoRepository, HistoricoCargoRepository>();
+
+builder.Services.AddScoped<IBolsaRepository, BolsaRepository>();
+builder.Services.AddScoped<ITipoBolsaRepository, TipoBolsaRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

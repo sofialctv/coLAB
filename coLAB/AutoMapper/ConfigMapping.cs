@@ -13,11 +13,15 @@ public class ConfigMapping : Profile
         CreateMap<Pessoa, PessoaResponseDTO>()
             .ReverseMap();
         CreateMap<Pessoa, PessoaRequestDTO>()
+        CreateMap<Bolsa, BolsaResponseDTO>()
             .ReverseMap();
         
         CreateMap<Cargo, CargoResponseDTO>()
+        CreateMap<Bolsa, BolsaRequestDTO>()
             .ReverseMap();
         CreateMap<Cargo, CargoRequestDTO>()
+        
+        CreateMap<TipoBolsa, TipoBolsaResponseDTO>()
             .ReverseMap();
         
         CreateMap<HistoricoCargo, HistoricoCargoResponseDTO>()
@@ -25,6 +29,7 @@ public class ConfigMapping : Profile
                 => opt.MapFrom(src => src.Cargo.Nome))
             .ForMember(dest => dest.PessoaNome, opt 
                 => opt.MapFrom(src => src.Pessoa.Nome))
+        CreateMap<TipoBolsa, TipoBolsaRequestDTO>()
             .ReverseMap();
 
         CreateMap<Financiador, FinanciadorResponseDTO>();
@@ -43,6 +48,7 @@ public class ConfigMapping : Profile
         // Map de HistoricoProjetoStatus para HistoricoProjetoStatusResponseDTO
         CreateMap<HistoricoProjetoStatus, HistoricoProjetoStatusResponseDTO>()
             .ForMember(dest => dest.StatusDescricao, opt => opt.MapFrom(src => src.Status.ToString()));
+        
         
     }
 }
