@@ -10,5 +10,6 @@
 
         public int TipoBolsaId { get; set; }
         public int PessoaId { get; set; }
+        public int ProjetoId { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using colab.Data;
@@ -11,9 +12,11 @@ using colab.Data;
 namespace colab.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250207203422_AjusteRelacaoBolsaProjeto")]
+    partial class AjusteRelacaoBolsaProjeto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,7 +67,7 @@ namespace colab.Migrations
                     b.HasIndex("TipoBolsaId")
                         .IsUnique();
 
-                    b.ToTable("Bolsas", (string)null);
+                    b.ToTable("Bolsas");
                 });
 
             modelBuilder.Entity("colab.Business.Models.Entities.Cargo", b =>
@@ -85,7 +88,7 @@ namespace colab.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cargos", (string)null);
+                    b.ToTable("Cargos");
                 });
 
             modelBuilder.Entity("colab.Business.Models.Entities.Financiador", b =>
@@ -106,7 +109,7 @@ namespace colab.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Financiadores", (string)null);
+                    b.ToTable("Financiadores");
                 });
 
             modelBuilder.Entity("colab.Business.Models.Entities.HistoricoCargo", b =>
@@ -140,7 +143,7 @@ namespace colab.Migrations
 
                     b.HasIndex("PessoaId");
 
-                    b.ToTable("HistoricosCargo", (string)null);
+                    b.ToTable("HistoricosCargo");
                 });
 
             modelBuilder.Entity("colab.Business.Models.Entities.HistoricoProjetoStatus", b =>
@@ -167,7 +170,7 @@ namespace colab.Migrations
 
                     b.HasIndex("ProjetoId");
 
-                    b.ToTable("HistoricoStatusProjetos", (string)null);
+                    b.ToTable("HistoricoStatusProjetos");
                 });
 
             modelBuilder.Entity("colab.Business.Models.Entities.Pessoa", b =>
@@ -196,7 +199,7 @@ namespace colab.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pessoas", (string)null);
+                    b.ToTable("Pessoas");
                 });
 
             modelBuilder.Entity("colab.Business.Models.Entities.Projeto", b =>
@@ -234,7 +237,7 @@ namespace colab.Migrations
 
                     b.HasIndex("FinanciadorId");
 
-                    b.ToTable("Projetos", (string)null);
+                    b.ToTable("Projetos");
                 });
 
             modelBuilder.Entity("colab.Business.Models.Entities.TipoBolsa", b =>
@@ -259,7 +262,7 @@ namespace colab.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TipoBolsa", (string)null);
+                    b.ToTable("TipoBolsa");
                 });
 
             modelBuilder.Entity("colab.Business.Models.Entities.Bolsa", b =>

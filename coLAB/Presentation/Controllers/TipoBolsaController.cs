@@ -2,7 +2,7 @@
 using colab.Business.DTOs.Response;
 using colab.Business.DTOs.Request;
 using colab.Business.Models.Entities;
-using colab.Business.Repository.Interfaces;
+using colab.Business.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace colab.Presentation.Controllers
@@ -11,44 +11,46 @@ namespace colab.Presentation.Controllers
     [ApiController]
     public class TipoBolsaController : ControllerBase
     {
-        private readonly ITipoBolsaRepository _tipobolsaRepository; // Interface para acessar o repositorio de TipoBolsa
-        private readonly IMapper _mapper; 
-        
-        // Injeta o repositório no construtor
-        public TipoBolsaController(ITipoBolsaRepository tipobolsaRepository, IMapper mapper)
-        {   
-            _tipobolsaRepository = tipobolsaRepository;
+        private readonly ITipoBolsaService _tipoBolsaService; // Agora estamos utilizando o serviço
+        private readonly IMapper _mapper;
+
+        // Injeta o serviço no construtor
+        public TipoBolsaController(ITipoBolsaService tipoBolsaService, IMapper mapper)
+        {
+            _tipoBolsaService = tipoBolsaService;
             _mapper = mapper;
         }
-        
+
         // GET: api/TipoBolsa
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var tipoBolsa = await _tipobolsaRepository.GetAllAsync();
-    
-            // Mapeia as entidades Bolsa para os DTOs BolsaResponseDTO
+            var tipoBolsa = await _tipoBolsaService.GetAllAsync();
+
+            // Mapeia as entidades TipoBolsa para os DTOs TipoBolsaResponseDTO
             var tipoBolsaDtos = _mapper.Map<IEnumerable<TipoBolsaResponseDTO>>(tipoBolsa);
-    
+
             return Ok(tipoBolsaDtos);
         }
-        
+
         // GET: api/TipoBolsa/{id}
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var tipoBolsa = await _tipobolsaRepository.GetByIdAsync(id);
-            if (tipoBolsa == null)
+            try
             {
-                return NotFound(); // Retorna 404 se a bolsa não for encontrada
-            }
+                var tipoBolsa = await _tipoBolsaService.GetByIdAsync(id);
 
-            // Mapeia a entidade TipoBolsa para o DTO TipoBolsaResponseDTO
-            var tipoBolsaDto = _mapper.Map<TipoBolsaResponseDTO>(tipoBolsa);
-    
-            return Ok(tipoBolsaDto);
+                // Mapeia a entidade TipoBolsa para o DTO TipoBolsaResponseDTO
+                var tipoBolsaDto = _mapper.Map<TipoBolsaResponseDTO>(tipoBolsa);
+                return Ok(tipoBolsaDto);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound(); // Retorna 404 se não encontrar o tipo de bolsa
+            }
         }
-        
+
         // POST: api/TipoBolsa
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] TipoBolsaRequestDTO tipoBolsaRequestDto)
@@ -61,17 +63,14 @@ namespace colab.Presentation.Controllers
             // Mapeia o DTO TipoBolsaRequestDTO para a entidade TipoBolsa
             var tipoBolsa = _mapper.Map<TipoBolsa>(tipoBolsaRequestDto);
 
-            await _tipobolsaRepository.AddAsync(tipoBolsa);
-            await _tipobolsaRepository.Save();
+            await _tipoBolsaService.AddAsync(tipoBolsa);
 
             // Mapeia a entidade TipoBolsa salva para o DTO TipoBolsaResponseDTO para retornar ao cliente
             var tipoBolsaResponseDto = _mapper.Map<TipoBolsaResponseDTO>(tipoBolsa);
-    
+
             return CreatedAtAction(nameof(GetById), new { id = tipoBolsa.Id }, tipoBolsaResponseDto);
         }
 
-
-        
         // PUT: api/TipoBolsa/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] TipoBolsaRequestDTO tipoBolsaRequestDto)
@@ -81,41 +80,35 @@ namespace colab.Presentation.Controllers
                 return BadRequest(); // Retorna erro 400 para solicitação inválida
             }
 
-            var existingTipoBolsa = await _tipobolsaRepository.GetByIdAsync(id);
-            if (existingTipoBolsa == null)
+            try
             {
-                return NotFound(); // Retorna erro 404 se a tipobolsa não for encontrada
+                // Mapeia o DTO para a entidade existente
+                var existingTipoBolsa = await _tipoBolsaService.GetByIdAsync(id);
+                _mapper.Map(tipoBolsaRequestDto, existingTipoBolsa);
+
+                await _tipoBolsaService.UpdateAsync(existingTipoBolsa);
+
+                return NoContent(); // Retorna 204 quando a atualização é bem-sucedida
             }
-
-            // Atualiza a entidade existente com os valores do DTO
-            _mapper.Map(tipoBolsaRequestDto, existingTipoBolsa);
-
-            await _tipobolsaRepository.UpdateAsync(existingTipoBolsa);
-            await _tipobolsaRepository.Save();
-
-            return NoContent(); // Retorna 204 quando a atualização é bem-sucedida
+            catch (KeyNotFoundException)
+            {
+                return NotFound(); // Retorna erro 404 se não encontrar o tipo de bolsa
+            }
         }
 
-        
         // DELETE: api/TipoBolsa/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            // Busca a TipoBolsa pelo ID
-            var tipoBolsa = await _tipobolsaRepository.GetByIdAsync(id);
-            if (tipoBolsa == null)
+            try
             {
-                return NotFound(); // Retorna erro 404 caso não encontre a bolsa
+                await _tipoBolsaService.DeleteAsync(id);
+                return NoContent(); // Retorna 204, indicando que a operação foi bem-sucedida
             }
-
-            // Remove a TipoBolsa
-            await _tipobolsaRepository.DeleteAsync(id);
-            await _tipobolsaRepository.Save();
-
-            return NoContent(); // Retorna 204, indicando que a operação foi bem-sucedida
+            catch (KeyNotFoundException)
+            {
+                return NotFound(); // Retorna erro 404 caso não encontre o tipo de bolsa
+            }
         }
-
-        
-        
     }
 }

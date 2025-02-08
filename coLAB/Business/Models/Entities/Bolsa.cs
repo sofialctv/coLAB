@@ -11,9 +11,10 @@ namespace colab.Business.Models.Entities
         public Boolean Ativo { get; set; }
 
         // Relacionamentos
-        
+        public int ProjetoId { get; set; } // Chave estrangeira
+        public Projeto Projeto { get; set; } // ref. ao Projeto
+
         public int TipoBolsaId{ get; set; }
-        
         public TipoBolsa TipoBolsa { get; set; }
         
         public int PessoaId { get; set; } // Chave estrangeira

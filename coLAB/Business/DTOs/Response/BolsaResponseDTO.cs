@@ -14,5 +14,7 @@ namespace colab.Business.DTOs.Response
         public TipoBolsa TipoBolsa { get; set; }
 
         public Pessoa Pessoa { get; set; }
+
+        public Projeto Projeto { get; set; }
     }
 }

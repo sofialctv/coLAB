@@ -1,11 +1,9 @@
 ﻿using colab.Business.DTOs;
-using colab.Business.Repository.Interfaces;
-using colab.Business.Models.Entities;
-using colab.Data;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using AutoMapper;
 using colab.Business.DTOs.Request;
+using colab.Business.Models.Entities;
+using colab.Business.Services.Interfaces;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 
 namespace colab.Presentation.Controllers
 {
@@ -13,21 +11,19 @@ namespace colab.Presentation.Controllers
     [Route("api/[controller]")]
     public class ProjetoController : ControllerBase
     {
-        private readonly IProjetoRepository _projetoRepository;
-        private readonly IBolsaRepository _bolsaRepository;
+        private readonly IProjetoService _projetoService;
         private readonly IMapper _mapper;
 
-        public ProjetoController(IProjetoRepository projetoRepository, IBolsaRepository bolsaRepository, IMapper mapper)
+        public ProjetoController(IProjetoService projetoService, IMapper mapper)
         {
-            _projetoRepository = projetoRepository;
-            _bolsaRepository = bolsaRepository;
+            _projetoService = projetoService;
             _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProjetoResponseDTO>>> GetAll()
         {
-            var projetos = await _projetoRepository.GetAllAsync();
+            var projetos = await _projetoService.GetAllAsync();
             var projetoDtos = _mapper.Map<List<ProjetoResponseDTO>>(projetos);
             return Ok(projetoDtos);
         }
@@ -35,7 +31,7 @@ namespace colab.Presentation.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ProjetoResponseDTO>> GetById(int id)
         {
-            var projeto = await _projetoRepository.GetByIdAsync(id);
+            var projeto = await _projetoService.GetByIdAsync(id);
             if (projeto == null)
             {
                 return NotFound(new { message = "Projeto não encontrado" });
@@ -49,7 +45,7 @@ namespace colab.Presentation.Controllers
         public async Task<IActionResult> Create(ProjetoRequestDTO projetoDto)
         {
             var projeto = _mapper.Map<Projeto>(projetoDto);
-            var createdProjeto = await _projetoRepository.AddAsync(projeto);
+            var createdProjeto = await _projetoService.AddAsync(projeto);
 
             var historicoStatus = new HistoricoProjetoStatus
             {
@@ -58,7 +54,7 @@ namespace colab.Presentation.Controllers
                 DataInicio = DateTime.UtcNow
             };
 
-            await _projetoRepository.AddHistoricoStatusAsync(historicoStatus);
+            await _projetoService.AddHistoricoStatusAsync(historicoStatus);
 
             return CreatedAtAction(nameof(GetById), new { id = createdProjeto.Id }, createdProjeto);
         }
@@ -71,7 +67,7 @@ namespace colab.Presentation.Controllers
                 return BadRequest(new { message = "ID do projeto não corresponde" });
             }
 
-            var projeto = await _projetoRepository.GetByIdAsync(id);
+            var projeto = await _projetoService.GetByIdAsync(id);
             if (projeto == null)
             {
                 return NotFound(new { message = "Projeto não encontrado" });
@@ -87,7 +83,7 @@ namespace colab.Presentation.Controllers
 
             // Atualizar os campos do projeto
             _mapper.Map(projetoDto, projeto);
-            await _projetoRepository.UpdateAsync(projeto);
+            await _projetoService.UpdateAsync(projeto);
 
             // Criar novo registro de histórico se o status mudou
             if (statusAlterado)
@@ -99,12 +95,12 @@ namespace colab.Presentation.Controllers
                     DataInicio = DateTime.UtcNow
                 };
 
-                await _projetoRepository.AddHistoricoStatusAsync(novoHistorico);
+                await _projetoService.AddHistoricoStatusAsync(novoHistorico);
 
                 if (ultimoStatus != null)
                 {
                     ultimoStatus.DataFim = DateTime.UtcNow;
-                    await _projetoRepository.UpdateHistoricoStatusAsync(ultimoStatus);
+                    await _projetoService.UpdateHistoricoStatusAsync(ultimoStatus);
                 }
             }
 
@@ -114,14 +110,13 @@ namespace colab.Presentation.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var projeto = await _projetoRepository.GetByIdAsync(id);
+            var projeto = await _projetoService.GetByIdAsync(id);
             if (projeto == null)
             {
                 return NotFound(new { message = "Projeto não encontrado" });
             }
 
-            await _projetoRepository.DeleteAsync(id);
-
+            await _projetoService.DeleteAsync(id);
             return NoContent();
         }
     }

@@ -5,104 +5,51 @@ using Microsoft.EntityFrameworkCore;
 
 namespace colab.Business.Repository.Implementations
 {
-    public class TipoBolsaRepository : ITipoBolsaRepository, IDisposable
+    public class TipoBolsaRepository : ITipoBolsaRepository
     {
-        private readonly ApplicationDbContext _DbContext;
+        private readonly ApplicationDbContext _dbContext;
 
         // Injeta o contexto do banco no construtor
         public TipoBolsaRepository(ApplicationDbContext context)
         {
-            _DbContext = context;
+            _dbContext = context;
         }
-        
+
         public async Task<IEnumerable<TipoBolsa>> GetAllAsync()
         {
-            var tipoBolsas = await _DbContext.TipoBolsa.ToListAsync();
-
-            return tipoBolsas;
+            return await _dbContext.TipoBolsa.ToListAsync();
         }
-        
+
         public async Task<TipoBolsa> GetByIdAsync(int id)
         {
-
-            var tipoBolsa = await _DbContext.TipoBolsa
+            return await _dbContext.TipoBolsa
                 .FirstOrDefaultAsync(tb => tb.Id == id);
-
-            if (tipoBolsa == null)
-            {
-                throw new KeyNotFoundException($"Tipo de Bolsa com ID {id} não foi encontrada.");
-            }
-            
-            return tipoBolsa;
         }
 
-        
-        // Adiciona uma nova tipo de bolsa ao banco de dados
         public async Task AddAsync(TipoBolsa tipoBolsa)
         {
-            _DbContext.TipoBolsa.Add(tipoBolsa);
+            _dbContext.TipoBolsa.Add(tipoBolsa);
+            await _dbContext.SaveChangesAsync();  // Garantir que a operação seja persistida no banco
         }
-        
-        // Atualiza os dados de uma tipo de bolsa existente
+
         public async Task UpdateAsync(TipoBolsa tipoBolsa)
         {
-            if (tipoBolsa == null || tipoBolsa.Id <= 0)
+            var existeBolsa = await _dbContext.TipoBolsa.FindAsync(tipoBolsa.Id);
+            if (existeBolsa != null)
             {
-                throw new ArgumentException("Dados de bolsa invalido");
+                _dbContext.Entry(existeBolsa).CurrentValues.SetValues(tipoBolsa);
+                await _dbContext.SaveChangesAsync();  // Garantir que a atualização seja persistida no banco
             }
-
-            
-            var existeBolsa = _DbContext.TipoBolsa.Find(tipoBolsa.Id); // Verifica se o Tipo de bolsa existe
-            if (existeBolsa != null) 
-            {
-                // Atualiza os valores da bolsa existente
-                _DbContext.Entry(existeBolsa).CurrentValues.SetValues(tipoBolsa);
-            }
-            else
-            {
-                throw new KeyNotFoundException("Bolsa não encontrada"); // Erro se não encontrada
-            }
-            
-            _DbContext.SaveChanges();
         }
-        
+
         public async Task DeleteAsync(int tipoBolsaID)
         {
-            var tipoBolsa = _DbContext.TipoBolsa.Find(tipoBolsaID); // Busca o Tipo de bolsa pelo ID
+            var tipoBolsa = await _dbContext.TipoBolsa.FindAsync(tipoBolsaID);
             if (tipoBolsa != null)
             {
-                _DbContext.TipoBolsa.Remove(tipoBolsa); // Remove a Tipo de bolsa  
+                _dbContext.TipoBolsa.Remove(tipoBolsa);
+                await _dbContext.SaveChangesAsync();  // Garantir que a exclusão seja persistida no banco
             }
-        }
-        
-        // Salva as mudanças no banco de dados
-        public async Task Save()
-        {
-            _DbContext.SaveChanges();
-        }
-        
-        private bool _disposed = false; // Flag para rastrear se os recursos já foram liberados.
-
-        // Método protegido para liberar recursos.
-        // Ele é chamado tanto pelo método público Dispose() quanto, teoricamente, pelo coletor de lixo (GC).
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposed) // Verifica se o repositório já foi descartado.
-            {
-                if (disposing)
-                {
-                    _DbContext.Dispose(); // Libera o ApplicationDbContext, que gerencia conexões com o banco.
-                }
-            }
-            _disposed = true; // Marca que os recursos já foram liberados.
-        }
-
-        // Método público para descartar o repositório.
-        // Implementa a interface IDisposable, permitindo o uso de 'using' ou liberação explícita.
-        public void Dispose()
-        {
-            Dispose(true); // Chama o método Dispose(bool), liberando recursos gerenciados.
-            GC.SuppressFinalize(this); // Evita que o coletor de lixo tente liberar o repositório novamente.
         }
     }
 }

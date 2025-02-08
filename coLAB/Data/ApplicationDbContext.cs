@@ -59,12 +59,29 @@ namespace colab.Data
                 .Property(b => b.escolaridade)
                 .HasConversion<string>();
 
-            // Relacionamento entre 'Projeto' e 'Financiador'
+            // relacionamento entre 'Projeto' e 'Financiador'
             modelBuilder.Entity<Projeto>()
                 .HasOne(p => p.Financiador)
                 .WithMany(f => f.Projetos)
                 .HasForeignKey(p => p.FinanciadorId)
-                .OnDelete(DeleteBehavior.Restrict); // Não permite exclusão caso exista relacionamento
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // relacionamento 1:N entre 'Projeto' e 'Bolsa'
+            modelBuilder.Entity<Projeto>()
+                .HasMany(p => p.Bolsas)
+                .WithOne(b => b.Projeto)
+                .HasForeignKey(b => b.ProjetoId);
+
+            // relacionamento 1:N entre 'Projeto' e 'HistoricoStatusProjeto'
+            modelBuilder.Entity<Projeto>()
+                .HasMany(p => p.HistoricoStatus)
+                .WithOne(h => h.Projeto)
+                .HasForeignKey(h => h.ProjetoId);
+
+            // config. para o enum 'ProjetoStatus' dentro de 'HistoricoStatusProjeto'
+            modelBuilder.Entity<HistoricoProjetoStatus>()
+                .Property(h => h.Status)
+                .HasConversion<int>();
             
             base.OnModelCreating(modelBuilder);
         }

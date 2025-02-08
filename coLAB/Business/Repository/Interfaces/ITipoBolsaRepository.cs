@@ -9,5 +9,4 @@ public interface ITipoBolsaRepository
     Task AddAsync(TipoBolsa tipoBolsa);
     Task UpdateAsync(TipoBolsa tipoBolsa);
     Task DeleteAsync(int id);
-    Task Save();
 }
