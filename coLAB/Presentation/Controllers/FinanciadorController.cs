@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using colab.Business.Repository.Interfaces;
+using colab.Business.Services.Interfaces;
 using colab.Business.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using colab.Business.DTOs;
@@ -12,12 +12,12 @@ namespace colabAPI.Presentation.Controllers
     [ApiController]
     public class FinanciadorController : ControllerBase
     {
-        private readonly IFinanciadorRepository _financiadorRepository;
+        private readonly IFinanciadorService _financiadorService;
         private readonly IMapper _mapper;
 
-        public FinanciadorController(IFinanciadorRepository financiadorRepository, IMapper mapper)
+        public FinanciadorController(IFinanciadorService financiadorService, IMapper mapper)
         {
-            _financiadorRepository = financiadorRepository;
+            _financiadorService = financiadorService;
             _mapper = mapper;
         }
 
@@ -25,7 +25,7 @@ namespace colabAPI.Presentation.Controllers
         public async Task<ActionResult<IEnumerable<FinanciadorResponseDTO>>> GetAll()
 
         {
-            var financiadores = await _financiadorRepository.GetAllAsync();
+            var financiadores = await _financiadorService.GetAllAsync();
             var financiadoresDTO = _mapper.Map<IEnumerable<FinanciadorResponseDTO>>(financiadores);
             return Ok(financiadoresDTO);
         }
@@ -33,7 +33,7 @@ namespace colabAPI.Presentation.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<FinanciadorResponseDTO>> GetById(int id)
         {
-            var financiador = await _financiadorRepository.GetByIdAsync(id);
+            var financiador = await _financiadorService.GetByIdAsync(id);
             if (financiador == null)
             {
                 return NotFound();
@@ -52,7 +52,7 @@ namespace colabAPI.Presentation.Controllers
 
             var financiador = _mapper.Map<Financiador>(financiadorRequestDTO);
 
-            await _financiadorRepository.AddAsync(financiador);
+            await _financiadorService.AddAsync(financiador);
 
             var financiadorResponseDTO = _mapper.Map<FinanciadorResponseDTO>(financiador);
 
@@ -67,7 +67,7 @@ namespace colabAPI.Presentation.Controllers
                 return BadRequest();
             }
 
-            var existingfinanciador = await _financiadorRepository.GetByIdAsync(id);
+            var existingfinanciador = await _financiadorService.GetByIdAsync(id);
             if (existingfinanciador == null)
             {
                 return NotFound();
@@ -75,7 +75,7 @@ namespace colabAPI.Presentation.Controllers
 
             var financiador = _mapper.Map(financiadorRequestDTO, existingfinanciador);
 
-            await _financiadorRepository.UpdateAsync(financiador);
+            await _financiadorService.UpdateAsync(financiador);
 
             return NoContent();
         }
@@ -83,13 +83,13 @@ namespace colabAPI.Presentation.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var financiador = await _financiadorRepository.GetByIdAsync(id);
+            var financiador = await _financiadorService.GetByIdAsync(id);
             if (financiador == null)
             {
                 return NotFound();
             }
 
-            await _financiadorRepository.DeleteAsync(id);
+            await _financiadorService.DeleteAsync(id);
 
             return NoContent();
         }

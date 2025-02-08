@@ -2,7 +2,7 @@
 using colab.Business.DTOs.Request;
 using colab.Business.DTOs.Response;
 using colab.Business.Models.Entities;
-using colab.Business.Repository.Interfaces;
+using colab.Business.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace colab.Presentation.Controllers
@@ -11,16 +11,16 @@ namespace colab.Presentation.Controllers
     [ApiController]
     public class HistoricoCargoController : ControllerBase
     {
-        private readonly IHistoricoCargoRepository _historicoCargoRepository; 
-        private readonly ICargoRepository _cargoRepository;
-        private readonly IPessoaRepository _pessoaRepository;
+        private readonly IHistoricoCargoService _historicoCargoService; 
+        private readonly ICargoService _cargoService;
+        private readonly IPessoaService _pessoaService;
         private readonly IMapper _mapper; 
 
-        public HistoricoCargoController(IHistoricoCargoRepository historicoCargoRepository, ICargoRepository cargoRepository, IPessoaRepository pessoaRepository, IMapper mapper)
+        public HistoricoCargoController(IHistoricoCargoService historicoCargoService, ICargoService cargoService, IPessoaService pessoaService, IMapper mapper)
         {
-            _historicoCargoRepository = historicoCargoRepository;
-            _pessoaRepository = pessoaRepository;
-            _cargoRepository = cargoRepository;
+            _historicoCargoService = historicoCargoService;
+            _pessoaService = pessoaService;
+            _cargoService = cargoService;
             _mapper = mapper;
         }
 
@@ -28,7 +28,7 @@ namespace colab.Presentation.Controllers
         [HttpGet]
         public async Task<IEnumerable<HistoricoCargoResponseDTO>> GetAll()
         {
-            var historicosCargo = await _historicoCargoRepository.GetAllAsync();
+            var historicosCargo = await _historicoCargoService.GetAllAsync();
             var historicosCargoDTO = _mapper.Map<IEnumerable<HistoricoCargoResponseDTO>>(historicosCargo);
             return (historicosCargoDTO);
         }
@@ -37,7 +37,7 @@ namespace colab.Presentation.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<HistoricoCargoResponseDTO>> GetById(int id)
         {
-            var historicoCargo = await _historicoCargoRepository.GetByIdAsync(id);
+            var historicoCargo = await _historicoCargoService.GetByIdAsync(id);
             if (historicoCargo == null)
             {
                 return NotFound();
@@ -55,13 +55,13 @@ namespace colab.Presentation.Controllers
                 return BadRequest(ModelState);
             }
             
-            var cargo = await _cargoRepository.GetByIdAsync(historicoCargoRequestDTO.CargoId);
+            var cargo = await _cargoService.GetByIdAsync(historicoCargoRequestDTO.CargoId);
             if (cargo == null)
             {
                 return BadRequest("Cargo não encontrado.");
             }
             
-            var pessoa = await _pessoaRepository.GetByIdAsync(historicoCargoRequestDTO.PessoaId);
+            var pessoa = await _pessoaService.GetByIdAsync(historicoCargoRequestDTO.PessoaId);
             if (pessoa == null)
             {
                 return BadRequest("Pessoa não encontrada.");
@@ -71,7 +71,7 @@ namespace colab.Presentation.Controllers
             historicoCargo.Cargo = cargo;
             historicoCargo.Pessoa = pessoa;
 
-            await _historicoCargoRepository.AddAsync(historicoCargo);
+            await _historicoCargoService.AddAsync(historicoCargo);
             
             var historicoCargoResponseDTO = _mapper.Map<HistoricoCargoResponseDTO>(historicoCargo);
 
@@ -87,19 +87,19 @@ namespace colab.Presentation.Controllers
                 return BadRequest(); 
             }
 
-            var existingHistoricoCargo = await _historicoCargoRepository.GetByIdAsync(id);
+            var existingHistoricoCargo = await _historicoCargoService.GetByIdAsync(id);
             if (existingHistoricoCargo == null)
             {
                 return NotFound(); 
             }
             
-            var cargo = await _cargoRepository.GetByIdAsync(historicoCargoRequestDTO.CargoId);
+            var cargo = await _cargoService.GetByIdAsync(historicoCargoRequestDTO.CargoId);
             if (cargo == null)
             {
                 return BadRequest("Cargo não encontrado.");
             }
             
-            var pessoa = await _pessoaRepository.GetByIdAsync(historicoCargoRequestDTO.PessoaId);
+            var pessoa = await _pessoaService.GetByIdAsync(historicoCargoRequestDTO.PessoaId);
             if (pessoa == null)
             {
                 return BadRequest("Pessoa não encontrada.");
@@ -110,7 +110,7 @@ namespace colab.Presentation.Controllers
             existingHistoricoCargo.Cargo = cargo;
             existingHistoricoCargo.Pessoa = pessoa;
 
-            await _historicoCargoRepository.UpdateAsync(existingHistoricoCargo);
+            await _historicoCargoService.UpdateAsync(existingHistoricoCargo);
 
             return NoContent();
         }
@@ -119,13 +119,13 @@ namespace colab.Presentation.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var historicoCargo = await _historicoCargoRepository.GetByIdAsync(id);
+            var historicoCargo = await _historicoCargoService.GetByIdAsync(id);
             if (historicoCargo == null)
             {
                 return NotFound(); 
             }
 
-            await _historicoCargoRepository.DeleteAsync(id);
+            await _historicoCargoService.DeleteAsync(id);
 
             return NoContent();
         }

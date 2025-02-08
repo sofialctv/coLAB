@@ -2,7 +2,7 @@ using AutoMapper;
 using colab.Business.DTOs.Request;
 using colab.Business.DTOs.Response;
 using colab.Business.Models.Entities;
-using colab.Business.Repository.Interfaces;
+using colab.Business.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace colab.Presentation.Controllers
@@ -11,12 +11,12 @@ namespace colab.Presentation.Controllers
     [ApiController]
     public class CargoController : ControllerBase
     {
-        private readonly ICargoRepository _cargoRepository; 
+        private readonly ICargoService _cargoService; 
         private readonly IMapper _mapper; 
 
-        public CargoController(ICargoRepository cargoRepository, IMapper mapper)
+        public CargoController(ICargoService cargoService, IMapper mapper)
         {
-            _cargoRepository = cargoRepository;
+            _cargoService = cargoService;
             _mapper = mapper;
         }
 
@@ -24,7 +24,7 @@ namespace colab.Presentation.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CargoResponseDTO>>> GetAll()
         {
-            var cargos = await _cargoRepository.GetAllAsync();
+            var cargos = await _cargoService.GetAllAsync();
             var cargosDTO = _mapper.Map<IEnumerable<CargoResponseDTO>>(cargos);
             return Ok(cargosDTO);
         }
@@ -33,7 +33,7 @@ namespace colab.Presentation.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CargoResponseDTO>> GetById(int id)
         {
-            var cargo = await _cargoRepository.GetByIdAsync(id);
+            var cargo = await _cargoService.GetByIdAsync(id);
             if (cargo == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace colab.Presentation.Controllers
 
             var cargo = _mapper.Map<Cargo>(cargoRequestDTO);
 
-            await _cargoRepository.AddAsync(cargo);
+            await _cargoService.AddAsync(cargo);
             
             var cargoResponseDTO = _mapper.Map<CargoResponseDTO>(cargo);
 
@@ -69,7 +69,7 @@ namespace colab.Presentation.Controllers
                 return BadRequest(); 
             }
 
-            var existingCargo = await _cargoRepository.GetByIdAsync(id);
+            var existingCargo = await _cargoService.GetByIdAsync(id);
             if (existingCargo == null)
             {
                 return NotFound(); 
@@ -77,7 +77,7 @@ namespace colab.Presentation.Controllers
 
             var cargo = _mapper.Map(cargoRequestDTO, existingCargo);
 
-            await _cargoRepository.UpdateAsync(cargo);
+            await _cargoService.UpdateAsync(cargo);
 
             return NoContent();
         }
@@ -86,13 +86,13 @@ namespace colab.Presentation.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var cargo = await _cargoRepository.GetByIdAsync(id);
+            var cargo = await _cargoService.GetByIdAsync(id);
             if (cargo == null)
             {
                 return NotFound(); 
             }
 
-            await _cargoRepository.DeleteAsync(id);
+            await _cargoService.DeleteAsync(id);
 
             return NoContent();
         }
