@@ -16,7 +16,9 @@ public class ConfigMapping : Profile
             .ReverseMap();
         
         CreateMap<Bolsa, BolsaResponseDTO>()
-            .ReverseMap();
+            .ForMember(dest => dest.TipoBolsaNome, opt => opt.MapFrom(src => src.TipoBolsa.nome))  // Mapeando o nome do TipoBolsa
+            .ForMember(dest => dest.PessoaNome, opt => opt.MapFrom(src => src.Pessoa.Nome))  // Mapeando o nome da Pessoa
+            .ForMember(dest => dest.ProjetoNome, opt => opt.MapFrom(src => src.Projeto.Nome));  // Mapeando o nome do Projeto
         CreateMap<Bolsa, BolsaRequestDTO>()
             .ReverseMap();
         

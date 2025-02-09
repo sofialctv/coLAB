@@ -11,10 +11,9 @@ namespace colab.Business.DTOs.Response
         public DateTime DataPrevistaFim { get; set; }
         public bool Ativo { get; set; }
 
-        public TipoBolsa TipoBolsa { get; set; }
-
-        public Pessoa Pessoa { get; set; }
-
-        public Projeto Projeto { get; set; }
+        // Alteração dos nomes das propriedades
+        public string TipoBolsaNome { get; set; }  // Para exibir o nome do TipoBolsa
+        public string PessoaNome { get; set; }  // Para exibir o nome da Pessoa
+        public string ProjetoNome { get; set; }  // Para exibir o nome do Projeto
     }
 }
