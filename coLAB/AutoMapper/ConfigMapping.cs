@@ -17,8 +17,11 @@ public class ConfigMapping : Profile
         
         CreateMap<Bolsa, BolsaResponseDTO>()
             .ForMember(dest => dest.TipoBolsaNome, opt => opt.MapFrom(src => src.TipoBolsa.nome))  // Mapeando o nome do TipoBolsa
+            .ForMember(dest => dest.TipoBolsaId, opt => opt.MapFrom(src => src.TipoBolsa.Id))  // Mapeando o id do TipoBolsa
             .ForMember(dest => dest.PessoaNome, opt => opt.MapFrom(src => src.Pessoa.Nome))  // Mapeando o nome da Pessoa
-            .ForMember(dest => dest.ProjetoNome, opt => opt.MapFrom(src => src.Projeto.Nome));  // Mapeando o nome do Projeto
+            .ForMember(dest => dest.PessoaId, opt => opt.MapFrom(src => src.Pessoa.Id))  // Mapeando o id da Pessoa
+            .ForMember(dest => dest.ProjetoNome, opt => opt.MapFrom(src => src.Projeto.Nome))  // Mapeando o nome do Projeto
+            .ForMember(dest => dest.ProjetoId, opt => opt.MapFrom(src => src.Projeto.Id));  // Mapeando o id do Projeto        
         CreateMap<Bolsa, BolsaRequestDTO>()
             .ReverseMap();
         

@@ -12,8 +12,11 @@ namespace colab.Business.DTOs.Response
         public bool Ativo { get; set; }
 
         // Alteração dos nomes das propriedades
-        public string TipoBolsaNome { get; set; }  // Para exibir o nome do TipoBolsa
-        public string PessoaNome { get; set; }  // Para exibir o nome da Pessoa
-        public string ProjetoNome { get; set; }  // Para exibir o nome do Projeto
+        public string TipoBolsaNome { get; set; }
+        public string TipoBolsaId { get; set; }
+        public string PessoaNome { get; set; }
+        public string PessoaId { get; set; }
+        public string ProjetoNome { get; set; }
+        public string ProjetoId { get; set; }
     }
 }
