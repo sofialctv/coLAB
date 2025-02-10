@@ -33,7 +33,6 @@ builder.Services.AddScoped<IHistoricoCargoRepository, HistoricoCargoRepository>(
 builder.Services.AddScoped<IFinanciadorRepository, FinanciadorRepository>();
 builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
 builder.Services.AddScoped<IBolsaRepository, BolsaRepository>();
-builder.Services.AddScoped<ITipoBolsaRepository, TipoBolsaRepository>();
 // Services
 builder.Services.AddScoped<IBolsaService, BolsaService>();
 builder.Services.AddScoped<ICargoService, CargoService>();
@@ -41,7 +40,6 @@ builder.Services.AddScoped<IFinanciadorService, FinanciadorService>();
 builder.Services.AddScoped<IHistoricoCargoService, HistoricoCargoService>();
 builder.Services.AddScoped<IPessoaService, PessoaService>();
 builder.Services.AddScoped<IProjetoService, ProjetoService>();
-builder.Services.AddScoped<ITipoBolsaService, TipoBolsaService>();
 
 
 builder.Services.AddEndpointsApiExplorer();

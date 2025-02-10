@@ -19,7 +19,6 @@ namespace colab.Data
         public DbSet<Projeto> Projetos { get; set; }
         public DbSet<HistoricoProjetoStatus> HistoricoStatusProjetos { get; set; }
         public DbSet<Bolsa> Bolsas { get; set; }
-        public DbSet<TipoBolsa> TipoBolsa { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -33,8 +32,8 @@ namespace colab.Data
 
             modelBuilder.Entity<HistoricoCargo>()
                 .HasOne(h => h.Cargo)
-                .WithOne(c => c.HistoricoCargo)
-                .HasForeignKey<HistoricoCargo>(c => c.CargoId)
+                .WithMany(c => c.HistoricosCargo)
+                .HasForeignKey(c => c.CargoId)
                 .IsRequired();
 
             // Relacionamento 1 para 1 entre Bolsa e Pessoa
@@ -44,20 +43,6 @@ namespace colab.Data
                 .HasForeignKey<Bolsa>(b => b.PessoaId) // Definir a chave estrangeira
                 .IsRequired(); // Tornar o relacionamento obrigatório
 
-            // Restante das configurações
-            modelBuilder.Entity<TipoBolsa>()
-                .HasOne(t => t.Bolsa)
-                .WithOne(b => b.TipoBolsa)
-                .HasForeignKey<Bolsa>(b => b.TipoBolsaId)
-                .IsRequired();
-
-            modelBuilder.Entity<Bolsa>()
-                .HasIndex(b => b.TipoBolsaId)
-                .IsUnique();
-
-            modelBuilder.Entity<TipoBolsa>()
-                .Property(b => b.escolaridade)
-                .HasConversion<string>();
 
             // relacionamento entre 'Projeto' e 'Financiador'
             modelBuilder.Entity<Projeto>()
@@ -82,7 +67,12 @@ namespace colab.Data
             modelBuilder.Entity<HistoricoProjetoStatus>()
                 .Property(h => h.Status)
                 .HasConversion<int>();
-            
+
+            modelBuilder.Entity<Bolsa>()
+                .Property(b => b.Escolaridade)
+                .HasConversion<int>();
+
+
             base.OnModelCreating(modelBuilder);
         }
     } 

@@ -6,6 +6,6 @@ namespace colab.Business.Models.Entities
         public string Nome { get; set; }
         public string Descricao { get; set; }
         
-        public HistoricoCargo HistoricoCargo { get; set; }
+        public List<HistoricoCargo> HistoricosCargo { get; set; }
     }
 }

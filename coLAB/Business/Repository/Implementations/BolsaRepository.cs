@@ -18,7 +18,6 @@ namespace colab.Business.Repository.Implementations
         {
             return await _DbContext.Bolsas
                 .Include(b => b.Pessoa)
-                .Include(b => b.TipoBolsa)
                 .Include(b => b.Projeto)
                 .ToListAsync();
         }
@@ -27,7 +26,6 @@ namespace colab.Business.Repository.Implementations
         {
             var bolsa = await _DbContext.Bolsas
                 .Include(b => b.Pessoa)
-                .Include(b => b.TipoBolsa)
                 .Include(b => b.Projeto)
                 .FirstOrDefaultAsync(b => b.Id == id);
 

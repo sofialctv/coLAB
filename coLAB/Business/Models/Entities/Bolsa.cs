@@ -1,9 +1,13 @@
 ﻿
+using colab.Business.Models.Entities.Enums;
+
 namespace colab.Business.Models.Entities
 {
     public class Bolsa
     {
         public int Id { get; set; }
+        public string Nome { get; set; }
+        public string PlanoTrabalho { get; set; }
         public double Valor { get; set; }
         public DateTime DataInicio { get; set; }
         public DateTime? DataFim { get; set; }
@@ -13,12 +17,11 @@ namespace colab.Business.Models.Entities
         // Relacionamentos
         public int ProjetoId { get; set; } // Chave estrangeira
         public Projeto Projeto { get; set; } // ref. ao Projeto
-
-        public int TipoBolsaId{ get; set; }
-        public TipoBolsa TipoBolsa { get; set; }
         
         public int PessoaId { get; set; } // Chave estrangeira
         public Pessoa Pessoa { get; set; }
+
+        public Escolaridade Escolaridade { get; set; }
         
     }
 
