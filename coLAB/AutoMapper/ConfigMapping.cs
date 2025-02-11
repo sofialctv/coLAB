@@ -9,12 +9,7 @@ namespace colab.AutoMapper;
 public class ConfigMapping : Profile
 {
     public ConfigMapping()
-    {
-        CreateMap<Pessoa, PessoaResponseDTO>()
-            .ReverseMap();
-        CreateMap<Pessoa, PessoaRequestDTO>()
-            .ReverseMap();
-        
+    {        
         CreateMap<Bolsa, BolsaResponseDTO>()
             .ForMember(dest => dest.PessoaNome, opt => opt.MapFrom(src => src.Pessoa.Nome))  // Mapeando o nome da Pessoa
             .ForMember(dest => dest.PessoaId, opt => opt.MapFrom(src => src.Pessoa.Id))  // Mapeando o id da Pessoa
@@ -22,12 +17,24 @@ public class ConfigMapping : Profile
             .ForMember(dest => dest.ProjetoId, opt => opt.MapFrom(src => src.Projeto.Id));  // Mapeando o id do Projeto        
         CreateMap<Bolsa, BolsaRequestDTO>()
             .ReverseMap();
-        
+
+        // Pessoa
+        CreateMap<Pessoa, PessoaResponseDTO>()
+            .ForMember(dest => dest.BolsaNome, opt => opt.MapFrom(src => src.Bolsa != null ? src.Bolsa.Nome : null))
+            .ForMember(dest => dest.HistoricosCargo, opt => opt.MapFrom(src => src.HistoricosCargo));
+        CreateMap<PessoaResponseDTO, Pessoa>();
+        CreateMap<Pessoa, PessoaRequestDTO>()
+            .ReverseMap();
+
+        // Cargo
         CreateMap<Cargo, CargoResponseDTO>()
             .ReverseMap();
         CreateMap<Cargo, CargoRequestDTO>()
             .ReverseMap();
 
+        // HistoricoCargo
+        CreateMap<HistoricoCargoRequestDTO, HistoricoCargo>()
+            .ReverseMap();
         CreateMap<HistoricoCargo, HistoricoCargoResponseDTO>()
             .ForMember(dest => dest.CargoNome, opt
                 => opt.MapFrom(src => src.Cargo.Nome))
@@ -37,8 +44,7 @@ public class ConfigMapping : Profile
         CreateMap<Financiador, FinanciadorResponseDTO>();
         CreateMap<FinanciadorRequestDTO, Financiador>();
         
-        CreateMap<HistoricoCargoRequestDTO, HistoricoCargo>()
-            .ReverseMap();
+        
 
         // Map de Projeto para ProjetoResponseDTO
         CreateMap<Projeto, ProjetoResponseDTO>()

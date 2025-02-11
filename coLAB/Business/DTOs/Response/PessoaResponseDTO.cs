@@ -1,3 +1,5 @@
+using colab.Business.Models.Entities;
+
 namespace colab.Business.DTOs.Response
 {
     public class PessoaResponseDTO
@@ -7,5 +9,8 @@ namespace colab.Business.DTOs.Response
         public string Email { get; set; }
         public string Telefone { get; set; }
         public string Cpf { get; set; }
-    }
+
+        public string BolsaNome { get; set; }
+        public List<HistoricoCargoResponseDTO> HistoricosCargo { get; set; }
+    } 
 }
