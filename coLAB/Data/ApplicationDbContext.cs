@@ -14,7 +14,6 @@ namespace colab.Data
         // Definição das tabelas (DbSet) do banco de dados que serão mapeadas pelo EF
         public DbSet<Pessoa> Pessoas { get; set; }
         public DbSet<Cargo> Cargos { get; set; }
-        public DbSet<HistoricoCargo> HistoricosCargo { get; set; }
         public DbSet<Financiador> Financiadores { get; set; }
         public DbSet<Projeto> Projetos { get; set; }
         public DbSet<HistoricoProjetoStatus> HistoricoStatusProjetos { get; set; }
@@ -22,25 +21,18 @@ namespace colab.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
-            // Relações de HistoricoCargo com Cargo e Pessoa
-            modelBuilder.Entity<HistoricoCargo>()
-                .HasOne(h => h.Pessoa)
-                .WithMany(p => p.HistoricosCargo)
-                .HasForeignKey(h => h.PessoaId)
-                .IsRequired();
 
-            modelBuilder.Entity<HistoricoCargo>()
-                .HasOne(h => h.Cargo)
-                .WithMany(c => c.HistoricosCargo)
-                .HasForeignKey(c => c.CargoId)
-                .IsRequired();
+            // relacionamento entre 'Pessoa' e 'Bolsa'
+            modelBuilder.Entity<Pessoa>()
+                .HasMany(p => p.Bolsas)
+                .WithOne(b => b.Pessoa)
+                .HasForeignKey(b => b.PessoaId);
 
-            // Relacionamento 1 para 1 entre Bolsa e Pessoa
-            modelBuilder.Entity<Bolsa>()
-                .HasOne(b => b.Pessoa) // Cada Bolsa tem uma Pessoa
-                .WithOne(p => p.Bolsa) // Cada Pessoa tem uma Bolsa
-                .HasForeignKey<Bolsa>(b => b.PessoaId); // Definir a chave estrangeira
+
+            modelBuilder.Entity<Cargo>()
+                .HasMany(c => c.Bolsas)
+                .WithOne(b => b.Cargo)
+                .HasForeignKey(b => b.CargoId);
 
 
             // relacionamento entre 'Projeto' e 'Financiador'

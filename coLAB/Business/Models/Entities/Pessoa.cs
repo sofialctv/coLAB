@@ -8,7 +8,6 @@ namespace colab.Business.Models.Entities
         public string Telefone { get; set; }
         public string Cpf { get; set; }
         
-        public Bolsa? Bolsa { get; set; }
-        public List<HistoricoCargo> HistoricosCargo { get; set; }
+        public List<Bolsa>? Bolsas { get; set; }
     }
 }

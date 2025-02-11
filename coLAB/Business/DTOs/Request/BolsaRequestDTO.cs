@@ -14,6 +14,7 @@ namespace colab.Business.DTOs.Request
 
         public int? PessoaId { get; set; }
         public int ProjetoId { get; set; }
+        public int CargoId { get; set; }
 
         public Escolaridade Escolaridade { get; set; }
     }

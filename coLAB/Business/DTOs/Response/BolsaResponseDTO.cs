@@ -16,9 +16,11 @@ namespace colab.Business.DTOs.Response
 
         // Alteração dos nomes das propriedades
         public string PessoaNome { get; set; }
-        public string PessoaId { get; set; }
+        public int PessoaId { get; set; }
         public string ProjetoNome { get; set; }
-        public string ProjetoId { get; set; }
+        public int ProjetoId { get; set; }
+        public string CargoNome { get; set; }
+        public int CargoId { get; set; }
 
         public Escolaridade Escolaridade { get; set; }
     }

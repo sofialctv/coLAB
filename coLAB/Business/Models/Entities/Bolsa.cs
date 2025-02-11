@@ -21,6 +21,9 @@ namespace colab.Business.Models.Entities
         public int PessoaId { get; set; } // Chave estrangeira
         public Pessoa Pessoa { get; set; }
 
+        public int CargoId { get; set; }
+        public Cargo Cargo { get; set; }
+
         public Escolaridade Escolaridade { get; set; }
         
     }

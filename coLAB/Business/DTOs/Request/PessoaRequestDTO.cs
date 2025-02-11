@@ -1,3 +1,5 @@
+using colab.Business.Models.Entities;
+
 namespace colab.Business.DTOs.Request
 {
     public class PessoaRequestDTO
@@ -8,6 +10,6 @@ namespace colab.Business.DTOs.Request
         public string Telefone { get; set; }
         public string Cpf { get; set; }
 
-        public int? BolsaId { get; set; }
+        public List<Bolsa>? BolsasList { get; set; }
     }
 }
