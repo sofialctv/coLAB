@@ -40,8 +40,7 @@ namespace colab.Data
             modelBuilder.Entity<Bolsa>()
                 .HasOne(b => b.Pessoa) // Cada Bolsa tem uma Pessoa
                 .WithOne(p => p.Bolsa) // Cada Pessoa tem uma Bolsa
-                .HasForeignKey<Bolsa>(b => b.PessoaId) // Definir a chave estrangeira
-                .IsRequired(); // Tornar o relacionamento obrigatório
+                .HasForeignKey<Bolsa>(b => b.PessoaId); // Definir a chave estrangeira
 
 
             // relacionamento entre 'Projeto' e 'Financiador'

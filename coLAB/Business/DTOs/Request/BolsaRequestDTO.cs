@@ -12,7 +12,7 @@ namespace colab.Business.DTOs.Request
         public DateTime DataPrevistaFim { get; set; }
         public bool Ativo { get; set; }
 
-        public int PessoaId { get; set; }
+        public int? PessoaId { get; set; }
         public int ProjetoId { get; set; }
 
         public Escolaridade Escolaridade { get; set; }

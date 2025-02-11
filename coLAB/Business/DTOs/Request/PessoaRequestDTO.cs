@@ -8,6 +8,6 @@ namespace colab.Business.DTOs.Request
         public string Telefone { get; set; }
         public string Cpf { get; set; }
 
-        public int BolsaId { get; set; }
+        public int? BolsaId { get; set; }
     }
 }
