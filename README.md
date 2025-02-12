@@ -9,7 +9,7 @@ Siga os passos abaixo para configurar e executar o projeto localmente:
 Abra o terminal e execute o seguinte comando para clonar o repositório do projeto:
 
 ```bash
-git clone https://github.com/seu-usuario/coLAB.git
+git clone https://github.com/sofialctv/coLAB.git
 ```
 
 ### 2. Acessar o diretório do projeto
