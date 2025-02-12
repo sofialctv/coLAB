@@ -28,6 +28,7 @@ namespace colab.Data
                 .WithOne(b => b.Pessoa)
                 .HasForeignKey(b => b.PessoaId);
 
+            // relacionamento entre 'Cargo' e 'Bolsa'
             modelBuilder.Entity<Cargo>()
                 .HasMany(c => c.Bolsas)
                 .WithOne(b => b.Cargo)

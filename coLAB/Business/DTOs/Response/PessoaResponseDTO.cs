@@ -10,6 +10,6 @@ namespace colab.Business.DTOs.Response
         public string Telefone { get; set; }
         public string Cpf { get; set; }
 
-        public List<Bolsa>? BolsasList { get; set; }
+        public List<BolsaResponseDTO>? Bolsas { get; set; }
     } 
 }
