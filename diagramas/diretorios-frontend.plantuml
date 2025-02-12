@@ -1,0 +1,28 @@
+@startuml
+
+package colab_FRONT {
+
+    package src 
+    {
+
+        package api { }
+        package components { }
+        package controllers { }
+
+        package models 
+        {
+            package ApiRoutes { }
+            package Entities 
+            { 
+                package Enums { }
+            }
+
+            package Repositories { }
+
+        }
+
+        package service { }
+        package views { }
+    }
+}
+@enduml
