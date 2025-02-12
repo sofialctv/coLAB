@@ -1,0 +1,48 @@
+@startuml
+
+package colabAPI {
+
+    package Business 
+    {
+
+        package Repository 
+        {
+            package Implementations {}
+            package Interfaces {}
+        }
+
+        package Service 
+        {
+            package Implementations {}
+            package Interfaces {}
+        }
+
+        package DTOs 
+        {
+            package Request  {}
+            package Response {}
+
+        }
+
+
+        package Models {
+            package Entities 
+            {   
+                package Enums {}
+            }
+        }
+
+    }
+
+    package Presentation 
+    {
+        package Controllers {}        
+    }
+
+
+    package Data {
+        class ApplicationDbContext
+    }  
+
+    }
+@enduml
