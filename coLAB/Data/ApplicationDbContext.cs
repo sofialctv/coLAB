@@ -31,7 +31,8 @@ namespace colab.Data
             modelBuilder.Entity<Cargo>()
                 .HasMany(c => c.Bolsas)
                 .WithOne(b => b.Cargo)
-                .HasForeignKey(b => b.CargoId);
+                .HasForeignKey(b => b.CargoId)
+                .OnDelete(DeleteBehavior.Restrict);;
 
             // relacionamento entre 'Projeto' e 'Financiador'
             modelBuilder.Entity<Projeto>()

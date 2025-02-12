@@ -217,7 +217,7 @@ namespace colab.Migrations
                     b.HasOne("colab.Business.Models.Entities.Cargo", "Cargo")
                         .WithMany("Bolsas")
                         .HasForeignKey("CargoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("colab.Business.Models.Entities.Pessoa", "Pessoa")
